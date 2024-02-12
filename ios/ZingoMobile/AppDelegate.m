@@ -324,10 +324,7 @@ static BGProcessingTask *bgTask = nil;
     NSLog(@"BGTask startBackgroundTask run sync task");
     syncFinished = false;
     [NSThread detachNewThreadSelector:@selector(syncingProcessBackgroundTask:) toTarget:self withObject:nil];
-    [self syncingStatusProcessBackgroundTask:nil];
 
-    // this trigger doesn't work, but if in some point works
-    // it finish the task properly.
     __weak BGTask* weakTask = bgTask;
     bgTask.expirationHandler = ^{
         NSLog(@"BGTask startBackgroundTask expirationHandler called");
