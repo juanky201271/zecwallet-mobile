@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, Platform, View } from 'react-native';
+import React, { useContext, useRef } from 'react';
+import { Dimensions, Platform, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
-  IconDefinition,
   faArrowDown,
   faArrowUp,
   faRefresh,
@@ -15,7 +14,7 @@ import {
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 import ZecAmount from '../../Components/ZecAmount';
 import FadeText from '../../Components/FadeText';
@@ -37,6 +36,179 @@ import { ContextAppLoaded } from '../../../app/context';
 import AddressItem from '../../Components/AddressItem';
 import { RPCValueTransfersStatusEnum } from '../../../app/rpc/enums/RPCValueTransfersStatusEnum';
 import Utils from '../../../app/utils';
+import Animated, {
+  runOnJS,
+  SharedValue,
+  useAnimatedStyle,
+  //useDerivedValue,
+  //useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
+const SwipeRightAction = ({
+  dragX,
+  messagesAddress,
+  pressMessages,
+}: {
+  dragX: SharedValue<number>;
+  messagesAddress: boolean;
+  pressMessages: () => void;
+}) => {
+  const context = useContext(ContextAppLoaded);
+  const { showSwipeableIcons } = context;
+  const { colors } = useTheme() as unknown as ThemeType;
+
+  const dimensions = {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+  };
+
+  const trans = useAnimatedStyle(() => {
+    if (-dragX.value >= dimensions.width * (1 / 2) && messagesAddress) {
+      dragX.value = withSpring(dragX.value, {}, () => {
+        'worklet';
+        runOnJS(pressMessages)();
+      });
+      return {
+        transform: [
+          {
+            translateX: withSpring(-dimensions.width),
+          },
+        ],
+      };
+    } else {
+      return {
+        transform: [
+          {
+            translateX: dragX.value + 50,
+          },
+        ],
+      };
+    }
+  });
+
+  //useDerivedValue(() => {
+  //  if (maxWidthHit.value) {
+  //    runOnJS(setMessagesAddressModalShowing)(true);
+  //    runOnJS(setValueTransferDetail)(vt);
+  //    runOnJS(setValueTransferDetailIndex)(index);
+  //    //swipeableRef?.current?.close();
+  //  }
+  //});
+
+  return (
+    <>
+      {showSwipeableIcons && (
+        <Animated.View
+          style={[
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            trans,
+          ]}>
+          {messagesAddress && (
+            <View
+              style={{
+                width: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity style={{ zIndex: 999, padding: 10 }} onPress={() => pressMessages()}>
+                <FontAwesomeIcon style={{ opacity: 0.8 }} size={30} icon={faComments} color={colors.money} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </Animated.View>
+      )}
+    </>
+  );
+};
+
+const SwipeLeftAction = ({
+  dragX,
+  setValueTransferDetail,
+  setValueTransferDetailIndex,
+  setValueTransferDetailModalShowing,
+  vt,
+  index,
+  setSendPageState,
+  closeSwipeableRow,
+}: {
+  dragX: SharedValue<number>;
+  setValueTransferDetail: (t: ValueTransferType) => void;
+  setValueTransferDetailIndex: (i: number) => void;
+  setValueTransferDetailModalShowing: (b: boolean) => void;
+  vt: ValueTransferType;
+  index: number;
+  setSendPageState: (s: SendPageStateClass) => void;
+  closeSwipeableRow: () => void;
+}) => {
+  const context = useContext(ContextAppLoaded);
+  const { translate, navigation, showSwipeableIcons } = context;
+  const { colors } = useTheme() as unknown as ThemeType;
+
+  const trans = useAnimatedStyle(
+    () => ({
+      transform: [{ translateX: dragX.value - (vt.address ? 100 : 50) }],
+    }),
+    [dragX.value],
+  );
+
+  return (
+    <>
+      {showSwipeableIcons && (
+        <Animated.View
+          style={[
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            trans,
+          ]}>
+          <View style={{ width: 50, justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity
+              style={{ zIndex: 999, padding: 10 }}
+              onPress={() => {
+                setValueTransferDetail(vt);
+                setValueTransferDetailIndex(index);
+                setValueTransferDetailModalShowing(true);
+                closeSwipeableRow();
+              }}>
+              <FontAwesomeIcon style={{ opacity: 0.8 }} size={25} icon={faFileLines} color={colors.money} />
+            </TouchableOpacity>
+          </View>
+          {!!vt.address && (
+            <View
+              style={{
+                width: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                style={{ zIndex: 999, padding: 10 }}
+                onPress={() => {
+                  // enviar
+                  const sendPageState = new SendPageStateClass(new ToAddrClass(0));
+                  sendPageState.toaddr.to = vt.address ? vt.address : '';
+                  setSendPageState(sendPageState);
+                  navigation.navigate(RouteEnums.LoadedApp, {
+                    screen: translate('loadedapp.send-menu'),
+                    initial: false,
+                  });
+                  closeSwipeableRow();
+                }}>
+                <FontAwesomeIcon size={27} icon={faPaperPlane} color={colors.primary} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </Animated.View>
+      )}
+    </>
+  );
+};
 
 type ValueTransferLineProps = {
   index: number;
@@ -61,182 +233,83 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
   setMessagesAddressModalShowing,
 }) => {
   const context = useContext(ContextAppLoaded);
-  const { translate, language, privacy, info, navigation, server, showSwipeableIcons } = context;
+  const { translate, language, privacy, info } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
-  const [amountColor, setAmountColor] = useState<string>(colors.primaryDisabled);
-  const [vtIcon, setVtIcon] = useState<IconDefinition>(faRefresh);
-  const [haveMemo, setHaveMemo] = useState<boolean>(false);
-  const [messagesAddress, setMessagesAddress] = useState<boolean>(false);
+  //const [amountColor, setAmountColor] = useState<string>(colors.primaryDisabled);
+  //const [vtIcon, setVtIcon] = useState<IconDefinition>(faRefresh);
+  //const [haveMemo, setHaveMemo] = useState<boolean>(false);
+  //const [messagesAddress, setMessagesAddress] = useState<boolean>(false);
 
-  const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
-  };
-  const maxWidthHit = useRef(false);
+  const swipeableRow = useRef<SwipeableMethods>(null);
 
-  useEffect(() => {
-    const amountCo =
-      vt.confirmations === 0
-        ? colors.primaryDisabled
-        : vt.kind === ValueTransferKindEnum.Received || vt.kind === ValueTransferKindEnum.Shield
-        ? colors.primary
-        : colors.text;
-
-    setAmountColor(amountCo);
-  }, [colors.primary, colors.primaryDisabled, colors.text, vt.confirmations, vt.kind]);
-
-  useEffect(() => {
-    const txIc =
-      vt.confirmations === 0
-        ? faRefresh
-        : vt.kind === ValueTransferKindEnum.Received || vt.kind === ValueTransferKindEnum.Shield
-        ? faArrowDown
-        : faArrowUp;
-    setVtIcon(txIc);
-  }, [vt.confirmations, vt.kind]);
-
-  useEffect(() => {
-    // if have any memo
-    const memos: string[] = vt.memos ? vt.memos.filter(m => !!m) : [];
-    setHaveMemo(memos.length > 0);
-  }, [vt.memos]);
-
-  useEffect(() => {
-    (async () => {
-      setMessagesAddress(await Utils.isMessagesAddress(vt, server.chainName));
-    })();
-  }, [vt, server.chainName]);
-
-  const handleRenderRightActions = (
-    progress: Animated.AnimatedInterpolation<number>,
-    dragX: Animated.AnimatedInterpolation<number>,
-    swipeable: Swipeable,
-  ) => {
-    const trans = progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [50, 0],
-      extrapolate: 'extend',
-    });
-
-    dragX.addListener(({ value }) => {
-      if (-value >= dimensions.width * (1 / 2) && messagesAddress) {
-        if (!maxWidthHit.current) {
-          //console.log(value);
-          setValueTransferDetail(vt);
-          setValueTransferDetailIndex(index);
-          setMessagesAddressModalShowing(true);
-          swipeable.reset();
-        }
-        maxWidthHit.current = true;
-      } else {
-        maxWidthHit.current = false;
-      }
-    });
-
-    return (
-      <>
-        {showSwipeableIcons && (
-          <Animated.View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              transform: [{ translateX: trans }],
-            }}>
-            {messagesAddress && (
-              <View
-                style={{
-                  width: 50,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: 20,
-                }}>
-                <TouchableOpacity
-                  style={{ zIndex: 999, padding: 10 }}
-                  onPress={() => {
-                    setValueTransferDetail(vt);
-                    setValueTransferDetailIndex(index);
-                    setMessagesAddressModalShowing(true);
-                    swipeable.reset();
-                  }}>
-                  <FontAwesomeIcon style={{ opacity: 0.8 }} size={30} icon={faComments} color={colors.money} />
-                </TouchableOpacity>
-              </View>
-            )}
-          </Animated.View>
-        )}
-      </>
-    );
+  const getAmountColor = () => {
+    return vt.confirmations === 0
+      ? colors.primaryDisabled
+      : vt.kind === ValueTransferKindEnum.Received || vt.kind === ValueTransferKindEnum.Shield
+      ? colors.primary
+      : colors.text;
   };
 
-  const handleRenderLeftActions = (
-    progress: Animated.AnimatedInterpolation<number>,
-    _dragX: Animated.AnimatedInterpolation<number>,
-    swipeable: Swipeable,
-  ) => {
-    const trans = progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [-100, 0],
-      extrapolate: 'clamp',
-    });
+  const getVtIcon = () => {
+    return vt.confirmations === 0
+      ? faRefresh
+      : vt.kind === ValueTransferKindEnum.Received || vt.kind === ValueTransferKindEnum.Shield
+      ? faArrowDown
+      : faArrowUp;
+  };
 
-    return (
-      <>
-        {showSwipeableIcons && (
-          <Animated.View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              transform: [{ translateX: trans }],
-              marginRight: 20,
-            }}>
-            <View style={{ width: 50, justifyContent: 'center', alignItems: 'center' }}>
-              <TouchableOpacity
-                style={{ zIndex: 999, padding: 10 }}
-                onPress={() => {
-                  setValueTransferDetail(vt);
-                  setValueTransferDetailIndex(index);
-                  setValueTransferDetailModalShowing(true);
-                  swipeable.reset();
-                }}>
-                <FontAwesomeIcon style={{ opacity: 0.8 }} size={25} icon={faFileLines} color={colors.money} />
-              </TouchableOpacity>
-            </View>
-            {!!vt.address && (
-              <View
-                style={{
-                  width: 50,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity
-                  style={{ zIndex: 999, padding: 10 }}
-                  onPress={() => {
-                    // enviar
-                    const sendPageState = new SendPageStateClass(new ToAddrClass(0));
-                    sendPageState.toaddr.to = vt.address ? vt.address : '';
-                    setSendPageState(sendPageState);
-                    navigation.navigate(RouteEnums.LoadedApp, {
-                      screen: translate('loadedapp.send-menu'),
-                      initial: false,
-                    });
-                    swipeable.reset();
-                  }}>
-                  <FontAwesomeIcon size={27} icon={faPaperPlane} color={colors.primary} />
-                </TouchableOpacity>
-              </View>
-            )}
-          </Animated.View>
-        )}
-      </>
-    );
+  const getHaveMemo = () => {
+    const memos = vt.memos ? vt.memos.filter(m => !!m) : [];
+    return memos.length > 0;
+  };
+
+  const getKindDescription = () => {
+    return vt.kind === ValueTransferKindEnum.Sent && vt.confirmations === 0
+      ? (translate('history.sending') as string)
+      : vt.kind === ValueTransferKindEnum.Sent && vt.confirmations > 0
+      ? (translate('history.sent') as string)
+      : vt.kind === ValueTransferKindEnum.Received && vt.confirmations === 0
+      ? (translate('history.receiving') as string)
+      : vt.kind === ValueTransferKindEnum.Received && vt.confirmations > 0
+      ? (translate('history.received') as string)
+      : vt.kind === ValueTransferKindEnum.MemoToSelf && vt.confirmations === 0
+      ? (translate('history.sendingtoself') as string)
+      : vt.kind === ValueTransferKindEnum.MemoToSelf && vt.confirmations > 0
+      ? (translate('history.memotoself') as string)
+      : vt.kind === ValueTransferKindEnum.SendToSelf && vt.confirmations === 0
+      ? (translate('history.sendingtoself') as string)
+      : vt.kind === ValueTransferKindEnum.SendToSelf && vt.confirmations > 0
+      ? (translate('history.sendtoself') as string)
+      : vt.kind === ValueTransferKindEnum.Shield && vt.confirmations === 0
+      ? (translate('history.shielding') as string)
+      : vt.kind === ValueTransferKindEnum.Shield && vt.confirmations > 0
+      ? (translate('history.shield') as string)
+      : vt.kind === ValueTransferKindEnum.Ephemeral320Tex && vt.confirmations === 0
+      ? (translate('history.sending') as string)
+      : vt.kind === ValueTransferKindEnum.Ephemeral320Tex && vt.confirmations > 0
+      ? (translate('history.ephemeral320tex') as string)
+      : '';
+  };
+
+  const pressMessages = () => {
+    setValueTransferDetail(vt);
+    setValueTransferDetailIndex(index);
+    setMessagesAddressModalShowing(true);
+    closeSwipeableRow();
+  };
+
+  const closeSwipeableRow = () => {
+    swipeableRow?.current?.close();
   };
 
   //console.log('render ValueTransferLine - 5', index, messagesAddress);
 
+  //if (index === 0) {
+  //  vt.confirmations = 0;
+  //  vt.status = RPCValueTransfersStatusEnum.calculated;
+  //}
   //if (index === 0) {
   //  vt.confirmations = 0;
   //  vt.status = RPCValueTransfersStatusEnum.transmitted;
@@ -268,17 +341,41 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
           setValueTransferDetailIndex(index);
           setValueTransferDetailModalShowing(true);
         }}>
-        <Swipeable
+        <ReanimatedSwipeable
+          ref={swipeableRow}
           overshootLeft={false}
-          overshootRight={messagesAddress ? true : false}
+          overshootRight={Utils.isMessagesAddress(vt)}
           overshootFriction={1}
-          renderRightActions={handleRenderRightActions}
-          renderLeftActions={handleRenderLeftActions}>
+          dragOffsetFromLeftEdge={30}
+          dragOffsetFromRightEdge={30}
+          renderRightActions={(_, drag) => (
+            <SwipeRightAction
+              dragX={drag}
+              messagesAddress={Utils.isMessagesAddress(vt)}
+              pressMessages={pressMessages}
+            />
+          )}
+          renderLeftActions={(_, drag) => (
+            <SwipeLeftAction
+              dragX={drag}
+              setValueTransferDetail={setValueTransferDetail}
+              setValueTransferDetailIndex={setValueTransferDetailIndex}
+              setValueTransferDetailModalShowing={setValueTransferDetailModalShowing}
+              vt={vt}
+              index={index}
+              setSendPageState={setSendPageState}
+              closeSwipeableRow={closeSwipeableRow}
+            />
+          )}>
           <View
             style={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: vt.status === RPCValueTransfersStatusEnum.transmitted ? 'center' : 'flex-start',
+              alignItems:
+                vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                vt.status === RPCValueTransfersStatusEnum.calculated
+                  ? 'center'
+                  : 'flex-start',
               marginTop: 15,
               paddingBottom: 10,
               borderBottomWidth: nextLineWithSameTxid ? (Platform.OS === GlobalConst.platformOSandroid ? 1 : 0.5) : 1.5,
@@ -294,8 +391,13 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                 <FontAwesomeIcon
                   style={{ marginLeft: 5, marginRight: 5, marginTop: 0 }}
                   size={30}
-                  icon={vtIcon}
-                  color={vt.status === RPCValueTransfersStatusEnum.transmitted ? colors.syncing : amountColor}
+                  icon={getVtIcon()}
+                  color={
+                    vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                    vt.status === RPCValueTransfersStatusEnum.calculated
+                      ? colors.syncing
+                      : getAmountColor()
+                  }
                 />
               </View>
               <View style={{ display: 'flex' }}>
@@ -315,38 +417,14 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                     style={{
                       opacity: 1,
                       fontWeight: 'bold',
-                      color: amountColor,
+                      color: getAmountColor(),
                       fontSize: vt.confirmations === 0 ? 14 : 18,
                     }}>
-                    {vt.kind === ValueTransferKindEnum.Sent && vt.confirmations === 0
-                      ? (translate('history.sending') as string)
-                      : vt.kind === ValueTransferKindEnum.Sent && vt.confirmations > 0
-                      ? (translate('history.sent') as string)
-                      : vt.kind === ValueTransferKindEnum.Received && vt.confirmations === 0
-                      ? (translate('history.receiving') as string)
-                      : vt.kind === ValueTransferKindEnum.Received && vt.confirmations > 0
-                      ? (translate('history.received') as string)
-                      : vt.kind === ValueTransferKindEnum.MemoToSelf && vt.confirmations === 0
-                      ? (translate('history.sendingtoself') as string)
-                      : vt.kind === ValueTransferKindEnum.MemoToSelf && vt.confirmations > 0
-                      ? (translate('history.memotoself') as string)
-                      : vt.kind === ValueTransferKindEnum.SendToSelf && vt.confirmations === 0
-                      ? (translate('history.sendingtoself') as string)
-                      : vt.kind === ValueTransferKindEnum.SendToSelf && vt.confirmations > 0
-                      ? (translate('history.sendtoself') as string)
-                      : vt.kind === ValueTransferKindEnum.Shield && vt.confirmations === 0
-                      ? (translate('history.shielding') as string)
-                      : vt.kind === ValueTransferKindEnum.Shield && vt.confirmations > 0
-                      ? (translate('history.shield') as string)
-                      : vt.kind === ValueTransferKindEnum.Ephemeral320Tex && vt.confirmations === 0
-                      ? (translate('history.sending') as string)
-                      : vt.kind === ValueTransferKindEnum.Ephemeral320Tex && vt.confirmations > 0
-                      ? (translate('history.ephemeral320tex') as string)
-                      : ''}
+                    {getKindDescription()}
                   </FadeText>
                   <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <FadeText>{vt.time ? moment((vt.time || 0) * 1000).format('MMM D, h:mm a') : '--'}</FadeText>
-                    {haveMemo && (
+                    {getHaveMemo() && (
                       <FontAwesomeIcon
                         style={{ marginLeft: 10 }}
                         size={15}
@@ -361,14 +439,15 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                 style={{ flexGrow: 1, alignSelf: 'auto', justifyContent: 'flex-end', paddingRight: 5 }}
                 size={18}
                 currencyName={info.currencyName}
-                color={amountColor}
+                color={getAmountColor()}
                 amtZec={vt.amount}
                 privacy={privacy}
               />
             </View>
             {vt.confirmations === 0 && (
               <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                {vt.status === RPCValueTransfersStatusEnum.transmitted && (
+                {(vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                  vt.status === RPCValueTransfersStatusEnum.calculated) && (
                   <FontAwesomeIcon
                     style={{ marginRight: 5 }}
                     icon={faTriangleExclamation}
@@ -379,20 +458,35 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                 <FadeText
                   style={{
                     color:
-                      vt.status === RPCValueTransfersStatusEnum.transmitted ? colors.primary : colors.primaryDisabled,
+                      vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                      vt.status === RPCValueTransfersStatusEnum.calculated
+                        ? colors.primary
+                        : colors.primaryDisabled,
                     fontSize: 12,
                     opacity: 1,
                     fontWeight: '700',
-                    textAlign: vt.status === RPCValueTransfersStatusEnum.transmitted ? 'center' : 'left',
-                    textDecorationLine: vt.status === RPCValueTransfersStatusEnum.transmitted ? 'underline' : 'none',
-                    marginLeft: vt.status === RPCValueTransfersStatusEnum.transmitted ? 0 : 40,
+                    textAlign:
+                      vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                      vt.status === RPCValueTransfersStatusEnum.calculated
+                        ? 'center'
+                        : 'left',
+                    textDecorationLine:
+                      vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                      vt.status === RPCValueTransfersStatusEnum.calculated
+                        ? 'underline'
+                        : 'none',
+                    marginLeft:
+                      vt.status === RPCValueTransfersStatusEnum.transmitted ||
+                      vt.status === RPCValueTransfersStatusEnum.calculated
+                        ? 0
+                        : 40,
                   }}>
                   {translate(`history.${vt.status}`) as string}
                 </FadeText>
               </View>
             )}
           </View>
-        </Swipeable>
+        </ReanimatedSwipeable>
       </TouchableOpacity>
     </View>
   );
