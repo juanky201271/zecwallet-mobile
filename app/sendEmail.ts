@@ -40,6 +40,9 @@ export const sendEmail = async (
     })
     .catch((err: any) => {
       console.log('Error opening email client:', err);
-      Alert.alert(translate('loadedapp.email-error') as string, JSON.stringify(err));
+      Alert.alert(
+        translate('loadedapp.email-error-title') as string,
+        translate('loadedapp.email-error-body') as string,
+      );
     });
 };

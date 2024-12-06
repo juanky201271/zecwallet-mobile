@@ -152,7 +152,8 @@
     "valuetransfer-confirmed": "Transação confirmada\n",
     "payment-made": "Pagamento efetuado\n",
     "valuetransfer-reverted": "A transação nunca foi confirmada por um validador.",
-    "email-error": "Erro ao abrir o cliente de e-mail"
+    "email-error-title": "Erro ao abrir o cliente de e-mail",
+    "email-error-body": "Acesse as configurações do seu dispositivo e defina um aplicativo de e-mail padrão para enviar o relatório."
   },
   "rpc": {
     "parsebirthday-error": "Erro: Não foi possível analisar como um número:",

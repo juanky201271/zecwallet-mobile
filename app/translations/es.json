@@ -152,7 +152,8 @@
     "valuetransfer-confirmed": "Transacción confirmada\n",
     "payment-made": "Pago realizado\n",
     "valuetransfer-reverted": "La transacción nunca fue confirmada por un validador.",
-    "email-error": "Error al abrir el cliente de correo electrónico"
+    "email-error-title": "Error al abrir el cliente de correo electrónico",
+    "email-error-body": "Ingresa a los Ajustes de tu dispositivo y configura una aplicación de correo predeterminada para enviar el reporte."
   },
   "rpc": {
     "parsebirthday-error": "Error: No es posible convertirlo en un número:",
