@@ -32,17 +32,9 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
-        }
-      }
-    />
-    <View
-      style={
-        {
-          "height": 20,
         }
       }
     />
@@ -64,6 +56,7 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -75,7 +68,6 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -87,6 +79,7 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />
@@ -436,17 +429,9 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
-        }
-      }
-    />
-    <View
-      style={
-        {
-          "height": 20,
         }
       }
     />
@@ -468,6 +453,7 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -479,7 +465,6 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -491,6 +476,7 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />

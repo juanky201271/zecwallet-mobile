@@ -470,7 +470,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           flexWrap: 'wrap',
           marginTop: 12,
           marginHorizontal: 5,
-          height: 40,
         }}>
         {!noSyncingStatus && selectServer !== SelectServerEnum.offline && (
           <>
@@ -633,7 +632,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           privacyComponent()}
       </View>
 
-      {noBalance && !receivedLegend && <View style={{ height: 20 }} />}
       {!noBalance && (
         <View
           style={{
@@ -641,7 +639,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             alignItems: 'center',
             justifyContent: 'center',
             margin: 0,
-            marginTop: readOnly ? 15 : 0,
           }}>
           {mode !== ModeEnum.basic && !noPrivacy && setPrivacyOption && addLastSnackbar && privacyComponent()}
           <ZecAmount
@@ -686,7 +683,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             alignItems: 'center',
             justifyContent: 'center',
             margin: 0,
-            marginTop: readOnly ? 15 : 0,
           }}>
           <RegText color={colors.primary}>{translate('seed.youreceived') as string}</RegText>
           <ZecAmount
@@ -745,7 +741,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           justifyContent: 'center',
           flexWrap: 'wrap',
         }}>
-        <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5, marginBottom: 3 }}>
+        <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5, marginBottom: 3, marginTop: 3 }}>
           {title}
         </RegText>
       </View>
@@ -755,9 +751,8 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           padding: 11.5,
           position: 'absolute',
           left: 0,
-          alignItems: 'flex-start',
         }}>
-        <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+        <View style={{ alignItems: 'center', flexDirection: 'row', height: 45 }}>
           {!noDrawMenu && (
             <TouchableOpacity
               style={{ marginRight: 5 }}

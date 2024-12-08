@@ -40,7 +40,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -125,7 +124,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
           "flexDirection": "row",
           "justifyContent": "center",
           "margin": 0,
-          "marginTop": 0,
         }
       }
     >
@@ -615,6 +613,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -627,7 +626,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -639,6 +637,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       >
@@ -789,7 +788,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -839,7 +837,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
           "flexDirection": "row",
           "justifyContent": "center",
           "margin": 0,
-          "marginTop": 0,
         }
       }
     >
@@ -1023,6 +1020,7 @@ exports[`Component History - test History no currency, privacy normal & mode bas
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -1035,7 +1033,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -1047,6 +1044,7 @@ exports[`Component History - test History no currency, privacy normal & mode bas
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       >

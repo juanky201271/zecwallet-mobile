@@ -32,7 +32,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -122,13 +121,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -144,6 +136,7 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -155,7 +148,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -167,6 +159,7 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />
@@ -643,7 +636,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -733,13 +725,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -755,6 +740,7 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -766,7 +752,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -778,6 +763,7 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />
@@ -1254,7 +1240,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -1344,13 +1329,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -1366,6 +1344,7 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -1377,7 +1356,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -1389,6 +1367,7 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />
@@ -1788,7 +1767,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -1878,13 +1856,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -1900,6 +1871,7 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -1911,7 +1883,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -1923,6 +1894,7 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />
@@ -2399,7 +2371,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -2489,13 +2460,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -2511,6 +2475,7 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -2522,7 +2487,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -2534,6 +2498,7 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       />

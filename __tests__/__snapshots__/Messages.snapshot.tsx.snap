@@ -40,7 +40,6 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -203,13 +202,6 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -225,6 +217,7 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -236,7 +229,6 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -248,6 +240,7 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       >
@@ -455,7 +448,6 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "height": 40,
           "justifyContent": "center",
           "marginHorizontal": 5,
           "marginTop": 12,
@@ -501,13 +493,6 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
     <View
       style={
         {
-          "height": 20,
-        }
-      }
-    />
-    <View
-      style={
-        {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "column",
@@ -523,6 +508,7 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
             "fontSize": 18,
             "fontWeight": "600",
             "marginBottom": 3,
+            "marginTop": 3,
             "opacity": 1,
             "paddingHorizontal": 5,
           }
@@ -534,7 +520,6 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
     <View
       style={
         {
-          "alignItems": "flex-start",
           "left": 0,
           "padding": 11.5,
           "position": "absolute",
@@ -546,6 +531,7 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
           {
             "alignItems": "center",
             "flexDirection": "row",
+            "height": 45,
           }
         }
       >
