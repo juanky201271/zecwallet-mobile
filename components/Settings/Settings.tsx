@@ -334,7 +334,7 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
       return;
     }
 
-    if (serverContext.uri !== serverUriParsed && selectServerContext !== SelectServerEnum.offline) {
+    if (serverContext.uri !== serverUriParsed && selectServer !== SelectServerEnum.offline) {
       const resultUri = parseServerURI(serverUriParsed, translate);
       if (resultUri.toLowerCase().startsWith(GlobalConst.error)) {
         addLastSnackbar({ message: translate('settings.isuri') as string });
@@ -353,23 +353,34 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
             setListServerUri(serverUriParsed);
           } else if (selectServer === SelectServerEnum.custom) {
             setCustomServerUri(serverUriParsed);
-          } else if (selectServer === SelectServerEnum.offline) {
-            setCustomServerUri('');
           }
         }
       }
     }
 
     if (
-      (serverContext.uri !== serverUriParsed || serverContext.chainName !== chainNameParsed) &&
-      selectServerContext !== SelectServerEnum.offline
+      (serverContext.uri !== serverUriParsed || selectServerContext !== selectServer) &&
+      !serverUriParsed &&
+      selectServer !== SelectServerEnum.offline
     ) {
-      if (!netInfo.isConnected || selectServer === SelectServerEnum.offline) {
+      addLastSnackbar({ message: translate('settings.isuri') as string });
+      return;
+    }
+
+    if (serverContext.uri !== serverUriParsed || serverContext.chainName !== chainNameParsed) {
+      // if the user is changing -> to Offline mode.
+      // doesn't matter is the device have or not internet connection.
+      if (
+        !netInfo.isConnected &&
+        !(selectServerContext !== SelectServerEnum.offline && selectServer === SelectServerEnum.offline)
+      ) {
         addLastSnackbar({ message: translate('loadedapp.connection-error') as string });
         return;
       }
       setDisabled(true);
-      addLastSnackbar({ message: translate('loadedapp.tryingnewserver') as string });
+      if (serverUriParsed) {
+        addLastSnackbar({ message: translate('loadedapp.tryingnewserver') as string });
+      }
       const { result, timeout, newChainName } = await checkServerURI(serverUriParsed, serverContext.uri);
       if (!result) {
         // if the server checking takes more then 30 seconds.

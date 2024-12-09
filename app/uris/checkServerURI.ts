@@ -20,6 +20,7 @@ const checkServerURI = async (uri: string, oldUri: string): Promise<checkServerU
     });
 
     const resultStrServer: string = await Promise.race([resultStrServerPromise, timeoutServerPromise]);
+    //console.log(resultStrServer);
 
     if (!resultStrServer || resultStrServer.toLowerCase().startsWith(GlobalConst.error)) {
       // I have to restore the old server again. Just in case.
@@ -29,31 +30,56 @@ const checkServerURI = async (uri: string, oldUri: string): Promise<checkServerU
       return { result: false, timeout: false, newChainName };
     } else {
       // the server is changed
-      const infoStrPromise = RPCModule.execute(CommandEnum.info, '');
-      const timeoutInfoPromise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          reject(new Error('Promise info Timeout 30 seconds'));
-        }, 30000);
-      });
+      if (uri) {
+        // the new server is not Offline mode.
+        const infoStrPromise = RPCModule.execute(CommandEnum.info, '');
+        const timeoutInfoPromise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error('Promise info Timeout 30 seconds'));
+          }, 30000);
+        });
 
-      const infoStr: string = await Promise.race([infoStrPromise, timeoutInfoPromise]);
+        const infoStr: string = await Promise.race([infoStrPromise, timeoutInfoPromise]);
+        //console.log(infoStr);
 
-      if (!infoStr || infoStr.toLowerCase().startsWith(GlobalConst.error)) {
-        //console.log('info', infoStr);
-        // I have to restore the old server again.
-        await RPCModule.execute(CommandEnum.changeserver, oldUri);
-        // error, no timeout
-        return { result: false, timeout: false, newChainName };
-      } else {
-        try {
-          const infoJSON: RPCInfoType = await JSON.parse(infoStr);
-          newChainName = infoJSON.chain_name;
-        } catch (e) {
-          //console.log(infoStr);
+        if (!infoStr || infoStr.toLowerCase().startsWith(GlobalConst.error)) {
+          //console.log('info', infoStr);
           // I have to restore the old server again.
           await RPCModule.execute(CommandEnum.changeserver, oldUri);
           // error, no timeout
           return { result: false, timeout: false, newChainName };
+        } else {
+          try {
+            const infoJSON: RPCInfoType = await JSON.parse(infoStr);
+            newChainName = infoJSON.chain_name;
+          } catch (e) {
+            //console.log(infoStr);
+            // I have to restore the old server again.
+            await RPCModule.execute(CommandEnum.changeserver, oldUri);
+            // error, no timeout
+            return { result: false, timeout: false, newChainName };
+          }
+        }
+      } else {
+        // the new server is empty -> means Offline mode.
+        const balanceStrPromise = RPCModule.execute(CommandEnum.balance, '');
+        const timeoutInfoPromise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error('Promise info Timeout 30 seconds'));
+          }, 30000);
+        });
+
+        const balanceStr: string = await Promise.race([balanceStrPromise, timeoutInfoPromise]);
+        //console.log(balanceStr);
+
+        if (!balanceStr || balanceStr.toLowerCase().startsWith(GlobalConst.error)) {
+          //console.log('info', infoStr);
+          // I have to restore the old server again.
+          await RPCModule.execute(CommandEnum.changeserver, oldUri);
+          // error, no timeout
+          return { result: false, timeout: false, newChainName };
+        } else {
+          newChainName = undefined;
         }
       }
     }

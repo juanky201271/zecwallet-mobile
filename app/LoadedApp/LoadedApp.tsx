@@ -1209,7 +1209,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
           ) {
             // Load the wallet and navigate to the ValueTransfers screen
             //console.log(`wallet loaded ok ${value.uri}`);
-            if (toast) {
+            if (toast && selectServer !== SelectServerEnum.offline) {
               this.addLastSnackbar({
                 message: `${this.state.translate('loadedapp.readingwallet')} ${value.uri}`,
               });
@@ -1472,11 +1472,21 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
   onClickOKServerWallet = async () => {
     if (this.state.newServer && this.state.newSelectServer) {
       const beforeServer = this.state.server;
-      const resultStr: string = await RPCModule.execute(CommandEnum.changeserver, this.state.newServer.uri);
-      if (resultStr.toLowerCase().startsWith(GlobalConst.error)) {
+
+      const resultStrServerPromise = RPCModule.execute(CommandEnum.changeserver, this.state.newServer.uri);
+      const timeoutServerPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error('Promise changeserver Timeout 30 seconds'));
+        }, 30000);
+      });
+
+      const resultStrServer: string = await Promise.race([resultStrServerPromise, timeoutServerPromise]);
+      //console.log(resultStrServer);
+
+      if (!resultStrServer || resultStrServer.toLowerCase().startsWith(GlobalConst.error)) {
         //console.log(`Error change server ${value} - ${resultStr}`);
         this.addLastSnackbar({
-          message: `${this.state.translate('loadedapp.changeservernew-error')} ${resultStr}`,
+          message: `${this.state.translate('loadedapp.changeservernew-error')} ${resultStrServer}`,
         });
         return;
       } else {
