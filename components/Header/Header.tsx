@@ -11,6 +11,7 @@ import {
   faSnowflake,
   //faXmark,
   faWifi,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useTheme } from '@react-navigation/native';
@@ -74,6 +75,7 @@ type HeaderProps = {
   setShieldingAmount?: (value: number) => void;
   setScrollToTop?: (value: boolean) => void;
   setScrollToBottom?: (value: boolean) => void;
+  closeScreen?: () => void;
 };
 
 const Header: React.FunctionComponent<HeaderProps> = ({
@@ -99,6 +101,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   setShieldingAmount,
   setScrollToTop,
   setScrollToBottom,
+  closeScreen,
 }) => {
   const context = useContext(ContextAppLoaded);
   const {
@@ -451,349 +454,389 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   //console.log('render header &&&&&&&&&&&&&&&&&&&&& syncstatus', syncingStatus);
 
   return (
-    <View
-      testID="header"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        paddingBottom: 0,
-        backgroundColor: colors.card,
-        zIndex: -1,
-        paddingTop: 10,
-      }}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          marginTop: 12,
-          marginHorizontal: 5,
-        }}>
-        {!noSyncingStatus && selectServer !== SelectServerEnum.offline && (
-          <>
-            {netInfo.isConnected && !!syncingStatus.lastBlockServer && syncingStatus.syncID >= 0 ? (
+    <>
+      <View>
+        <View
+          testID="header"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            paddingBottom: 0,
+            backgroundColor: colors.card,
+            zIndex: -1,
+            paddingTop: 10,
+            minHeight: !noDrawMenu ? 60 : 25,
+          }}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              marginTop: 12,
+              marginHorizontal: 5,
+            }}>
+            {!noSyncingStatus && selectServer !== SelectServerEnum.offline && (
               <>
-                {!syncingStatus.inProgress && syncingStatus.lastBlockServer === syncingStatus.lastBlockWallet && (
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: 0,
-                      marginRight: 5,
-                      padding: 1,
-                      borderColor: colors.primary,
-                      borderWidth: 1,
-                      borderRadius: 10,
-                      minWidth: 25,
-                      minHeight: 25,
-                    }}>
-                    <View testID="header.checkicon" style={{ margin: 0, padding: 0 }}>
-                      <FontAwesomeIcon icon={faCheck} color={colors.primary} size={20} />
-                    </View>
-                  </View>
-                )}
-                {!syncingStatus.inProgress &&
-                  syncingStatus.lastBlockServer !== syncingStatus.lastBlockWallet &&
-                  mode === ModeEnum.advanced && (
-                    <View
-                      style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 0,
-                        marginRight: 5,
-                        padding: 1,
-                        borderColor: colors.zingo,
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        minWidth: 25,
-                        minHeight: 25,
-                      }}>
-                      <TouchableOpacity onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                        <FontAwesomeIcon icon={faPause} color={colors.zingo} size={17} />
-                      </TouchableOpacity>
-                    </View>
-                  )}
-                {syncingStatus.inProgress && blocksRemaining > 0 && (
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: 0,
-                      marginRight: 5,
-                      padding: 1,
-                      borderColor: colors.syncing,
-                      borderWidth: 1,
-                      borderRadius: 10,
-                      minWidth: 25,
-                      minHeight: 25,
-                    }}>
-                    <Animated.View
-                      style={{
-                        opacity: opacityValue,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingHorizontal: 3,
-                      }}>
-                      {mode === ModeEnum.basic ? (
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                          <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
-                          <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
+                {netInfo.isConnected && !!syncingStatus.lastBlockServer && syncingStatus.syncID >= 0 ? (
+                  <>
+                    {!syncingStatus.inProgress && syncingStatus.lastBlockServer === syncingStatus.lastBlockWallet && (
+                      <View
+                        style={{
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: 0,
+                          marginRight: 5,
+                          padding: 1,
+                          borderColor: colors.primary,
+                          borderWidth: 1,
+                          borderRadius: 10,
+                          minWidth: 25,
+                          minHeight: 25,
+                        }}>
+                        <View testID="header.checkicon" style={{ margin: 0, padding: 0 }}>
+                          <FontAwesomeIcon icon={faCheck} color={colors.primary} size={20} />
                         </View>
-                      ) : (
-                        <TouchableOpacity
-                          testID="header.playicon"
-                          onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
-                            <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
-                          </View>
-                        </TouchableOpacity>
+                      </View>
+                    )}
+                    {!syncingStatus.inProgress &&
+                      syncingStatus.lastBlockServer !== syncingStatus.lastBlockWallet &&
+                      mode === ModeEnum.advanced && (
+                        <View
+                          style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: 0,
+                            marginRight: 5,
+                            padding: 1,
+                            borderColor: colors.zingo,
+                            borderWidth: 1,
+                            borderRadius: 10,
+                            minWidth: 25,
+                            minHeight: 25,
+                          }}>
+                          <TouchableOpacity
+                            onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
+                            <FontAwesomeIcon icon={faPause} color={colors.zingo} size={17} />
+                          </TouchableOpacity>
+                        </View>
                       )}
-                    </Animated.View>
-                  </View>
+                    {syncingStatus.inProgress && blocksRemaining > 0 && (
+                      <View
+                        style={{
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: 0,
+                          marginRight: 5,
+                          padding: 1,
+                          borderColor: colors.syncing,
+                          borderWidth: 1,
+                          borderRadius: 10,
+                          minWidth: 25,
+                          minHeight: 25,
+                        }}>
+                        <Animated.View
+                          style={{
+                            opacity: opacityValue,
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingHorizontal: 3,
+                          }}>
+                          {mode === ModeEnum.basic ? (
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                              <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
+                              <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
+                            </View>
+                          ) : (
+                            <TouchableOpacity
+                              testID="header.playicon"
+                              onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
+                              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
+                                <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
+                              </View>
+                            </TouchableOpacity>
+                          )}
+                        </Animated.View>
+                      </View>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {netInfo.isConnected && mode === ModeEnum.advanced && (
+                      <View
+                        style={{
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: 0,
+                          marginRight: 5,
+                          padding: 1,
+                          borderColor: colors.primaryDisabled,
+                          borderWidth: 1,
+                          borderRadius: 10,
+                          minWidth: 25,
+                          minHeight: 25,
+                        }}>
+                        <TouchableOpacity
+                          onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
+                          <FontAwesomeIcon icon={faWifi} color={colors.primaryDisabled} size={18} />
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </>
                 )}
-              </>
-            ) : (
-              <>
-                {netInfo.isConnected && mode === ModeEnum.advanced && (
+                {(!netInfo.isConnected ||
+                  netInfo.type === NetInfoStateType.cellular ||
+                  netInfo.isConnectionExpensive) && (
                   <View
                     style={{
                       alignItems: 'center',
                       justifyContent: 'center',
                       margin: 0,
                       marginRight: 5,
-                      padding: 1,
-                      borderColor: colors.primaryDisabled,
-                      borderWidth: 1,
-                      borderRadius: 10,
+                      padding: 0,
                       minWidth: 25,
                       minHeight: 25,
                     }}>
-                    <TouchableOpacity onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                      <FontAwesomeIcon icon={faWifi} color={colors.primaryDisabled} size={18} />
-                    </TouchableOpacity>
+                    {mode === ModeEnum.basic ? (
+                      <FontAwesomeIcon
+                        icon={faCloudDownload}
+                        color={!netInfo.isConnected ? 'red' : 'yellow'}
+                        size={20}
+                      />
+                    ) : (
+                      <TouchableOpacity onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
+                        <FontAwesomeIcon
+                          icon={faCloudDownload}
+                          color={!netInfo.isConnected ? 'red' : 'yellow'}
+                          size={20}
+                        />
+                      </TouchableOpacity>
+                    )}
                   </View>
                 )}
               </>
             )}
-            {(!netInfo.isConnected || netInfo.type === NetInfoStateType.cellular || netInfo.isConnectionExpensive) && (
+            {selectServer === SelectServerEnum.offline && (
               <View
                 style={{
                   alignItems: 'center',
                   justifyContent: 'center',
                   margin: 0,
                   marginRight: 5,
-                  padding: 0,
+                  paddingHorizontal: 5,
+                  paddingVertical: 1,
+                  borderColor: colors.zingo,
+                  borderWidth: 1,
+                  borderRadius: 10,
                   minWidth: 25,
                   minHeight: 25,
                 }}>
-                {mode === ModeEnum.basic ? (
-                  <FontAwesomeIcon icon={faCloudDownload} color={!netInfo.isConnected ? 'red' : 'yellow'} size={20} />
-                ) : (
-                  <TouchableOpacity onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                    <FontAwesomeIcon icon={faCloudDownload} color={!netInfo.isConnected ? 'red' : 'yellow'} size={20} />
-                  </TouchableOpacity>
-                )}
+                <View style={{ flexDirection: 'row', margin: 0, padding: 0 }}>
+                  <FontAwesomeIcon icon={faWifi} color={'red'} size={18} />
+                  <FadeText style={{ marginLeft: 10, marginRight: 5 }}>
+                    {translate('settings.server-offline') as string}
+                  </FadeText>
+                </View>
               </View>
             )}
-          </>
-        )}
-        {selectServer === SelectServerEnum.offline && (
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: 0,
-              marginRight: 5,
-              paddingHorizontal: 5,
-              paddingVertical: 1,
-              borderColor: colors.zingo,
-              borderWidth: 1,
-              borderRadius: 10,
-              minWidth: 25,
-              minHeight: 25,
-            }}>
-            <View style={{ flexDirection: 'row', margin: 0, padding: 0 }}>
-              <FontAwesomeIcon icon={faWifi} color={'red'} size={18} />
-              <FadeText style={{ marginLeft: 10, marginRight: 5 }}>
-                {translate('settings.server-offline') as string}
-              </FadeText>
-            </View>
+            {mode !== ModeEnum.basic &&
+              !noPrivacy &&
+              setPrivacyOption &&
+              addLastSnackbar &&
+              noBalance &&
+              privacyComponent()}
           </View>
-        )}
-        {mode !== ModeEnum.basic &&
-          !noPrivacy &&
-          setPrivacyOption &&
-          addLastSnackbar &&
-          noBalance &&
-          privacyComponent()}
-      </View>
 
-      {!noBalance && (
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: 0,
-          }}>
-          {mode !== ModeEnum.basic && !noPrivacy && setPrivacyOption && addLastSnackbar && privacyComponent()}
-          <ZecAmount
-            currencyName={info.currencyName}
-            color={colors.text}
-            size={36}
-            amtZec={totalBalance ? totalBalance.total : 0}
-            privacy={privacy}
-            smallPrefix={true}
-          />
-          {mode !== ModeEnum.basic &&
-            totalBalance &&
-            (totalBalance.orchardBal !== totalBalance.spendableOrchard ||
-              totalBalance.privateBal > 0 ||
-              totalBalance.transparentBal > 0) && (
-              <TouchableOpacity onPress={() => poolsMoreInfoOnClick && poolsMoreInfoOnClick()}>
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: colors.card,
-                    borderRadius: 10,
-                    margin: 0,
-                    marginLeft: 5,
-                    padding: 0,
-                    minWidth: 25,
-                    minHeight: 25,
-                  }}>
-                  <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.primary} />
+          {!noBalance && (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: 0,
+              }}>
+              {mode !== ModeEnum.basic && !noPrivacy && setPrivacyOption && addLastSnackbar && privacyComponent()}
+              <ZecAmount
+                currencyName={info.currencyName}
+                color={colors.text}
+                size={36}
+                amtZec={totalBalance ? totalBalance.total : 0}
+                privacy={privacy}
+                smallPrefix={true}
+              />
+              {mode !== ModeEnum.basic &&
+                totalBalance &&
+                (totalBalance.orchardBal !== totalBalance.spendableOrchard ||
+                  totalBalance.privateBal > 0 ||
+                  totalBalance.transparentBal > 0) && (
+                  <TouchableOpacity onPress={() => poolsMoreInfoOnClick && poolsMoreInfoOnClick()}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: colors.card,
+                        borderRadius: 10,
+                        margin: 0,
+                        marginLeft: 5,
+                        padding: 0,
+                        minWidth: 25,
+                        minHeight: 25,
+                      }}>
+                      <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.primary} />
+                    </View>
+                  </TouchableOpacity>
+                )}
+            </View>
+          )}
+
+          {receivedLegend && totalBalance && totalBalance.total > 0 && (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: 0,
+              }}>
+              <RegText color={colors.primary}>{translate('seed.youreceived') as string}</RegText>
+              <ZecAmount
+                currencyName={info.currencyName}
+                color={colors.primary}
+                size={18}
+                amtZec={totalBalance.total}
+                privacy={privacy}
+              />
+              <RegText color={colors.primary}>!!!</RegText>
+            </View>
+          )}
+
+          {currency === CurrencyEnum.USDCurrency && !noBalance && (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <CurrencyAmount
+                style={{ marginTop: 0, marginBottom: 0 }}
+                price={zecPrice.zecPrice}
+                amtZec={totalBalance ? totalBalance.total : 0}
+                currency={currency}
+                privacy={privacy}
+              />
+              <View style={{ marginLeft: 5 }}>
+                <PriceFetcher setZecPrice={setZecPrice} />
+              </View>
+            </View>
+          )}
+
+          {showShieldButton &&
+            !calculateDisableButtonToShield() &&
+            setComputingModalVisible &&
+            valueTransfers !== null && (
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <FadeText style={{ fontSize: 8 }}>
+                  {(translate(`history.shield-legend-${calculatePoolsToShield()}`) as string) +
+                    ` ${calculateAmountToShield()} ` +
+                    (translate('send.fee') as string) +
+                    ': ' +
+                    Utils.parseNumberFloatToStringLocale(shieldingFee, 8) +
+                    ' '}
+                </FadeText>
+                <View style={{ margin: 5, flexDirection: 'row' }}>
+                  <Button
+                    testID="header.shield"
+                    type={ButtonTypeEnum.Primary}
+                    title={translate(`history.shield-${calculatePoolsToShield()}`) as string}
+                    onPress={onPressShieldFunds}
+                    disabled={calculateDisableButtonToShield()}
+                  />
                 </View>
-              </TouchableOpacity>
+              </View>
             )}
         </View>
-      )}
-
-      {receivedLegend && totalBalance && totalBalance.total > 0 && (
         <View
           style={{
+            padding: 11.5,
+            position: 'absolute',
+            left: 0,
+          }}>
+          <View style={{ alignItems: 'center', flexDirection: 'row', height: 45 }}>
+            {!noDrawMenu && (
+              <TouchableOpacity
+                style={{ marginRight: 5 }}
+                testID="header.drawmenu"
+                accessible={true}
+                accessibilityLabel={translate('menudrawer-acc') as string}
+                onPress={toggleMenuDrawer}>
+                <FontAwesomeIcon icon={faBars} size={45} color={colors.border} />
+              </TouchableOpacity>
+            )}
+            {readOnly && (
+              <>
+                {setUfvkViewModalVisible &&
+                !(mode === ModeEnum.basic && valueTransfers !== null && valueTransfers.length <= 0) &&
+                !(mode === ModeEnum.basic && totalBalance && totalBalance.total <= 0) ? (
+                  <TouchableOpacity onPress={() => ufvkShowModal()}>
+                    <FontAwesomeIcon icon={faSnowflake} size={24} color={colors.zingo} />
+                  </TouchableOpacity>
+                ) : (
+                  <FontAwesomeIcon icon={faSnowflake} size={24} color={colors.zingo} />
+                )}
+              </>
+            )}
+          </View>
+        </View>
+
+        <View
+          style={{
+            padding: 15,
+            position: 'absolute',
+            right: 0,
+          }}>
+          <Image
+            source={require('../../assets/img/logobig-zingo.png')}
+            style={{ width: 38, height: 38, resizeMode: 'contain', borderRadius: 10 }}
+          />
+        </View>
+      </View>
+      <View>
+        <View
+          style={{
+            display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
-            margin: 0,
+            justifyContent: noDrawMenu ? 'space-between' : 'center',
+            flexWrap: 'wrap',
+            width: '100%',
+            marginVertical: 5,
           }}>
-          <RegText color={colors.primary}>{translate('seed.youreceived') as string}</RegText>
-          <ZecAmount
-            currencyName={info.currencyName}
-            color={colors.primary}
-            size={18}
-            amtZec={totalBalance.total}
-            privacy={privacy}
-          />
-          <RegText color={colors.primary}>!!!</RegText>
-        </View>
-      )}
-
-      {currency === CurrencyEnum.USDCurrency && !noBalance && (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <CurrencyAmount
-            style={{ marginTop: 0, marginBottom: 0 }}
-            price={zecPrice.zecPrice}
-            amtZec={totalBalance ? totalBalance.total : 0}
-            currency={currency}
-            privacy={privacy}
-          />
-          <View style={{ marginLeft: 5 }}>
-            <PriceFetcher setZecPrice={setZecPrice} />
-          </View>
-        </View>
-      )}
-
-      {showShieldButton && !calculateDisableButtonToShield() && setComputingModalVisible && valueTransfers !== null && (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <FadeText style={{ fontSize: 8 }}>
-            {(translate(`history.shield-legend-${calculatePoolsToShield()}`) as string) +
-              ` ${calculateAmountToShield()} ` +
-              (translate('send.fee') as string) +
-              ': ' +
-              Utils.parseNumberFloatToStringLocale(shieldingFee, 8) +
-              ' '}
-          </FadeText>
-          <View style={{ margin: 5, flexDirection: 'row' }}>
-            <Button
-              testID="header.shield"
-              type={ButtonTypeEnum.Primary}
-              title={translate(`history.shield-${calculatePoolsToShield()}`) as string}
-              onPress={onPressShieldFunds}
-              disabled={calculateDisableButtonToShield()}
-            />
-          </View>
-        </View>
-      )}
-
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}>
-        <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5, marginBottom: 3, marginTop: 3 }}>
-          {title}
-        </RegText>
-      </View>
-
-      <View
-        style={{
-          padding: 11.5,
-          position: 'absolute',
-          left: 0,
-        }}>
-        <View style={{ alignItems: 'center', flexDirection: 'row', height: 45 }}>
-          {!noDrawMenu && (
-            <TouchableOpacity
-              style={{ marginRight: 5 }}
-              testID="header.drawmenu"
-              accessible={true}
-              accessibilityLabel={translate('menudrawer-acc') as string}
-              onPress={toggleMenuDrawer}>
-              <FontAwesomeIcon icon={faBars} size={45} color={colors.border} />
-            </TouchableOpacity>
-          )}
-          {readOnly && (
+          {noDrawMenu ? (
             <>
-              {setUfvkViewModalVisible &&
-              !(mode === ModeEnum.basic && valueTransfers !== null && valueTransfers.length <= 0) &&
-              !(mode === ModeEnum.basic && totalBalance && totalBalance.total <= 0) ? (
-                <TouchableOpacity onPress={() => ufvkShowModal()}>
-                  <FontAwesomeIcon icon={faSnowflake} size={24} color={colors.zingo} />
-                </TouchableOpacity>
-              ) : (
-                <FontAwesomeIcon icon={faSnowflake} size={24} color={colors.zingo} />
-              )}
+              <TouchableOpacity onPress={() => closeScreen && closeScreen()}>
+                <FontAwesomeIcon
+                  style={{ marginHorizontal: 10 }}
+                  size={30}
+                  icon={faChevronLeft}
+                  color={colors.primary}
+                />
+              </TouchableOpacity>
+              <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5 }}>
+                {title}
+              </RegText>
+              <View style={{ width: 30, height: 30, marginHorizontal: 10 }} />
+            </>
+          ) : (
+            <>
+              <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5, textAlign: 'center' }}>
+                {title}
+              </RegText>
             </>
           )}
         </View>
-      </View>
 
-      <View
-        style={{
-          padding: 15,
-          position: 'absolute',
-          right: 0,
-          alignItems: 'flex-end',
-        }}>
-        <Image
-          source={require('../../assets/img/logobig-zingo.png')}
-          style={{ width: 38, height: 38, resizeMode: 'contain', borderRadius: 10 }}
-        />
+        <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
       </View>
-
-      <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
-    </View>
+    </>
   );
 };
 
