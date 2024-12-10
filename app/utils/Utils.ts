@@ -29,28 +29,6 @@ export default class Utils {
     return `${addr.slice(0, trimSize)}...${addr.slice(addr.length - trimSize)}`;
   }
 
-  // Convert to max 8 decimal places, and remove trailing zeros
-  static maxPrecision(v: number): string {
-    return v.toFixed(8);
-  }
-
-  static maxPrecisionTrimmed(v: number): string {
-    let s = Utils.maxPrecision(v);
-    if (!s) {
-      return s;
-    }
-
-    while (s.indexOf('.') >= 0 && s.substr(s.length - 1, 1) === '0') {
-      s = s.substr(0, s.length - 1);
-    }
-
-    if (s.substr(s.length - 1, 1) === '.') {
-      s = s.substr(0, s.length - 1);
-    }
-
-    return s;
-  }
-
   static splitZecAmountIntoBigSmall(zecValue?: number): ZecAmountSplitType {
     if (typeof zecValue === 'undefined') {
       return { bigPart: '--', smallPart: '' };
@@ -208,7 +186,7 @@ export default class Utils {
   static parseNumberFloatToStringLocale(numberValue: number, toFixed: number): string {
     const { decimalSeparator } = getNumberFormatSettings();
 
-    let stringValue = Utils.maxPrecisionTrimmed(Number(numberValue.toFixed(toFixed)));
+    let stringValue = numberValue.toFixed(toFixed);
 
     return stringValue.replace(new RegExp('\\.'), `${decimalSeparator}`);
   }
