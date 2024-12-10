@@ -213,7 +213,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
         style={
           {
             "flexDirection": "row",
-            "margin": 5,
+            "marginHorizontal": 5,
           }
         }
       >
@@ -491,7 +491,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
                 {
                   "color": "#ffffff",
                   "fontSize": 20,
-                  "marginBottom": 5,
+                  "marginBottom": 0,
                   "marginTop": 0,
                 }
               }
@@ -504,7 +504,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
                   "color": "#ffffff",
                   "fontSize": 20,
                   "fontWeight": "700",
-                  "marginBottom": 5,
+                  "marginBottom": 0,
                   "marginTop": 0,
                 }
               }
@@ -844,7 +844,7 @@ exports[`Component History - test History no currency, privacy normal & mode bas
         style={
           {
             "flexDirection": "row",
-            "margin": 5,
+            "marginHorizontal": 5,
           }
         }
       >

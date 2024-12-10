@@ -224,7 +224,7 @@ exports[`Component Components - test ZecAmount High Privacy - snapshot 1`] = `
     {
       "backgroundColor": "red",
       "flexDirection": "row",
-      "margin": 5,
+      "marginHorizontal": 5,
     }
   }
 >
@@ -374,7 +374,7 @@ exports[`Component Components - test ZecAmount Normal Privacy - snapshot 1`] = `
     {
       "backgroundColor": "red",
       "flexDirection": "row",
-      "margin": 5,
+      "marginHorizontal": 5,
     }
   }
 >

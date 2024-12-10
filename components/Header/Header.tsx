@@ -699,7 +699,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
       {currency === CurrencyEnum.USDCurrency && !noBalance && (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <CurrencyAmount
-            style={{ marginTop: 0, marginBottom: 5 }}
+            style={{ marginTop: 0, marginBottom: 0 }}
             price={zecPrice.zecPrice}
             amtZec={totalBalance ? totalBalance.total : 0}
             currency={currency}
