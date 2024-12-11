@@ -152,6 +152,7 @@ memo10"
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -164,6 +165,7 @@ memo10"
           60 
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -175,6 +177,7 @@ memo10"
           text translated
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -261,6 +264,7 @@ memo10"
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(242, 242, 242)",

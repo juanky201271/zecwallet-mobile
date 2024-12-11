@@ -100,7 +100,8 @@ const ZecAmount: React.FunctionComponent<ZecAmountProps> = ({
                 color,
                 margin: 0,
                 padding: 0,
-              }}>
+              }}
+              selectable>
               {currencyName ? currencyName : '---'}
             </Text>
           )}
@@ -112,7 +113,8 @@ const ZecAmount: React.FunctionComponent<ZecAmountProps> = ({
                 color,
                 margin: 0,
                 padding: 0,
-              }}>
+              }}
+              selectable>
               {' -' + decimalSeparator + '----'}
             </Text>
           ) : (
@@ -124,7 +126,8 @@ const ZecAmount: React.FunctionComponent<ZecAmountProps> = ({
                 color,
                 margin: 0,
                 padding: 0,
-              }}>
+              }}
+              selectable>
               {' ' + splits.bigPart}
             </Text>
           )}
@@ -137,7 +140,8 @@ const ZecAmount: React.FunctionComponent<ZecAmountProps> = ({
                 margin: 0,
                 padding: 0,
                 marginBottom: Platform.OS === GlobalConst.platformOSandroid ? size / 10 : size / 15,
-              }}>
+              }}
+              selectable>
               {splits.smallPart}
             </Text>
           )}

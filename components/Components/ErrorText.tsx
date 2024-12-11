@@ -13,7 +13,7 @@ const ErrorText: React.FunctionComponent<ErrorTextProps> = ({ style, children, t
   const { colors } = useTheme() as unknown as ThemeType;
 
   return (
-    <Text testID={testID} style={{ color: colors.primary, ...style }}>
+    <Text testID={testID} style={{ color: colors.primary, ...style }} selectable>
       {children}
     </Text>
   );

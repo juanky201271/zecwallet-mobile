@@ -277,7 +277,8 @@ const Seed: React.FunctionComponent<SeedProps> = ({
                   marginTop: 0,
                   textAlign: 'center',
                   minHeight: 48,
-                }}>
+                }}
+                selectable>
                 {translate('seed.tapcopy') as string}
               </Text>
             </TouchableOpacity>

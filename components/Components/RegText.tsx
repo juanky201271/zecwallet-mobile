@@ -17,7 +17,7 @@ const RegText: React.FunctionComponent<RegTextProps> = ({ style, color, onPress,
   const styleSum: TextStyle = { color: color || colors.text, fontSize: 18, fontWeight: '600', opacity: 1, ...style };
 
   return (
-    <Text testID={testID} style={styleSum} onPress={onPress}>
+    <Text testID={testID} style={styleSum} onPress={onPress} selectable>
       {children}
     </Text>
   );

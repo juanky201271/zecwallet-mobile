@@ -12,7 +12,11 @@ type FadeTextProps = {
 const FadeText: React.FunctionComponent<FadeTextProps> = ({ style, children }) => {
   const { colors } = useTheme() as unknown as ThemeType;
 
-  return <Text style={{ opacity: 0.65, color: colors.text, ...style }}>{children}</Text>;
+  return (
+    <Text style={{ opacity: 0.65, color: colors.text, ...style }} selectable>
+      {children}
+    </Text>
+  );
 };
 
 export default FadeText;

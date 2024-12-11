@@ -240,6 +240,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
         />
       </View>
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -327,6 +328,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -339,6 +341,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
           text translated
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(0, 122, 255)",
@@ -400,6 +403,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -412,6 +416,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
           text translated
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -473,6 +478,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -485,6 +491,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
           text translated
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",

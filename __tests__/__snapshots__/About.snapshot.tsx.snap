@@ -160,6 +160,7 @@ exports[`Component About - test About - snapshot 1`] = `
         />
       </View>
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -209,6 +210,7 @@ exports[`Component About - test About - snapshot 1`] = `
   >
     <View>
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -225,6 +227,7 @@ exports[`Component About - test About - snapshot 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -269,6 +272,7 @@ exports[`Component About - test About - snapshot 1`] = `
           }
         >
           <Text
+            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",

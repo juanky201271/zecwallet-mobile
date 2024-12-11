@@ -20,7 +20,7 @@ const BoldText: React.FunctionComponent<BoldTextProps> = ({ style, children, tes
   };
 
   return (
-    <Text testID={testID} style={totalStyle}>
+    <Text testID={testID} style={totalStyle} selectable>
       {children}
     </Text>
   );

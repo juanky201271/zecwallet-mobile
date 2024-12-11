@@ -10,6 +10,7 @@ exports[`Component DetailLine - test DetailLine children - snapshot 1`] = `
   }
 >
   <Text
+    selectable={true}
     style={
       {
         "color": "rgb(28, 28, 30)",
@@ -33,6 +34,7 @@ exports[`Component DetailLine - test DetailLine value - snapshot 1`] = `
   }
 >
   <Text
+    selectable={true}
     style={
       {
         "color": "rgb(28, 28, 30)",
@@ -77,6 +79,7 @@ exports[`Component DetailLine - test DetailLine value - snapshot 1`] = `
     }
   >
     <Text
+      selectable={true}
       style={
         {
           "color": "rgb(28, 28, 30)",

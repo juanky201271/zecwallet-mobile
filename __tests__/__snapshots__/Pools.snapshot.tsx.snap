@@ -240,6 +240,7 @@ exports[`Component Pools - test Pools - snapshot 1`] = `
         />
       </View>
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",

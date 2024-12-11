@@ -1402,10 +1402,12 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
                     justifyContent: 'center',
                   }}>
                   <View style={{ marginBottom: 30, display: 'flex', alignItems: 'center' }}>
-                    <Text style={{ color: colors.zingo, fontSize: 40, fontWeight: 'bold' }}>
+                    <Text style={{ color: colors.zingo, fontSize: 40, fontWeight: 'bold' }} selectable>
                       {translate('zingo') as string}
                     </Text>
-                    <Text style={{ color: colors.zingo, fontSize: 15 }}>{translate('version') as string}</Text>
+                    <Text style={{ color: colors.zingo, fontSize: 15 }} selectable>
+                      {translate('version') as string}
+                    </Text>
                     <Image
                       source={require('../../assets/img/logobig-zingo.png')}
                       style={{ width: 100, height: 100, resizeMode: 'contain', marginTop: 10, borderRadius: 10 }}

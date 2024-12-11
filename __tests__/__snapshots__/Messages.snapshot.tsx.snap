@@ -320,6 +320,7 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
       }
     >
       <Text
+        selectable={true}
         style={
           {
             "color": "#ffffff",
@@ -391,6 +392,7 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "#18bd18",
@@ -616,6 +618,7 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
       }
     >
       <Text
+        selectable={true}
         style={
           {
             "color": "#ffffff",
@@ -687,6 +690,7 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "#18bd18",

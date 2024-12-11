@@ -51,6 +51,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
       >
         <View>
           <Text
+            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -82,6 +83,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
           >
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -97,6 +99,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -112,6 +115,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -127,6 +131,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -142,6 +147,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -157,6 +163,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -172,6 +179,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             </Text>
             <Text
               onPress={[Function]}
+              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -199,6 +207,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
         }
       >
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",
@@ -206,9 +215,11 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             }
           }
         >
-          Version : 
+          Version :
+           
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": undefined,
@@ -219,6 +230,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
           text translated
         </Text>
         <Text
+          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",

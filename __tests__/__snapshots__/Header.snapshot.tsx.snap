@@ -321,6 +321,7 @@ exports[`Component Header - test Header Complex - snapshot 1`] = `
                 </RNSVGGroup>
               </RNSVGSvgView>
               <Text
+                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -335,6 +336,7 @@ exports[`Component Header - test Header Complex - snapshot 1`] = `
                  1.1234
               </Text>
               <Text
+                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -543,6 +545,7 @@ exports[`Component Header - test Header Complex - snapshot 1`] = `
       }
     >
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -662,6 +665,7 @@ exports[`Component Header - test Header Simple - snapshot 1`] = `
       }
     >
       <Text
+        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
