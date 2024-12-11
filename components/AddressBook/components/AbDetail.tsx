@@ -200,12 +200,14 @@ const AbDetail: React.FunctionComponent<AbDetailProps> = ({
           disabled={
             action === AddressBookActionEnum.Delete ? false : error || errorAddress || !label || !address ? true : false
           }
+          twoButtons={true}
         />
         <Button
           type={ButtonTypeEnum.Secondary}
           title={translate('cancel') as string}
           style={{ marginLeft: 10 }}
           onPress={cancel}
+          twoButtons={true}
         />
       </View>
     </View>

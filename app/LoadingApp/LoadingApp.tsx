@@ -1520,6 +1520,7 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
                           disabled={actionButtonsDisabled}
                           onPress={this.usingCustomServer}
                           style={{ marginBottom: 10 }}
+                          twoButtons={true}
                         />
                         <Button
                           type={ButtonTypeEnum.Secondary}
@@ -1527,6 +1528,7 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
                           disabled={actionButtonsDisabled}
                           onPress={() => this.setState({ customServerShow: false })}
                           style={{ marginBottom: 10, marginLeft: 10 }}
+                          twoButtons={true}
                         />
                       </View>
                     </View>

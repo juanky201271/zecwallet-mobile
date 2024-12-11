@@ -1769,6 +1769,7 @@ const Send: React.FunctionComponent<SendProps> = ({
                     setConfirmModalVisible(true);
                   }, 100);
                 }}
+                twoButtons={true}
               />
               <Button
                 type={ButtonTypeEnum.Secondary}
@@ -1780,6 +1781,7 @@ const Send: React.FunctionComponent<SendProps> = ({
                   clearToAddr();
                   setPickerTempSelectedAddress('');
                 }}
+                twoButtons={true}
               />
             </View>
             {server.chainName === ChainNameEnum.mainChainName && (
