@@ -33,7 +33,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     type === ButtonTypeEnum.Primary
       ? {
           backgroundColor: disabled ? colors.primaryDisabled : colors.primary,
-          borderColor: disabled ? colors.primaryDisabled : colors.text,
+          borderColor: disabled ? colors.primaryDisabled : colors.primary,
           borderWidth: 2,
         }
       : type === ButtonTypeEnum.Secondary
