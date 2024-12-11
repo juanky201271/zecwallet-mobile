@@ -99,6 +99,7 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, updateToField })
             noSyncingStatus={true}
             noDrawMenu={true}
             noPrivacy={true}
+            closeScreen={closeModal}
           />
         </View>
       </Animated.View>
@@ -184,12 +185,6 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, updateToField })
           title={translate('save') as string}
           onPress={doSaveAndClose}
           disabled={countMemoBytes(memo, includeUAMemo) > GlobalConst.memoMaxLength}
-        />
-        <Button
-          type={ButtonTypeEnum.Secondary}
-          title={translate('cancel') as string}
-          style={{ marginLeft: 10 }}
-          onPress={closeModal}
         />
       </View>
     </SafeAreaView>

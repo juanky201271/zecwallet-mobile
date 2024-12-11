@@ -5,7 +5,6 @@ import { useTheme } from '@react-navigation/native';
 
 import ZecAmount from '../Components/ZecAmount';
 import BoldText from '../Components/BoldText';
-import Button from '../Components/Button';
 import DetailLine from '../Components/DetailLine';
 import { ThemeType } from '../../app/types';
 import { ContextAppLoaded } from '../../app/context';
@@ -18,7 +17,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/pt';
 import 'moment/locale/ru';
-import { ButtonTypeEnum, CommandEnum, GlobalConst } from '../../app/AppState';
+import { CommandEnum, GlobalConst } from '../../app/AppState';
 import RPCModule from '../../app/RPCModule';
 import { RPCWalletKindType } from '../../app/rpc/types/RPCWalletKindType';
 
@@ -70,6 +69,7 @@ const Pools: React.FunctionComponent<PoolsProps> = ({ closeModal, setPrivacyOpti
         noDrawMenu={true}
         setPrivacyOption={setPrivacyOption}
         addLastSnackbar={addLastSnackbar}
+        closeScreen={closeModal}
       />
 
       <ScrollView
@@ -223,22 +223,6 @@ const Pools: React.FunctionComponent<PoolsProps> = ({ closeModal, setPrivacyOpti
           )}
         </View>
       </ScrollView>
-
-      <View
-        style={{
-          flexGrow: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 5,
-        }}>
-        <Button
-          testID="fundpools.button.close"
-          type={ButtonTypeEnum.Secondary}
-          title={translate('close') as string}
-          onPress={closeModal}
-        />
-      </View>
     </SafeAreaView>
   );
 };

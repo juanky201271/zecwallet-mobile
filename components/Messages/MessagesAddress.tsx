@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
-import { ButtonTypeEnum, SendPageStateClass } from '../../app/AppState';
+import { SendPageStateClass } from '../../app/AppState';
 import MessageList from './components/MessageList';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { ThemeType } from '../../app/types';
 import { ContextAppLoaded } from '../../app/context';
@@ -10,7 +10,6 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/pt';
 import 'moment/locale/ru';
-import Button from '../Components/Button';
 
 type MessagesAddressProps = {
   doRefresh: () => void;
@@ -40,7 +39,7 @@ const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
   openModal,
 }) => {
   const context = useContext(ContextAppLoaded);
-  const { translate, language } = context;
+  const { language } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
@@ -66,9 +65,6 @@ const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
         closeModal={closeModal}
         openModal={openModal}
       />
-      <View style={{ flexGrow: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-        <Button type={ButtonTypeEnum.Secondary} title={translate('close') as string} onPress={closeModal} />
-      </View>
     </SafeAreaView>
   );
 };

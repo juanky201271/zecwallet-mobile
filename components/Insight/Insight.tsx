@@ -10,7 +10,6 @@ import Clipboard from '@react-native-community/clipboard';
 
 import RegText from '../Components/RegText';
 import ZecAmount from '../Components/ZecAmount';
-import Button from '../Components/Button';
 import { ThemeType } from '../../app/types';
 import { ContextAppLoaded } from '../../app/context';
 import Utils from '../../app/utils';
@@ -18,7 +17,7 @@ import FadeText from '../Components/FadeText';
 import Header from '../Header';
 import RPCModule from '../../app/RPCModule';
 import AddressItem from '../Components/AddressItem';
-import { ButtonTypeEnum, CommandEnum, SnackbarDurationEnum } from '../../app/AppState';
+import { CommandEnum, SnackbarDurationEnum } from '../../app/AppState';
 import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/pt';
@@ -279,6 +278,7 @@ const Insight: React.FunctionComponent<InsightProps> = ({ closeModal, setPrivacy
         noDrawMenu={true}
         setPrivacyOption={setPrivacyOption}
         addLastSnackbar={addLastSnackbar}
+        closeScreen={closeModal}
       />
 
       <View style={{ width: '100%', flexDirection: 'row', marginTop: 10 }}>
@@ -395,17 +395,6 @@ const Insight: React.FunctionComponent<InsightProps> = ({ closeModal, setPrivacy
           </View>
         </View>
       </ScrollView>
-
-      <View
-        style={{
-          flexGrow: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 5,
-        }}>
-        <Button type={ButtonTypeEnum.Secondary} title={translate('close') as string} onPress={closeModal} />
-      </View>
     </SafeAreaView>
   );
 };

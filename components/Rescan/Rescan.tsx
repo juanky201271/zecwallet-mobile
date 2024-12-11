@@ -49,6 +49,7 @@ const Rescan: React.FunctionComponent<RescanProps> = ({ closeModal, doRescan }) 
         noSyncingStatus={true}
         noDrawMenu={true}
         noPrivacy={true}
+        closeScreen={closeModal}
       />
 
       <ScrollView
@@ -71,12 +72,6 @@ const Rescan: React.FunctionComponent<RescanProps> = ({ closeModal, doRescan }) 
           marginVertical: 5,
         }}>
         <Button type={ButtonTypeEnum.Primary} title={translate('rescan.button') as string} onPress={doRescanAndClose} />
-        <Button
-          type={ButtonTypeEnum.Secondary}
-          title={translate('cancel') as string}
-          style={{ marginLeft: 10 }}
-          onPress={closeModal}
-        />
       </View>
     </SafeAreaView>
   );

@@ -187,6 +187,7 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
             translate={translate}
             netInfo={netInfo}
             mode={mode}
+            closeScreen={onClickCancel}
           />
         </View>
       </Animated.View>
@@ -329,13 +330,6 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
             Keyboard.dismiss();
             okButton();
           }}
-        />
-        <Button
-          testID="import.button.cancel"
-          type={ButtonTypeEnum.Secondary}
-          title={translate('cancel') as string}
-          style={{ marginLeft: 10 }}
-          onPress={onClickCancel}
         />
       </View>
     </SafeAreaView>

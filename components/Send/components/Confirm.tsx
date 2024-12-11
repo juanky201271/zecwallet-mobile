@@ -282,6 +282,7 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
         noSyncingStatus={true}
         noDrawMenu={true}
         noPrivacy={true}
+        closeScreen={closeModal}
       />
       <ScrollView
         showsVerticalScrollIndicator={true}
@@ -411,12 +412,6 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
             type={ButtonTypeEnum.Primary}
             title={sendAllAmount ? (translate('send.confirm-button-all') as string) : (translate('confirm') as string)}
             onPress={() => confirmSendBiometrics()}
-          />
-          <Button
-            type={ButtonTypeEnum.Secondary}
-            style={{ marginLeft: 20 }}
-            title={translate('cancel') as string}
-            onPress={closeModal}
           />
         </View>
       </View>

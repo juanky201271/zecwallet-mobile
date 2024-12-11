@@ -202,6 +202,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
             noSyncingStatus={true}
             noDrawMenu={true}
             noPrivacy={true}
+            closeScreen={closeModal}
           />
         </View>
       </Animated.View>
@@ -368,12 +369,6 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
             type={ButtonTypeEnum.Primary}
             title={translate('addressbook.new') as string}
             onPress={() => newAddressBookItem()}
-          />
-          <Button
-            type={ButtonTypeEnum.Secondary}
-            title={translate('cancel') as string}
-            style={{ marginLeft: 10 }}
-            onPress={closeModal}
           />
         </View>
       )}

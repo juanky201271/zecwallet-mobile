@@ -12,7 +12,6 @@ import { useTheme } from '@react-navigation/native';
 import {
   AddressBookFileClass,
   AddressClass,
-  ButtonTypeEnum,
   ChainNameEnum,
   SendPageStateClass,
   SnackbarDurationEnum,
@@ -23,7 +22,6 @@ import Utils from '../../../app/utils';
 import RegText from '../../Components/RegText';
 import ZecAmount from '../../Components/ZecAmount';
 import FadeText from '../../Components/FadeText';
-import Button from '../../Components/Button';
 import { ThemeType } from '../../../app/types';
 import { ContextAppLoaded } from '../../../app/context';
 import Header from '../../Header';
@@ -162,6 +160,7 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
         noDrawMenu={true}
         setPrivacyOption={setPrivacyOption}
         addLastSnackbar={addLastSnackbar}
+        closeScreen={closeModal}
       />
       {showNavigator && (
         <View
@@ -430,9 +429,6 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
           )}
         </View>
       </ScrollView>
-      <View style={{ flexGrow: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-        <Button type={ButtonTypeEnum.Secondary} title={translate('close') as string} onPress={closeModal} />
-      </View>
     </SafeAreaView>
   );
 };

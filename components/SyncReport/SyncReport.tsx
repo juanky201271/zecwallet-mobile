@@ -4,7 +4,6 @@ import { View, ScrollView, SafeAreaView, Text, ActivityIndicator } from 'react-n
 import { useTheme } from '@react-navigation/native';
 
 import { ThemeType } from '../../app/types';
-import Button from '../Components/Button';
 import DetailLine from '../Components/DetailLine';
 import { ContextAppLoaded } from '../../app/context';
 import moment from 'moment';
@@ -19,7 +18,7 @@ import RegText from '../Components/RegText';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
 import Utils from '../../app/utils';
-import { ButtonTypeEnum, GlobalConst } from '../../app/AppState';
+import { GlobalConst } from '../../app/AppState';
 
 type SyncReportProps = {
   closeModal: () => void;
@@ -229,6 +228,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
         noSyncingStatus={true}
         noDrawMenu={true}
         noPrivacy={true}
+        closeScreen={closeModal}
       />
 
       <ScrollView
@@ -682,17 +682,6 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
           </View>
         )}
       </ScrollView>
-
-      <View
-        style={{
-          flexGrow: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 5,
-        }}>
-        <Button type={ButtonTypeEnum.Secondary} title={translate('close') as string} onPress={closeModal} />
-      </View>
     </SafeAreaView>
   );
 };

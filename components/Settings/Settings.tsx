@@ -561,6 +561,7 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
             noSyncingStatus={true}
             noDrawMenu={true}
             noPrivacy={true}
+            closeScreen={closeModal}
           />
         </View>
       </Animated.View>
@@ -1049,13 +1050,6 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
               await saveSettings();
             }, 100);
           }}
-        />
-        <Button
-          disabled={disabled}
-          type={ButtonTypeEnum.Secondary}
-          title={translate('cancel') as string}
-          style={{ marginLeft: 10 }}
-          onPress={closeModal}
         />
       </View>
     </SafeAreaView>
