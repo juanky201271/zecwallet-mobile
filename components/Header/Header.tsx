@@ -810,9 +810,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             width: '100%',
             marginVertical: 5,
           }}>
-          {noDrawMenu ? (
+          {noDrawMenu && closeScreen ? (
             <>
-              <TouchableOpacity onPress={() => closeScreen && closeScreen()}>
+              <TouchableOpacity onPress={() => closeScreen()}>
                 <FontAwesomeIcon
                   style={{ marginHorizontal: 10 }}
                   size={30}

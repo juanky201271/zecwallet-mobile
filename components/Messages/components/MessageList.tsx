@@ -233,6 +233,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
             noDrawMenu={true}
             setPrivacyOption={setPrivacyOption}
             addLastSnackbar={addLastSnackbar}
+            closeScreen={closeModal}
           />
           <View
             style={{
