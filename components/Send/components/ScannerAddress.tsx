@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
 
 import { ContextAppLoaded } from '../../../app/context';
@@ -9,6 +10,10 @@ import 'moment/locale/pt';
 import 'moment/locale/ru';
 import { GlobalConst } from '../../../app/AppState';
 import Utils from '../../../app/utils';
+import Header from '../../Header';
+import { useTheme } from '@react-navigation/native';
+import { ThemeType } from '../../../app/types';
+import { SafeAreaView } from 'react-native';
 
 type ScannerAddressProps = {
   setAddress: (address: string) => void;
@@ -18,6 +23,7 @@ type ScannerAddressProps = {
 const ScannerAddress: React.FunctionComponent<ScannerAddressProps> = ({ setAddress, closeModal }) => {
   const context = useContext(ContextAppLoaded);
   const { translate, server, language } = context;
+  const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
   const validateAddress = async (scannedAddress: string) => {
@@ -46,12 +52,24 @@ const ScannerAddress: React.FunctionComponent<ScannerAddressProps> = ({ setAddre
   };
 
   return (
-    <Scanner
-      onRead={onRead}
-      doCancel={doCancel}
-      title={translate('scanner.scanaddress') as string}
-      button={translate('cancel') as string}
-    />
+    <SafeAreaView
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        height: '100%',
+        backgroundColor: colors.background,
+      }}>
+      <Header
+        title={translate('scanner.scanaddress') as string}
+        noBalance={true}
+        noSyncingStatus={true}
+        noDrawMenu={true}
+        noPrivacy={true}
+        closeScreen={doCancel}
+      />
+      <Scanner onRead={onRead} />
+    </SafeAreaView>
   );
 };
 

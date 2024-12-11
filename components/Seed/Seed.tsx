@@ -202,6 +202,7 @@ const Seed: React.FunctionComponent<SeedProps> = ({
         mode={mode}
         addLastSnackbar={addLastSnackbar}
         receivedLegend={action === SeedActionEnum.view ? !basicFirstViewSeed : false}
+        closeScreen={onClickCancel}
       />
 
       <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
@@ -329,7 +330,7 @@ const Seed: React.FunctionComponent<SeedProps> = ({
             mode === ModeEnum.basic
               ? !basicFirstViewSeed
                 ? (translate('seed.showtransactions') as string)
-                : (translate('close') as string)
+                : (translate('cancel') as string)
               : !!texts && !!texts[action]
               ? texts[action][times]
               : ''
@@ -350,15 +351,6 @@ const Seed: React.FunctionComponent<SeedProps> = ({
             }
           }}
         />
-        {times > 0 && (
-          <Button
-            testID="seed.button.cancel"
-            type={ButtonTypeEnum.Secondary}
-            title={translate('cancel') as string}
-            style={{ marginLeft: 10 }}
-            onPress={onClickCancel}
-          />
-        )}
       </View>
     </SafeAreaView>
   );

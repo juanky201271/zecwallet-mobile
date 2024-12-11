@@ -98,6 +98,7 @@ const ShowUfvk: React.FunctionComponent<ShowUfvkProps> = ({ onClickOK, onClickCa
         noDrawMenu={true}
         setPrivacyOption={setPrivacyOption}
         addLastSnackbar={addLastSnackbar}
+        closeScreen={onClickCancel}
       />
 
       <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
@@ -155,14 +156,6 @@ const ShowUfvk: React.FunctionComponent<ShowUfvkProps> = ({ onClickOK, onClickCa
             }
           }}
         />
-        {times > 0 && (
-          <Button
-            type={ButtonTypeEnum.Secondary}
-            title={translate('cancel') as string}
-            style={{ marginLeft: 10 }}
-            onPress={onClickCancel}
-          />
-        )}
       </View>
     </SafeAreaView>
   );
