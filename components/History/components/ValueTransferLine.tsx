@@ -106,9 +106,10 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
     dragX: Animated.AnimatedInterpolation<number>,
     swipeable: Swipeable,
   ) => {
+    const width = dimensions.width * 0.7;
     const trans = progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [50, 0],
+      outputRange: [width, 0],
       extrapolate: 'extend',
     });
 
@@ -133,20 +134,20 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
           <Animated.View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               alignItems: 'center',
               transform: [{ translateX: trans }],
+              backgroundColor: colors.sideMenuBackground,
             }}>
             {messagesAddress && (
               <View
                 style={{
-                  width: 50,
-                  justifyContent: 'center',
+                  width: width,
+                  justifyContent: 'flex-start',
                   alignItems: 'center',
-                  marginLeft: 20,
                 }}>
                 <TouchableOpacity
-                  style={{ zIndex: 999, padding: 10 }}
+                  style={{ zIndex: 999, padding: 20, alignSelf: 'flex-start' }}
                   onPress={() => {
                     setValueTransferDetail(vt);
                     setValueTransferDetailIndex(index);
@@ -170,7 +171,7 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
   ) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [-100, 0],
+      outputRange: [-132, 0],
       extrapolate: 'clamp',
     });
 
@@ -183,11 +184,11 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
               justifyContent: 'center',
               alignItems: 'center',
               transform: [{ translateX: trans }],
-              marginRight: 20,
+              backgroundColor: colors.sideMenuBackground,
             }}>
-            <View style={{ width: 50, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ width: 65, justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity
-                style={{ zIndex: 999, padding: 10 }}
+                style={{ zIndex: 999, padding: 20 }}
                 onPress={() => {
                   setValueTransferDetail(vt);
                   setValueTransferDetailIndex(index);
@@ -200,12 +201,12 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
             {!!vt.address && !readOnly && selectServer !== SelectServerEnum.offline && !addressProtected && (
               <View
                 style={{
-                  width: 50,
+                  width: 67,
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
                 <TouchableOpacity
-                  style={{ zIndex: 999, padding: 10 }}
+                  style={{ zIndex: 999, padding: 20 }}
                   onPress={() => {
                     // enviar
                     const sendPageState = new SendPageStateClass(new ToAddrClass(0));
@@ -269,7 +270,8 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
         <Swipeable
           ref={swipeableRef}
           overshootLeft={false}
-          overshootRight={messagesAddress ? true : false}
+          overshootRight={true}
+          rightThreshold={65}
           overshootFriction={1}
           renderRightActions={handleRenderRightActions}
           renderLeftActions={handleRenderLeftActions}>
