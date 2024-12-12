@@ -357,7 +357,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               setValueTransferDetail={(ttt: ValueTransferType) => setValueTransferDetail(ttt)}
               setValueTransferDetailIndex={(iii: number) => setValueTransferDetailIndex(iii)}
               setValueTransferDetailModalShowing={(bbb: boolean) => setValueTransferDetailModalShowing(bbb)}
-              fromMessageAddress={!!address}
+              messageAddress={address}
             />
           );
         })}

@@ -33,7 +33,7 @@ type MessageLineProps = {
   setValueTransferDetail: (t: ValueTransferType) => void;
   setValueTransferDetailIndex: (i: number) => void;
   setValueTransferDetailModalShowing: (b: boolean) => void;
-  fromMessageAddress: boolean;
+  messageAddress?: string;
 };
 const MessageLine: React.FunctionComponent<MessageLineProps> = ({
   index,
@@ -42,7 +42,7 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
   setValueTransferDetail,
   setValueTransferDetailIndex,
   setValueTransferDetailModalShowing,
-  fromMessageAddress,
+  messageAddress,
 }) => {
   const context = useContext(ContextAppLoaded);
   const { translate, language, privacy, info, addressBook, addresses, addLastSnackbar } = context;
@@ -119,7 +119,7 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
             backgroundColor:
               vt.kind === ValueTransferKindEnum.Received ? colors.primaryDisabled : colors.secondaryDisabled,
           }}>
-          {!!vt.address && !fromMessageAddress && (
+          {!!vt.address && !messageAddress && (
             <View style={{ marginTop: -15, marginBottom: 10, marginLeft: 30 }}>
               <AddressItem address={vt.address} oneLine={true} closeModal={() => {}} openModal={() => {}} />
             </View>
@@ -155,23 +155,20 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
                       duration: SnackbarDurationEnum.short,
                     });
                   }}>
-                  <RegText>{'\nReply to:'}</RegText>
-                  {!thisWalletAddress(memoUA) && (
-                    <FontAwesomeIcon icon={faTriangleExclamation} color={'red'} size={18} />
-                  )}
-                  <RegText style={{ opacity: thisWalletAddress(memoUA) ? 0.6 : 0.4 }}>{memoUA}</RegText>
-                  {contactFound(memoUA) && (
-                    <View style={{ flexDirection: 'row' }}>
-                      {!thisWalletAddress(memoUA) && (
-                        <RegText style={{ opacity: 0.6 }}>{translate('addressbook.likely') as string}</RegText>
+                  {!thisWalletAddress(memoUA) && memoUA !== messageAddress && (
+                    <>
+                      <RegText>{'\nReply to:'}</RegText>
+                      <FontAwesomeIcon icon={faTriangleExclamation} color={'red'} size={18} />
+                      <RegText style={{ opacity: thisWalletAddress(memoUA) ? 0.6 : 0.4 }}>{memoUA}</RegText>
+                      {contactFound(memoUA) && (
+                        <View style={{ flexDirection: 'row' }}>
+                          {!thisWalletAddress(memoUA) && (
+                            <RegText style={{ opacity: 0.6 }}>{translate('addressbook.likely') as string}</RegText>
+                          )}
+                          <AddressItem address={memoUA} onlyContact={true} closeModal={() => {}} openModal={() => {}} />
+                        </View>
                       )}
-                      <AddressItem address={memoUA} onlyContact={true} closeModal={() => {}} openModal={() => {}} />
-                    </View>
-                  )}
-                  {!contactFound(memoUA) && thisWalletAddress(memoUA) && (
-                    <View style={{ flexDirection: 'row' }}>
-                      <RegText>{translate('addressbook.thiswalletaddress') as string}</RegText>
-                    </View>
+                    </>
                   )}
                 </TouchableOpacity>
               )}
