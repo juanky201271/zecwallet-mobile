@@ -59,6 +59,6 @@ describe('Component Info - test', () => {
         <Info closeModal={onClose} setZecPrice={onSet} />
       </ContextAppLoadedProvider>,
     );
-    screen.getByText('33,33');
+    screen.getByText('$ 33,33');
   });
 });

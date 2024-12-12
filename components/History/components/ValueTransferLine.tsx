@@ -270,7 +270,7 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
         <Swipeable
           ref={swipeableRef}
           overshootLeft={false}
-          overshootRight={true}
+          overshootRight={messagesAddress ? true : false}
           rightThreshold={65}
           overshootFriction={1}
           renderRightActions={handleRenderRightActions}

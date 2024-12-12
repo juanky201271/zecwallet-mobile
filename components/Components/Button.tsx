@@ -93,8 +93,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
             textTransform: 'uppercase',
             fontSize: 16,
             textAlign: 'center',
-          }}
-          selectable>
+          }}>
           {title}
         </Text>
       </View>

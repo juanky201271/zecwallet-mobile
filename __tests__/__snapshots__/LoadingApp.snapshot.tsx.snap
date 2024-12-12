@@ -49,7 +49,6 @@ exports[`Component LoadingApp - test LoadingApp - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": undefined,
@@ -61,7 +60,6 @@ exports[`Component LoadingApp - test LoadingApp - snapshot 1`] = `
           text translated
         </Text>
         <Text
-          selectable={true}
           style={
             {
               "color": undefined,

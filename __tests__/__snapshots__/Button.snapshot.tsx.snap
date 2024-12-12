@@ -63,7 +63,6 @@ exports[`Component Button - test Button Primary - snapshot 1`] = `
     }
   >
     <Text
-      selectable={true}
       style={
         {
           "color": "rgb(242, 242, 242)",
@@ -143,7 +142,6 @@ exports[`Component Button - test Button Secondary - snapshot 1`] = `
     }
   >
     <Text
-      selectable={true}
       style={
         {
           "color": "rgb(0, 122, 255)",

@@ -306,7 +306,6 @@ exports[`Component Rescan - test Rescan - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(242, 242, 242)",

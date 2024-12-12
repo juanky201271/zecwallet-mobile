@@ -217,15 +217,11 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
           flexDirection: 'row',
           backgroundColor: colors.sideMenuBackground,
         }}>
-        <Text style={{ fontSize: 8, color: colors.border }} selectable>
-          Version :{' '}
-        </Text>
-        <Text style={{ fontSize: 8, color: colors.primaryDisabled }} selectable>
-          {translate('version') as string}
-        </Text>
-        <Text style={{ fontSize: 8, color: colors.border, marginLeft: 10 }} selectable>{`${translate(
-          'settings.mode',
-        )}${translate(`settings.value-mode-${mode}`)}`}</Text>
+        <Text style={{ fontSize: 8, color: colors.border }}>Version : </Text>
+        <Text style={{ fontSize: 8, color: colors.primaryDisabled }}>{translate('version') as string}</Text>
+        <Text style={{ fontSize: 8, color: colors.border, marginLeft: 10 }}>{`${translate('settings.mode')}${translate(
+          `settings.value-mode-${mode}`,
+        )}`}</Text>
       </View>
     </View>
   );

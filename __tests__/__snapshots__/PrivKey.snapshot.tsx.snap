@@ -339,7 +339,6 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -727,7 +726,6 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",

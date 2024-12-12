@@ -616,7 +616,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                             </RNSVGGroup>
                           </RNSVGSvgView>
                           <Text
-                            selectable={true}
                             style={
                               {
                                 "color": "red",
@@ -874,19 +873,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                         }
                       >
                         <Text
-                          selectable={true}
-                          style={
-                            {
-                              "color": "#ffffff",
-                              "fontSize": 12.5,
-                              "marginTop": 5,
-                            }
-                          }
-                        >
-                          $
-                        </Text>
-                        <Text
-                          selectable={true}
                           style={
                             {
                               "color": "#ffffff",
@@ -896,7 +882,7 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                             }
                           }
                         >
-                           -.--
+                          $ -.--
                         </Text>
                       </View>
                     </View>
@@ -1081,7 +1067,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#011401",
@@ -1159,7 +1144,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#18bd18",
@@ -1798,7 +1782,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                             </RNSVGGroup>
                           </RNSVGSvgView>
                           <Text
-                            selectable={true}
                             style={
                               {
                                 "color": "red",
@@ -2062,24 +2045,12 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                             {
                               "color": "#ffffff",
                               "fontSize": 12.5,
-                              "marginTop": 5,
-                            }
-                          }
-                        >
-                          $
-                        </Text>
-                        <Text
-                          selectable={true}
-                          style={
-                            {
-                              "color": "#ffffff",
-                              "fontSize": 12.5,
                               "fontWeight": "700",
                               "marginTop": 5,
                             }
                           }
                         >
-                           16.66
+                          $ 16.66
                         </Text>
                       </View>
                     </View>
@@ -2264,7 +2235,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#011401",
@@ -2342,7 +2312,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#18bd18",

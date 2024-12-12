@@ -69,19 +69,6 @@ exports[`Component Components - test CurrencyAmount High Privacy - snapshot 1`] 
       }
     >
       <Text
-        selectable={true}
-        style={
-          {
-            "backgroundColor": "red",
-            "color": undefined,
-            "fontSize": 20,
-          }
-        }
-      >
-        $
-      </Text>
-      <Text
-        selectable={true}
         style={
           {
             "backgroundColor": "red",
@@ -91,7 +78,7 @@ exports[`Component Components - test CurrencyAmount High Privacy - snapshot 1`] 
           }
         }
       >
-         -.--
+        $ -.--
       </Text>
     </View>
   </View>
@@ -156,23 +143,11 @@ exports[`Component Components - test CurrencyAmount Normal Privacy - snapshot 1`
             "backgroundColor": "red",
             "color": undefined,
             "fontSize": 20,
-          }
-        }
-      >
-        $
-      </Text>
-      <Text
-        selectable={true}
-        style={
-          {
-            "backgroundColor": "red",
-            "color": undefined,
-            "fontSize": 20,
             "fontWeight": "700",
           }
         }
       >
-         44.93
+        $ 44.93
       </Text>
     </View>
   </View>
@@ -359,7 +334,6 @@ exports[`Component Components - test ZecAmount High Privacy - snapshot 1`] = `
         </RNSVGGroup>
       </RNSVGSvgView>
       <Text
-        selectable={true}
         style={
           {
             "color": "red",
@@ -510,7 +484,6 @@ exports[`Component Components - test ZecAmount Normal Privacy - snapshot 1`] = `
         </RNSVGGroup>
       </RNSVGSvgView>
       <Text
-        selectable={true}
         style={
           {
             "color": "red",
@@ -525,7 +498,6 @@ exports[`Component Components - test ZecAmount Normal Privacy - snapshot 1`] = `
          1.1234
       </Text>
       <Text
-        selectable={true}
         style={
           {
             "color": "red",

@@ -342,7 +342,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
                 </RNSVGGroup>
               </RNSVGSvgView>
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",
@@ -490,20 +489,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
               }
             >
               <Text
-                selectable={true}
-                style={
-                  {
-                    "color": "#ffffff",
-                    "fontSize": 20,
-                    "marginBottom": 0,
-                    "marginTop": 0,
-                  }
-                }
-              >
-                $
-              </Text>
-              <Text
-                selectable={true}
                 style={
                   {
                     "color": "#ffffff",
@@ -514,7 +499,7 @@ exports[`Component History - test History currency USD, privacy high & mode adva
                   }
                 }
               >
-                 -.--
+                $ -.--
               </Text>
             </View>
           </View>
@@ -982,7 +967,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
                 </RNSVGGroup>
               </RNSVGSvgView>
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",
@@ -997,7 +981,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
                  1.1234
               </Text>
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",

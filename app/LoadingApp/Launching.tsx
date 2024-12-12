@@ -45,12 +45,10 @@ const Launching: React.FunctionComponent<LaunchingProps> = props => {
             marginTop: 20,
             padding: 10,
           }}>
-          <Text style={{ color: colors.zingo, fontSize: 40, fontWeight: 'bold' }} selectable>
+          <Text style={{ color: colors.zingo, fontSize: 40, fontWeight: 'bold' }}>
             {props.translate('zingo') as string}
           </Text>
-          <Text style={{ color: colors.zingo, fontSize: 15 }} selectable>
-            {props.translate('version') as string}
-          </Text>
+          <Text style={{ color: colors.zingo, fontSize: 15 }}>{props.translate('version') as string}</Text>
         </View>
         <View
           style={{

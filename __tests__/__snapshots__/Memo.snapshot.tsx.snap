@@ -264,7 +264,6 @@ memo10"
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(242, 242, 242)",

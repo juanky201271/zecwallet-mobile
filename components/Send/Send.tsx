@@ -1798,9 +1798,7 @@ const Send: React.FunctionComponent<SendProps> = ({
                       borderColor: colors.primary,
                       borderRadius: 5,
                     }}>
-                    <Text style={{ fontSize: 13, color: colors.border }} selectable>
-                      {translate('donation-legend') as string}
-                    </Text>
+                    <Text style={{ fontSize: 13, color: colors.border }}>{translate('donation-legend') as string}</Text>
                   </View>
                 ) : (
                   <TouchableOpacity
@@ -1841,7 +1839,7 @@ const Send: React.FunctionComponent<SendProps> = ({
                         borderColor: colors.primary,
                         borderRadius: 5,
                       }}>
-                      <Text style={{ fontSize: 13, color: colors.border }} selectable>
+                      <Text style={{ fontSize: 13, color: colors.border }}>
                         {translate('donation-button') as string}
                       </Text>
                       <FontAwesomeIcon

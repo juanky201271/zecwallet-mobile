@@ -113,8 +113,7 @@ const SingleAddress: React.FunctionComponent<SingleAddressProps> = ({ address, i
                             textDecorationLine: 'underline',
                             marginTop: 15,
                             minHeight: 48,
-                          }}
-                          selectable>
+                          }}>
                           {translate('seed.tapreveal') as string}
                         </Text>
                       </View>
@@ -161,14 +160,12 @@ const SingleAddress: React.FunctionComponent<SingleAddressProps> = ({ address, i
               )}
               <View style={{ width: 150, justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity onPress={doCopy}>
-                  <Text
-                    style={{ color: colors.text, textDecorationLine: 'underline', marginTop: 15, minHeight: 48 }}
-                    selectable>
+                  <Text style={{ color: colors.text, textDecorationLine: 'underline', marginTop: 15, minHeight: 48 }}>
                     {translate('seed.tapcopy') as string}
                   </Text>
                 </TouchableOpacity>
                 {multi && (
-                  <Text style={{ color: colors.primary, marginTop: -25 }} selectable>
+                  <Text style={{ color: colors.primary, marginTop: -25 }}>
                     {index + 1}
                     {translate('receive.of') as string}
                     {total}

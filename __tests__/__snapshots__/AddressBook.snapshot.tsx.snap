@@ -130,7 +130,6 @@ exports[`Component Address Book - test Address Book - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#011401",

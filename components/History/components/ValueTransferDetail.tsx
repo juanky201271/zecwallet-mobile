@@ -322,7 +322,7 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
                   <RegText>{vt.txid}</RegText>
                   {server.chainName !== ChainNameEnum.regtestChainName && (
                     <TouchableOpacity onPress={() => handleTxIDClick(vt.txid)}>
-                      <Text style={{ color: colors.text, textDecorationLine: 'underline', margin: 15 }} selectable>
+                      <Text style={{ color: colors.text, textDecorationLine: 'underline', margin: 15 }}>
                         {translate('history.viewexplorer') as string}
                       </Text>
                     </TouchableOpacity>

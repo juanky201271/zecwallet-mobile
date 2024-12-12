@@ -53,8 +53,7 @@ const ChainTypeToggle: React.FunctionComponent<ChainTypeToggleProps> = ({
                 fontSize: 13,
                 color: colors.border,
                 marginRight: 5,
-              }}
-              selectable>
+              }}>
               {translate('settings.value-chainname-main') as string}
             </Text>
             {customServerChainName === ChainNameEnum.mainChainName && (
@@ -91,8 +90,7 @@ const ChainTypeToggle: React.FunctionComponent<ChainTypeToggleProps> = ({
                 fontSize: 13,
                 color: colors.border,
                 marginRight: 5,
-              }}
-              selectable>
+              }}>
               {translate('settings.value-chainname-test') as string}
             </Text>
             {customServerChainName === ChainNameEnum.testChainName && (
@@ -129,8 +127,7 @@ const ChainTypeToggle: React.FunctionComponent<ChainTypeToggleProps> = ({
                 fontSize: 13,
                 color: colors.border,
                 marginRight: 5,
-              }}
-              selectable>
+              }}>
               {translate('settings.value-chainname-regtest') as string}
             </Text>
             {customServerChainName === ChainNameEnum.regtestChainName && (

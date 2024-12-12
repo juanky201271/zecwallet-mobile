@@ -108,9 +108,7 @@ const PrivKey: React.FunctionComponent<PrivKeyProps> = ({ address, keyType, priv
             />
           </View>
           <TouchableOpacity onPress={doCopy}>
-            <Text
-              style={{ color: colors.text, textDecorationLine: 'underline', marginBottom: 5, minHeight: 48 }}
-              selectable>
+            <Text style={{ color: colors.text, textDecorationLine: 'underline', marginBottom: 5, minHeight: 48 }}>
               {translate('seed.tapcopy') as string}
             </Text>
           </TouchableOpacity>

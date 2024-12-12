@@ -313,7 +313,6 @@ exports[`Component Address Book Details - test Address Book Datails - Add - snap
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#011401",
@@ -391,7 +390,6 @@ exports[`Component Address Book Details - test Address Book Datails - Add - snap
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#18bd18",
@@ -792,7 +790,6 @@ exports[`Component Address Book Details - test Address Book Datails - Delete - s
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#011401",
@@ -870,7 +867,6 @@ exports[`Component Address Book Details - test Address Book Datails - Delete - s
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#18bd18",
@@ -1294,7 +1290,6 @@ exports[`Component Address Book Details - test Address Book Datails - Modify - s
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#011401",
@@ -1372,7 +1367,6 @@ exports[`Component Address Book Details - test Address Book Datails - Modify - s
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#18bd18",

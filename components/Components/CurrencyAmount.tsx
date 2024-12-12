@@ -58,16 +58,13 @@ const CurrencyAmount: React.FunctionComponent<CurrencyAmountProps> = ({ price, s
       <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
         <TouchableOpacity disabled={!privacyHigh} onPress={onPress}>
           <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-            <Text style={{ color: colors.money, fontSize: 20, ...style }} selectable>
-              $
-            </Text>
             {privacyHigh ? (
-              <Text style={{ color: colors.money, fontSize: 20, fontWeight: '700', ...style }} selectable>
-                {' -' + decimalSeparator + '--'}
+              <Text style={{ color: colors.money, fontSize: 20, fontWeight: '700', ...style }}>
+                {'$ -' + decimalSeparator + '--'}
               </Text>
             ) : (
               <Text style={{ color: colors.money, fontSize: 20, fontWeight: '700', ...style }} selectable>
-                {' ' + currencyString}
+                {'$ ' + currencyString}
               </Text>
             )}
           </View>

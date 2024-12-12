@@ -70,7 +70,6 @@ exports[`Component ChainTypeToggle - test ChainTypeToggle - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",
@@ -161,7 +160,6 @@ exports[`Component ChainTypeToggle - test ChainTypeToggle - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",
@@ -235,7 +233,6 @@ exports[`Component ChainTypeToggle - test ChainTypeToggle - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",

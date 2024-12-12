@@ -207,7 +207,6 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",
@@ -215,11 +214,9 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
             }
           }
         >
-          Version :
-           
+          Version : 
         </Text>
         <Text
-          selectable={true}
           style={
             {
               "color": undefined,
@@ -230,7 +227,6 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
           text translated
         </Text>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(216, 216, 216)",
