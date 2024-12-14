@@ -814,7 +814,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
             if (vtNew.length > 0 && vtNew[0].confirmations > 0) {
               let message: string = '';
               let title: string = '';
-              if (vtNew[0].kind === ValueTransferKindEnum.Received) {
+              if (vtNew[0].kind === ValueTransferKindEnum.Received && vtNew[0].amount > 0) {
                 message =
                   (this.state.translate('loadedapp.incoming-funds') as string) +
                   (this.state.translate('history.received') as string) +
@@ -823,7 +823,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                   ' ' +
                   this.state.info.currencyName;
                 title = this.state.translate('loadedapp.receive-menu') as string;
-              } else if (vtNew[0].kind === ValueTransferKindEnum.MemoToSelf) {
+              } else if (vtNew[0].kind === ValueTransferKindEnum.MemoToSelf && vtNew[0].fee && vtNew[0].fee > 0) {
                 message =
                   (this.state.translate('loadedapp.valuetransfer-confirmed') as string) +
                   (this.state.translate('history.memotoself') as string) +
@@ -835,7 +835,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                       this.state.info.currencyName
                     : '');
                 title = this.state.translate('loadedapp.send-menu') as string;
-              } else if (vtNew[0].kind === ValueTransferKindEnum.SendToSelf) {
+              } else if (vtNew[0].kind === ValueTransferKindEnum.SendToSelf && vtNew[0].fee && vtNew[0].fee > 0) {
                 message =
                   (this.state.translate('loadedapp.valuetransfer-confirmed') as string) +
                   (this.state.translate('history.sendtoself') as string) +
@@ -847,20 +847,18 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                       this.state.info.currencyName
                     : '');
                 title = this.state.translate('loadedapp.send-menu') as string;
-              } else if (vtNew[0].kind === ValueTransferKindEnum.Rejection) {
-                // not so sure about this `kind`... this is enough for now.
+              } else if (vtNew[0].kind === ValueTransferKindEnum.Rejection && vtNew[0].amount > 0) {
+                // not so sure about this `kind`...
+                // I guess the wallet is receiving some refund from a TEX sent.
                 message =
-                  (this.state.translate('loadedapp.valuetransfer-confirmed') as string) +
-                  (this.state.translate('history.rejection') as string) +
-                  (vtNew[0].fee
-                    ? ((' ' + this.state.translate('send.fee')) as string) +
-                      ' ' +
-                      Utils.parseNumberFloatToStringLocale(vtNew[0].fee, 8) +
-                      ' ' +
-                      this.state.info.currencyName
-                    : '');
-                title = this.state.translate('loadedapp.send-menu') as string;
-              } else if (vtNew[0].kind === ValueTransferKindEnum.Shield) {
+                  (this.state.translate('loadedapp.incoming-funds') as string) +
+                  (this.state.translate('history.received') as string) +
+                  ' ' +
+                  Utils.parseNumberFloatToStringLocale(vtNew[0].amount, 8) +
+                  ' ' +
+                  this.state.info.currencyName;
+                title = this.state.translate('loadedapp.receive-menu') as string;
+              } else if (vtNew[0].kind === ValueTransferKindEnum.Shield && vtNew[0].amount > 0) {
                 message =
                   (this.state.translate('loadedapp.incoming-funds') as string) +
                   (this.state.translate('history.shield') as string) +
@@ -869,7 +867,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                   ' ' +
                   this.state.info.currencyName;
                 title = this.state.translate('loadedapp.receive-menu') as string;
-              } else {
+              } else if (vtNew[0].kind === ValueTransferKindEnum.Sent && vtNew[0].amount > 0) {
                 message =
                   (this.state.translate('loadedapp.payment-made') as string) +
                   (this.state.translate('history.sent') as string) +
@@ -879,7 +877,9 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                   this.state.info.currencyName;
                 title = this.state.translate('loadedapp.send-menu') as string;
               }
-              createAlert(this.setBackgroundError, this.addLastSnackbar, title, message, true, this.state.translate);
+              if (message && title) {
+                createAlert(this.setBackgroundError, this.addLastSnackbar, title, message, true, this.state.translate);
+              }
             }
             // the ValueTransfer is gone -> Likely Reverted by the server
             if (vtNew.length === 0) {
@@ -2082,6 +2082,8 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                     setPrivacyOption={this.setPrivacyOption}
                     setUfvkViewModalVisible={this.setUfvkViewModalVisible}
                     setSendPageState={this.setSendPageState}
+                    setScrollToTop={this.setScrollToTop}
+                    scrollToTop={scrollToTop}
                     setScrollToBottom={this.setScrollToBottom}
                     scrollToBottom={scrollToBottom}
                   />

@@ -22,6 +22,7 @@ import ZecPriceType from './types/ZecPriceType';
 import SecurityType from './types/SecurityType';
 import ServerUrisType from './types/ServerUrisType';
 import ValueTransferType from './types/ValueTransferType';
+import ContactType from './types/ContactType';
 
 import { CommandEnum } from './enums/CommandEnum';
 import { AddressBookActionEnum } from './enums/AddressBookActionEnum';
@@ -87,6 +88,7 @@ export {
   SecurityType,
   ServerUrisType,
   ValueTransferType,
+  ContactType,
   CommandEnum,
   AddressBookActionEnum,
   MenuItemEnum,

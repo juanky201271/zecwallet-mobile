@@ -4,6 +4,7 @@ import {
   AddressClass,
   ChainNameEnum,
   CommandEnum,
+  ContactType,
   GlobalConst,
   SendJsonToTypeType,
   SendPageStateClass,
@@ -335,7 +336,7 @@ export default class Utils {
     );
   }
 
-  static isMessagesAddress(vt: ValueTransferType): boolean {
+  static isMessagesAddress(vt: ValueTransferType | ContactType): boolean {
     // we can't check here in this VT if the memo is empty
     // because this address/contact could have memos in another
     // VT in the list.
@@ -355,7 +356,7 @@ export default class Utils {
     return false;
   }
 
-  static messagesAddress = (vt: ValueTransferType) => {
+  static messagesAddress = (vt: ValueTransferType | ContactType) => {
     if (vt.address) {
       return vt.address;
     } else {

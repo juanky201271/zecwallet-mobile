@@ -7,13 +7,19 @@ import { ThemeType } from '../../app/types/ThemeType';
 type FadeTextProps = {
   style?: TextStyle;
   children: string | string[];
+  numberOfLines?: number;
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
 };
 
-const FadeText: React.FunctionComponent<FadeTextProps> = ({ style, children }) => {
+const FadeText: React.FunctionComponent<FadeTextProps> = ({ style, children, numberOfLines, ellipsizeMode }) => {
   const { colors } = useTheme() as unknown as ThemeType;
 
   return (
-    <Text style={{ opacity: 0.65, color: colors.text, ...style }} selectable>
+    <Text
+      numberOfLines={numberOfLines}
+      ellipsizeMode={ellipsizeMode}
+      style={{ opacity: 0.65, color: colors.text, ...style }}
+      selectable>
       {children}
     </Text>
   );
