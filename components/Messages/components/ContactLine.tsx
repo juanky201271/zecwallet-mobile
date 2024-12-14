@@ -80,7 +80,17 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
 
   const getLabel = (_c: ContactType) => {
     const label = addressBook.filter((ab: AddressBookFileClass) => ab.address === _c.address);
-    return label.length === 1 ? label[0].label : null;
+    let initials = null;
+    if (label.length === 1) {
+      const words = label[0].label.split(' ');
+      if (words[0]) {
+        initials = words[0].charAt(0).toUpperCase();
+      }
+      if (words[1]) {
+        initials = initials + words[1].charAt(0).toUpperCase();
+      }
+    }
+    return initials;
   };
 
   const getMemo = (_c: ContactType) => {
@@ -297,7 +307,7 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                       marginRight: 5,
                       marginTop: 0,
                     }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{getLabel(c)?.charAt(0).toUpperCase()}</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{`${getLabel(c)}`}</Text>
                   </View>
                 )}
               </View>

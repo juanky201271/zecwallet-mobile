@@ -119,6 +119,8 @@ describe('Component Messages - test', () => {
           setSendPageState={onFunction}
           setScrollToBottom={onFunction}
           scrollToBottom={false}
+          setScrollToTop={onFunction}
+          scrollToTop={false}
         />
       </ContextAppLoadedProvider>,
     );
@@ -142,6 +144,8 @@ describe('Component Messages - test', () => {
           setSendPageState={onFunction}
           setScrollToBottom={onFunction}
           scrollToBottom={false}
+          setScrollToTop={onFunction}
+          scrollToTop={false}
         />
       </ContextAppLoadedProvider>,
     );

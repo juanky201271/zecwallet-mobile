@@ -1249,9 +1249,7 @@ export default class RPC {
             ? ValueTransferKindEnum.Sent
             : vt.kind === RPCValueTransfersKindEnum.shield
             ? ValueTransferKindEnum.Shield
-            : vt.kind === RPCValueTransfersKindEnum.rejection
-            ? ValueTransferKindEnum.Rejection
-            : undefined;
+            : ValueTransferKindEnum.Rejection;
         currentValueTransferList.fee = (!vt.transaction_fee ? 0 : vt.transaction_fee) / 10 ** 8;
         currentValueTransferList.zecPrice = !vt.zec_price ? 0 : vt.zec_price;
         if (
@@ -1342,9 +1340,7 @@ export default class RPC {
             ? ValueTransferKindEnum.Sent
             : m.kind === RPCValueTransfersKindEnum.shield
             ? ValueTransferKindEnum.Shield
-            : m.kind === RPCValueTransfersKindEnum.rejection
-            ? ValueTransferKindEnum.Rejection
-            : undefined;
+            : ValueTransferKindEnum.Rejection;
         currentMessageList.fee = (!m.transaction_fee ? 0 : m.transaction_fee) / 10 ** 8;
         currentMessageList.zecPrice = !m.zec_price ? 0 : m.zec_price;
         if (
