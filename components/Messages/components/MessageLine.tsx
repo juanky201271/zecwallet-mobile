@@ -1,9 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation, faCircleCheck as faCircleCheckSolid } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck as faCircleCheckRegular } from '@fortawesome/free-regular-svg-icons';
+
 import Clipboard from '@react-native-community/clipboard';
 
 import ZecAmount from '../../Components/ZecAmount';
@@ -25,6 +27,7 @@ import { ContextAppLoaded } from '../../../app/context';
 import AddressItem from '../../Components/AddressItem';
 import RegText from '../../Components/RegText';
 import Utils from '../../../app/utils';
+import { RPCValueTransfersStatusEnum } from '../../../app/rpc/enums/RPCValueTransfersStatusEnum';
 
 type MessageLineProps = {
   index: number;
@@ -110,7 +113,8 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
             flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
-            padding: 20,
+            padding: 10,
+            marginBottom: 5,
             marginLeft: vt.kind === ValueTransferKindEnum.Received ? 0 : 50,
             marginRight: vt.kind === ValueTransferKindEnum.Received ? 50 : 0,
             borderRadius: 20,
@@ -174,28 +178,69 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
               )}
             </View>
           )}
-        </View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: vt.kind === ValueTransferKindEnum.Received ? 'row' : 'row-reverse',
-            alignItems: 'center',
-            marginBottom: 5,
-          }}>
-          {vt.amount >= Utils.parseStringLocaleToNumberFloat(Utils.getZenniesDonationAmount()) && (
-            <ZecAmount
-              style={{
-                paddingRight: 5,
-              }}
-              size={12}
-              currencyName={info.currencyName}
-              color={getAmountColor(vt)}
-              amtZec={vt.amount}
-              privacy={privacy}
-            />
-          )}
-          <View>
-            <FadeText>{vt.time ? moment((vt.time || 0) * 1000).format('MMM D, h:mm a') : '--'}</FadeText>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'flex-end',
+            }}>
+            {vt.amount >= Utils.parseStringLocaleToNumberFloat(Utils.getZenniesDonationAmount()) && (
+              <ZecAmount
+                style={{
+                  paddingRight: 5,
+                }}
+                size={12}
+                currencyName={info.currencyName}
+                color={getAmountColor(vt)}
+                amtZec={vt.amount}
+                privacy={privacy}
+              />
+            )}
+            <View>
+              <FadeText>{vt.time ? moment((vt.time || 0) * 1000).format('MMM D, h:mm a') : '--'}</FadeText>
+            </View>
+            <View style={{ display: 'flex', justifyContent: 'center' }}>
+              <View style={{ flexDirection: 'row' }}>
+                {(vt.status === RPCValueTransfersStatusEnum.calculated ||
+                  vt.status === RPCValueTransfersStatusEnum.transmitted) && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                    size={12}
+                    icon={faCircleCheckRegular}
+                    color={colors.primary}
+                  />
+                )}
+                {(vt.status === RPCValueTransfersStatusEnum.mempool ||
+                  vt.status === RPCValueTransfersStatusEnum.confirmed) && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                    size={12}
+                    icon={faCircleCheckSolid}
+                    color={colors.primary}
+                  />
+                )}
+                {vt.status !== RPCValueTransfersStatusEnum.confirmed && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                    size={12}
+                    icon={faCircleCheckRegular}
+                    color={colors.primary}
+                  />
+                )}
+                {vt.status === RPCValueTransfersStatusEnum.confirmed && (
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                    size={12}
+                    icon={faCircleCheckSolid}
+                    color={colors.primary}
+                  />
+                )}
+                {vt.status !== RPCValueTransfersStatusEnum.confirmed && (
+                  <ActivityIndicator size={12} color={colors.primary} style={{ marginLeft: 2, marginTop: 2 }} />
+                )}
+              </View>
+            </View>
           </View>
         </View>
       </TouchableOpacity>

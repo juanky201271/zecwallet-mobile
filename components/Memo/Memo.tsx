@@ -21,15 +21,9 @@ import { Buffer } from 'buffer';
 
 type MemoProps = {
   closeModal: () => void;
-  updateToField: (
-    address: string | null,
-    amount: string | null,
-    amountCurrency: string | null,
-    memo: string | null,
-    includeUAMemo: boolean | null,
-  ) => void;
+  memoUpdateToField: (memo: string | null) => void;
 };
-const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, updateToField }) => {
+const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToField }) => {
   const context = useContext(ContextAppLoaded);
   const { translate, sendPageState, language, uaAddress } = context;
   const { colors } = useTheme() as unknown as ThemeType;
@@ -47,7 +41,7 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, updateToField })
   };
 
   const doSaveAndClose = () => {
-    updateToField(null, null, null, memo, null);
+    memoUpdateToField(memo);
     closeModal();
   };
 

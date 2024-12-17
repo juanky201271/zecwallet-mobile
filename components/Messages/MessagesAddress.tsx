@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
-import { SendPageStateClass } from '../../app/AppState';
+import { SelectServerEnum, SendPageStateClass, ServerType } from '../../app/AppState';
 import MessageList from './components/MessageList';
 import { SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -23,6 +23,14 @@ type MessagesAddressProps = {
   address: string;
   closeModal: () => void;
   openModal: () => void;
+  sendTransaction: () => Promise<String>;
+  clearToAddr: () => void;
+  setServerOption: (
+    value: ServerType,
+    selectServer: SelectServerEnum,
+    toast: boolean,
+    sameServerChainName: boolean,
+  ) => Promise<void>;
 };
 
 const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
@@ -37,6 +45,9 @@ const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
   address,
   closeModal,
   openModal,
+  sendTransaction,
+  clearToAddr,
+  setServerOption,
 }) => {
   const context = useContext(ContextAppLoaded);
   const { language } = context;
@@ -64,6 +75,9 @@ const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
         address={address}
         closeModal={closeModal}
         openModal={openModal}
+        sendTransaction={sendTransaction}
+        clearToAddr={clearToAddr}
+        setServerOption={setServerOption}
       />
     </SafeAreaView>
   );

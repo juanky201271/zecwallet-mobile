@@ -34,7 +34,6 @@ import {
   InfoType,
   ToAddrClass,
   SyncingStatusClass,
-  SendProgressClass,
   WalletSettingsClass,
   AddressClass,
   ZecPriceType,
@@ -387,7 +386,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       messages: null,
       walletSettings: {} as WalletSettingsClass,
       syncingStatus: {} as SyncingStatusClass,
-      sendProgress: {} as SendProgressClass,
       info: {} as InfoType,
       zecPrice: {
         zecPrice: 0,
@@ -522,7 +520,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       }
       if (Platform.OS === GlobalConst.platformOSandroid) {
         if (priorAppState !== nextAppState) {
-          console.log('LOADED SAVED Android', nextAppState);
+          //console.log('LOADED SAVED Android', nextAppState);
           this.setState({ appStateStatus: nextAppState });
         }
       }
@@ -627,8 +625,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
         if (isConnected !== state.isConnected) {
           if (!state.isConnected) {
             //console.log('EVENT Loaded: No internet connection.');
-            //await this.rpc.clearTimers();
-            //this.setSyncingStatus(new SyncingStatusClass());
           } else {
             //console.log('EVENT Loaded: YES internet connection.');
             if (this.rpc.getInRefresh()) {
@@ -963,13 +959,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
     this.setState({ computingModalVisible: visible });
   };
 
-  setSendProgress = (sendProgress: SendProgressClass) => {
-    if (!isEqual(this.state.sendProgress, sendProgress)) {
-      //console.log('fetch send progress');
-      this.setState({ sendProgress });
-    }
-  };
-
   setInfo = (info: InfoType) => {
     if (!isEqual(this.state.info, info)) {
       //console.log('fetch info');
@@ -995,7 +984,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
     }
   };
 
-  sendTransaction = async (setSendProgress: (arg0: SendProgressClass) => void): Promise<String> => {
+  sendTransaction = async (): Promise<String> => {
     try {
       // Construct a sendJson from the sendPage state
       const { sendPageState, uaAddress, addresses, server, donation } = this.state;
@@ -1006,7 +995,9 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
         server,
         donation,
       );
-      const txid = await this.rpc.sendTransaction(sendJson, setSendProgress);
+      const start = Date.now();
+      const txid = await this.rpc.sendTransaction(sendJson);
+      console.log('&&&&&&&&&&&&&& send tx', Date.now() - start);
 
       return txid;
     } catch (err) {
@@ -1198,7 +1189,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       // - the seed exists and the App can open the wallet in the new server.
       //   But I have to restart the sync if needed.
       let result: string = await RPCModule.loadExistingWallet(value.uri, value.chainName);
-      console.log('load existing wallet', result);
+      //console.log('load existing wallet', result);
       if (result && !result.toLowerCase().startsWith(GlobalConst.error)) {
         try {
           // here result can have an `error` field for watch-only which is actually OK.
@@ -1398,14 +1389,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
         },
       ],
     });
-  };
-
-  clearTimers = async () => {
-    await this.rpc.clearTimers();
-  };
-
-  configure = async () => {
-    await this.rpc.configure();
   };
 
   onClickOKChangeWallet = async (state: any) => {
@@ -1648,7 +1631,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       messages: this.state.messages,
       walletSettings: this.state.walletSettings,
       syncingStatus: this.state.syncingStatus,
-      sendProgress: this.state.sendProgress,
       info: this.state.info,
       zecPrice: this.state.zecPrice,
       uaAddress: this.state.uaAddress,
@@ -2017,6 +1999,9 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                     scrollToTop={scrollToTop}
                     setScrollToBottom={this.setScrollToBottom}
                     scrollToBottom={scrollToBottom}
+                    sendTransaction={this.sendTransaction}
+                    clearToAddr={this.clearToAddr}
+                    setServerOption={this.setServerOption}
                   />
                 )}
               </Tab.Screen>
@@ -2046,7 +2031,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                         setSendPageState={this.setSendPageState}
                         sendTransaction={this.sendTransaction}
                         clearToAddr={this.clearToAddr}
-                        setSendProgress={this.setSendProgress}
                         toggleMenuDrawer={this.toggleMenuDrawer}
                         syncingStatusMoreInfoOnClick={this.syncingStatusMoreInfoOnClick}
                         poolsMoreInfoOnClick={this.poolsMoreInfoOnClick}
@@ -2057,8 +2041,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                         setScrollToTop={this.setScrollToTop}
                         setScrollToBottom={this.setScrollToBottom}
                         setServerOption={this.setServerOption}
-                        clearTimers={this.clearTimers}
-                        configure={this.configure}
                       />
                     )}
                   </Tab.Screen>
@@ -2086,6 +2068,9 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                     scrollToTop={scrollToTop}
                     setScrollToBottom={this.setScrollToBottom}
                     scrollToBottom={scrollToBottom}
+                    sendTransaction={this.sendTransaction}
+                    clearToAddr={this.clearToAddr}
+                    setServerOption={this.setServerOption}
                   />
                 )}
               </Tab.Screen>

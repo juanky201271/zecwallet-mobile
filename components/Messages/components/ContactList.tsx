@@ -19,7 +19,13 @@ import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 
-import { ContactType, SendPageStateClass, ValueTransferType } from '../../../app/AppState';
+import {
+  ContactType,
+  SelectServerEnum,
+  SendPageStateClass,
+  ServerType,
+  ValueTransferType,
+} from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import FadeText from '../../Components/FadeText';
 import { ContextAppLoaded } from '../../../app/context';
@@ -39,6 +45,14 @@ type ContactListProps = {
   scrollToTop: boolean;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
+  sendTransaction: () => Promise<String>;
+  clearToAddr: () => void;
+  setServerOption: (
+    value: ServerType,
+    selectServer: SelectServerEnum,
+    toast: boolean,
+    sameServerChainName: boolean,
+  ) => Promise<void>;
 };
 
 const ContactList: React.FunctionComponent<ContactListProps> = ({
@@ -52,6 +66,9 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
   scrollToTop,
   setScrollToBottom,
   scrollToBottom,
+  sendTransaction,
+  clearToAddr,
+  setServerOption,
 }) => {
   const context = useContext(ContextAppLoaded);
   const { translate, valueTransfers, language, addLastSnackbar, server } = context;
@@ -171,6 +188,9 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
             address={Utils.messagesAddress(contactDetail)}
             closeModal={() => setMessagesAddressModalShowing(false)}
             openModal={() => setMessagesAddressModalShowing(true)}
+            sendTransaction={sendTransaction}
+            clearToAddr={clearToAddr}
+            setServerOption={setServerOption}
           />
         </Modal>
       )}

@@ -4,7 +4,6 @@ import { StackScreenProps } from '@react-navigation/stack';
 import {
   SyncingStatusClass,
   ReceivePageStateClass,
-  SendProgressClass,
   WalletSettingsClass,
   InfoType,
   WalletType,
@@ -37,7 +36,6 @@ export const defaultAppContextLoaded: AppContextLoaded = {
   receivePageState: new ReceivePageStateClass(''),
   info: {} as InfoType,
   walletSettings: new WalletSettingsClass(),
-  sendProgress: new SendProgressClass(0, 0, 0),
   wallet: {} as WalletType,
   uaAddress: '',
   server: {} as ServerType,

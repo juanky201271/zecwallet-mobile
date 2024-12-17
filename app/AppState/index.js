@@ -2,7 +2,6 @@ import AddressClass from './classes/AddressClass';
 import AddressBookFileClass from './classes/AddressBookFileClass';
 import ReceivePageStateClass from './classes/ReceivePageStateClass';
 import SendPageStateClass from './classes/SendPageStateClass';
-import SendProgressClass from './classes/SendProgressClass';
 import SettingsFileClass from './classes/SettingsFileClass';
 import SyncingStatusClass from './classes/SyncingStatusClass';
 import ToAddrClass from './classes/ToAddrClass';
@@ -69,7 +68,6 @@ export {
   AddressBookFileClass,
   ReceivePageStateClass,
   SendPageStateClass,
-  SendProgressClass,
   SettingsFileClass,
   SyncingStatusClass,
   ToAddrClass,

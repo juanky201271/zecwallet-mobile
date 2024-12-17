@@ -1,5 +1,5 @@
 import React from 'react';
-import { SendPageStateClass } from '../../app/AppState';
+import { SelectServerEnum, SendPageStateClass, ServerType } from '../../app/AppState';
 import ContactList from './components/ContactList';
 
 type MessagesProps = {
@@ -13,6 +13,14 @@ type MessagesProps = {
   scrollToTop: boolean;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
+  sendTransaction: () => Promise<String>;
+  clearToAddr: () => void;
+  setServerOption: (
+    value: ServerType,
+    selectServer: SelectServerEnum,
+    toast: boolean,
+    sameServerChainName: boolean,
+  ) => Promise<void>;
 };
 
 const Messages: React.FunctionComponent<MessagesProps> = ({
@@ -26,6 +34,9 @@ const Messages: React.FunctionComponent<MessagesProps> = ({
   scrollToTop,
   setScrollToBottom,
   scrollToBottom,
+  sendTransaction,
+  clearToAddr,
+  setServerOption,
 }) => {
   return (
     <ContactList
@@ -39,6 +50,9 @@ const Messages: React.FunctionComponent<MessagesProps> = ({
       scrollToTop={scrollToTop}
       setScrollToBottom={setScrollToBottom}
       scrollToBottom={scrollToBottom}
+      sendTransaction={sendTransaction}
+      clearToAddr={clearToAddr}
+      setServerOption={setServerOption}
     />
   );
 };

@@ -34,7 +34,8 @@
   "body": "Necesito ayuda con...",
   "messages": {
     "title": "Mensajes",
-    "empty": "Todavía no hay mensajes."
+    "empty": "Todavía no hay mensajes.",
+    "message-placeholder": "Mensaje"
   },
   "addressbook": {
     "title": "Libreta de Direcciones",

@@ -1,11 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, View, TouchableOpacity, Text } from 'react-native';
+import { Animated, Dimensions, View, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faCircleCheck as faCircleCheckSolid,
-  faRefresh,
   faComments,
   faPaperPlane,
   faCircleUser,
@@ -74,8 +73,8 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
       : colors.text;
   };
 
-  const getIcon = (_c: ContactType) => {
-    return _c.confirmations === 0 ? faRefresh : faCircleUser;
+  const getIcon = () => {
+    return faCircleUser;
   };
 
   const getLabel = (_c: ContactType) => {
@@ -289,7 +288,7 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                   <FontAwesomeIcon
                     style={{ marginLeft: 5, marginRight: 5, marginTop: 0 }}
                     size={40}
-                    icon={getIcon(c)}
+                    icon={getIcon()}
                     color={getAmountColor(c)}
                   />
                 ) : (
@@ -332,41 +331,46 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                       ? 'You: '
                       : '') + getMemo(c)}
                   </FadeText>
-                  <View style={{ flexDirection: 'row' }}>
-                    {(c.status === RPCValueTransfersStatusEnum.calculated ||
-                      c.status === RPCValueTransfersStatusEnum.transmitted) && (
-                      <FontAwesomeIcon
-                        style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
-                        size={12}
-                        icon={faCircleCheckRegular}
-                        color={colors.primary}
-                      />
-                    )}
-                    {(c.status === RPCValueTransfersStatusEnum.mempool ||
-                      c.status === RPCValueTransfersStatusEnum.confirmed) && (
-                      <FontAwesomeIcon
-                        style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
-                        size={12}
-                        icon={faCircleCheckSolid}
-                        color={colors.primary}
-                      />
-                    )}
-                    {c.status !== RPCValueTransfersStatusEnum.confirmed && (
-                      <FontAwesomeIcon
-                        style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
-                        size={12}
-                        icon={faCircleCheckRegular}
-                        color={colors.primary}
-                      />
-                    )}
-                    {c.status === RPCValueTransfersStatusEnum.confirmed && (
-                      <FontAwesomeIcon
-                        style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
-                        size={12}
-                        icon={faCircleCheckSolid}
-                        color={colors.primary}
-                      />
-                    )}
+                  <View style={{ display: 'flex', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row' }}>
+                      {(c.status === RPCValueTransfersStatusEnum.calculated ||
+                        c.status === RPCValueTransfersStatusEnum.transmitted) && (
+                        <FontAwesomeIcon
+                          style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                          size={12}
+                          icon={faCircleCheckRegular}
+                          color={colors.primary}
+                        />
+                      )}
+                      {(c.status === RPCValueTransfersStatusEnum.mempool ||
+                        c.status === RPCValueTransfersStatusEnum.confirmed) && (
+                        <FontAwesomeIcon
+                          style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                          size={12}
+                          icon={faCircleCheckSolid}
+                          color={colors.primary}
+                        />
+                      )}
+                      {c.status !== RPCValueTransfersStatusEnum.confirmed && (
+                        <FontAwesomeIcon
+                          style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                          size={12}
+                          icon={faCircleCheckRegular}
+                          color={colors.primary}
+                        />
+                      )}
+                      {c.status === RPCValueTransfersStatusEnum.confirmed && (
+                        <FontAwesomeIcon
+                          style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                          size={12}
+                          icon={faCircleCheckSolid}
+                          color={colors.primary}
+                        />
+                      )}
+                      {c.status !== RPCValueTransfersStatusEnum.confirmed && (
+                        <ActivityIndicator size={12} color={colors.primary} style={{ marginLeft: 2, marginTop: 2 }} />
+                      )}
+                    </View>
                   </View>
                 </View>
               </View>

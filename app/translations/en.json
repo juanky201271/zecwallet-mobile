@@ -34,7 +34,8 @@
   "body": "I need help with...",
   "messages": {
     "title": "Messages",
-    "empty": "No Messages yet."
+    "empty": "No Messages yet.",
+    "message-placeholder": "Message"
   },
   "addressbook": {
     "title": "Address Book",

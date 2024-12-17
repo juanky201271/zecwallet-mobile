@@ -19,7 +19,13 @@ import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons';
 
-import { ButtonTypeEnum, SendPageStateClass, ValueTransferType } from '../../app/AppState';
+import {
+  ButtonTypeEnum,
+  SelectServerEnum,
+  SendPageStateClass,
+  ServerType,
+  ValueTransferType,
+} from '../../app/AppState';
 import { ThemeType } from '../../app/types';
 import FadeText from '../Components/FadeText';
 import Button from '../Components/Button';
@@ -45,6 +51,14 @@ type HistoryProps = {
   scrollToTop: boolean;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
+  sendTransaction: () => Promise<String>;
+  clearToAddr: () => void;
+  setServerOption: (
+    value: ServerType,
+    selectServer: SelectServerEnum,
+    toast: boolean,
+    sameServerChainName: boolean,
+  ) => Promise<void>;
 };
 
 const History: React.FunctionComponent<HistoryProps> = ({
@@ -62,6 +76,9 @@ const History: React.FunctionComponent<HistoryProps> = ({
   scrollToTop,
   setScrollToBottom,
   scrollToBottom,
+  sendTransaction,
+  clearToAddr,
+  setServerOption,
 }) => {
   const context = useContext(ContextAppLoaded);
   const { translate, valueTransfers, language, setBackgroundError, addLastSnackbar, server } = context;
@@ -188,6 +205,9 @@ const History: React.FunctionComponent<HistoryProps> = ({
             address={Utils.messagesAddress(valueTransferDetail)}
             closeModal={() => setMessagesAddressModalShowing(false)}
             openModal={() => setMessagesAddressModalShowing(true)}
+            sendTransaction={sendTransaction}
+            clearToAddr={clearToAddr}
+            setServerOption={setServerOption}
           />
         </Modal>
       )}

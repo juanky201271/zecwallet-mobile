@@ -121,6 +121,9 @@ describe('Component Messages - test', () => {
           scrollToBottom={false}
           setScrollToTop={onFunction}
           scrollToTop={false}
+          sendTransaction={onFunction}
+          clearToAddr={onFunction}
+          setServerOption={onFunction}
         />
       </ContextAppLoadedProvider>,
     );
@@ -146,6 +149,9 @@ describe('Component Messages - test', () => {
           scrollToBottom={false}
           setScrollToTop={onFunction}
           scrollToTop={false}
+          sendTransaction={onFunction}
+          clearToAddr={onFunction}
+          setServerOption={onFunction}
         />
       </ContextAppLoadedProvider>,
     );

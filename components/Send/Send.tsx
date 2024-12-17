@@ -27,7 +27,6 @@ import {
   AddressBookFileClass,
   CommandEnum,
   SendPageStateClass,
-  SendProgressClass,
   ToAddrClass,
   ModeEnum,
   CurrencyEnum,
@@ -66,9 +65,8 @@ import selectingServer from '../../app/selectingServer';
 
 type SendProps = {
   setSendPageState: (sendPageState: SendPageStateClass) => void;
-  sendTransaction: (setSendProgress: (arg0: SendProgressClass) => void) => Promise<String>;
+  sendTransaction: () => Promise<String>;
   clearToAddr: () => void;
-  setSendProgress: (progress: SendProgressClass) => void;
   toggleMenuDrawer: () => void;
   setComputingModalVisible: (visible: boolean) => void;
   syncingStatusMoreInfoOnClick: () => void;
@@ -84,15 +82,12 @@ type SendProps = {
     toast: boolean,
     sameServerChainName: boolean,
   ) => Promise<void>;
-  clearTimers: () => Promise<void>;
-  configure: () => Promise<void>;
 };
 
 const Send: React.FunctionComponent<SendProps> = ({
   setSendPageState,
   sendTransaction,
   clearToAddr,
-  setSendProgress,
   toggleMenuDrawer,
   setComputingModalVisible,
   syncingStatusMoreInfoOnClick,
@@ -103,8 +98,6 @@ const Send: React.FunctionComponent<SendProps> = ({
   setScrollToTop,
   setScrollToBottom,
   setServerOption,
-  clearTimers,
-  configure,
 }) => {
   const context = useContext(ContextAppLoaded);
   const {
@@ -405,6 +398,10 @@ const Send: React.FunctionComponent<SendProps> = ({
   const memoTotal = useCallback((memoPar: string, includeUAMemoPar: boolean, uaAddressPar: string) => {
     return `${memoPar || ''}${includeUAMemoPar ? '\nReply to: \n' + uaAddressPar : ''}`;
   }, []);
+
+  const memoUpdateToField = (memo: string | null) => {
+    updateToField(null, null, null, memo, null);
+  };
 
   const updateToField = async (
     address: string | null,
@@ -720,31 +717,19 @@ const Send: React.FunctionComponent<SendProps> = ({
       addLastSnackbar({ message: translate('loadedapp.connection-error') as string });
       return;
     }
-    // clear first all interval tasks
-    await clearTimers();
     // first interrupt syncing Just in case...
     await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.true);
     // First, close the confirm modal and show the "computing" modal
     setConfirmModalVisible(false);
     setComputingModalVisible(true);
 
-    const setLocalSendProgress = (progress: SendProgressClass) => {
-      if (progress && progress.sendInProgress) {
-        setSendProgress(progress);
-      } else {
-        setSendProgress(new SendProgressClass(0, 0, 0));
-      }
-    };
-
     // call the sendTransaction method in a timeout, allowing the modals to show properly
     setTimeout(async () => {
       let error = '';
       let customError: string | undefined;
       try {
-        const txid = await sendTransaction(setLocalSendProgress);
+        const txid = await sendTransaction();
 
-        // create all interval tasks
-        await configure();
         // Clear the fields
         clearToAddr();
 
@@ -798,10 +783,8 @@ const Send: React.FunctionComponent<SendProps> = ({
           }
 
           try {
-            const txid = await sendTransaction(setLocalSendProgress);
+            const txid = await sendTransaction();
 
-            // create all interval tasks
-            await configure();
             // Clear the fields
             clearToAddr();
 
@@ -831,8 +814,6 @@ const Send: React.FunctionComponent<SendProps> = ({
           }
         }
       }
-      // create all interval tasks
-      await configure();
 
       setTimeout(() => {
         //console.log('sendtx error', error);
@@ -954,7 +935,7 @@ const Send: React.FunctionComponent<SendProps> = ({
           closeModal={() => {
             setMemoModalVisible(false);
           }}
-          updateToField={updateToField}
+          memoUpdateToField={memoUpdateToField}
         />
       </Modal>
 

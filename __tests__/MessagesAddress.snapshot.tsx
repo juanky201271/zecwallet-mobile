@@ -122,6 +122,9 @@ describe('Component Messages Address - test', () => {
           address={mockAddresses[0].uaAddress}
           closeModal={onFunction}
           openModal={onFunction}
+          sendTransaction={onFunction}
+          clearToAddr={onFunction}
+          setServerOption={onFunction}
         />
       </ContextAppLoadedProvider>,
     );

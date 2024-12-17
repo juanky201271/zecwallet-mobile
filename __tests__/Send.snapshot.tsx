@@ -89,7 +89,6 @@ describe('Component Send - test', () => {
           setSendPageState={onFunction}
           sendTransaction={onFunction}
           clearToAddr={onFunction}
-          setSendProgress={onFunction}
           toggleMenuDrawer={onFunction}
           setComputingModalVisible={onFunction}
           poolsMoreInfoOnClick={onFunction}
@@ -100,8 +99,6 @@ describe('Component Send - test', () => {
           setScrollToTop={onFunction}
           setScrollToBottom={onFunction}
           setServerOption={onFunction}
-          clearTimers={onFunction}
-          configure={onFunction}
         />
       </ContextAppLoadedProvider>,
     );
@@ -121,7 +118,6 @@ describe('Component Send - test', () => {
           setSendPageState={onFunction}
           sendTransaction={onFunction}
           clearToAddr={onFunction}
-          setSendProgress={onFunction}
           toggleMenuDrawer={onFunction}
           setComputingModalVisible={onFunction}
           poolsMoreInfoOnClick={onFunction}
@@ -132,8 +128,6 @@ describe('Component Send - test', () => {
           setScrollToTop={onFunction}
           setScrollToBottom={onFunction}
           setServerOption={onFunction}
-          clearTimers={onFunction}
-          configure={onFunction}
         />
       </ContextAppLoadedProvider>,
     );

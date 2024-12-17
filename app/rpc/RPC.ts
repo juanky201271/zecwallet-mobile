@@ -4,7 +4,6 @@ import {
   InfoType,
   SendJsonToTypeType,
   WalletType,
-  SendProgressClass,
   WalletSettingsClass,
   TranslateType,
   SyncingStatusClass,
@@ -25,7 +24,6 @@ import { RPCWalletHeight } from './types/RPCWalletHeightType';
 import { RPCSeedType } from './types/RPCSeedType';
 import { RPCSyncStatusType } from './types/RPCSyncStatusType';
 import { RPCGetOptionType } from './types/RPCGetOptionType';
-import { RPCSendProgressType } from './types/RPCSendProgressType';
 import { RPCSyncRescan } from './types/RPCSyncRescanType';
 import { RPCUfvkType } from './types/RPCUfvkType';
 import { RPCSendType } from './types/RPCSendType';
@@ -366,7 +364,7 @@ export default class RPC {
     // every 15 seconds the App try to Sync the new blocks.
     if (!this.refreshTimerID) {
       this.refreshTimerID = setInterval(() => {
-        console.log('++++++++++ interval try refresh 15 secs', this.timers);
+        //console.log('++++++++++ interval try refresh 15 secs', this.timers);
         this.refresh(false);
       }, 15 * 1000); // 15 seconds
       //console.log('create refresh timer', this.refreshTimerID);
@@ -376,7 +374,7 @@ export default class RPC {
     // every 5 seconds the App update part of the data (VT)
     if (!this.updateVTTimerID) {
       this.updateVTTimerID = setInterval(() => {
-        console.log('++++++++++ interval update 5 secs VT', this.timers);
+        //console.log('++++++++++ interval update 5 secs VT', this.timers);
         this.sanitizeTimers();
         this.updateVTData();
       }, 5 * 1000); // 5 secs
@@ -390,7 +388,7 @@ export default class RPC {
     // every 5 seconds the App update part of the data (M)
     if (!this.updateMTimerID) {
       this.updateMTimerID = setInterval(() => {
-        console.log('++++++++++ interval update 5 secs M', this.timers);
+        //console.log('++++++++++ interval update 5 secs M', this.timers);
         this.sanitizeTimers();
         this.updateMData();
       }, 5 * 1000); // 5 secs
@@ -597,49 +595,29 @@ export default class RPC {
     }
   }
 
-  async doSendProgress(): Promise<string> {
-    try {
-      const sendProgressStr: string = await RPCModule.execute(CommandEnum.sendprogress, '');
-      if (sendProgressStr) {
-        if (sendProgressStr.toLowerCase().startsWith(GlobalConst.error)) {
-          console.log(`Error send progress ${sendProgressStr}`);
-          return sendProgressStr;
-        }
-      } else {
-        console.log('Internal Error send progress');
-        return 'Error: Internal RPC Error: send progress';
-      }
-
-      return sendProgressStr;
-    } catch (error) {
-      console.log(`Critical Error send progress ${error}`);
-      return `Error: send progress ${error}`;
-    }
-  }
-
   async loadWalletVTData() {
-    const start: number = Date.now();
+    //const start: number = Date.now();
     await this.fetchTandZandOValueTransfers();
     //console.log('@@@@@@@@@@@@@@@ VT time', Date.now() - start);
     //console.log('RPC - 4.0 - fetch value transfers');
     //const start2: number = Date.now();
     await this.fetchAddresses();
-    console.log('@@@@@@@@@@@@@@@ VT TOTAL time', Date.now() - start);
+    //console.log('@@@@@@@@@@@@@@@ VT TOTAL time', Date.now() - start);
     //console.log('RPC - 4.1 - fetch addresses');
   }
 
   async loadWalletMData() {
-    const start: number = Date.now();
+    //const start: number = Date.now();
     await this.fetchTandZandOMessages();
-    console.log('@@@@@@@@@@@@@@@ M time', Date.now() - start);
+    //console.log('@@@@@@@@@@@@@@@ M time', Date.now() - start);
     //console.log('RPC - 4.2 - fetch value transfers messages');
-    const start2: number = Date.now();
+    //const start2: number = Date.now();
     await this.fetchTotalBalance();
-    console.log('@@@@@@@@@@@@@@@ M-BAL time', Date.now() - start2);
+    //console.log('@@@@@@@@@@@@@@@ M-BAL time', Date.now() - start2);
     //console.log('RPC - 4.3 - fetch total balance');
-    const start3: number = Date.now();
+    //const start3: number = Date.now();
     await this.fetchWalletSettings();
-    console.log('@@@@@@@@@@@@@@@ M-WALLET time', Date.now() - start3);
+    //console.log('@@@@@@@@@@@@@@@ M-WALLET time', Date.now() - start3);
     //console.log('RPC - 4.4 - fetch wallet settings');
   }
 
@@ -672,7 +650,7 @@ export default class RPC {
       console.log('Internal error update data', error);
       this.updateVTDataLock = false;
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
     }
   }
 
@@ -698,7 +676,7 @@ export default class RPC {
       console.log('Internal error update data', error);
       this.updateMDataLock = false;
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
     }
   }
 
@@ -784,7 +762,7 @@ export default class RPC {
 
       // We need to wait for the sync to finish. The sync is done when
       this.syncStatusTimerID = setInterval(async () => {
-        console.log('++++++++++ interval syncing 5 secs');
+        //console.log('++++++++++ interval syncing 5 secs');
         const returnStatus = await this.doSyncStatus();
         if (returnStatus.toLowerCase().startsWith(GlobalConst.error)) {
           return;
@@ -1083,7 +1061,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error info & server block height ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1122,7 +1100,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error addresses balances notes ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1168,7 +1146,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error addresses ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1191,7 +1169,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error wallet height ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1206,7 +1184,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error wallet birthday ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1297,7 +1275,7 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error txs list value transfers ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
@@ -1388,39 +1366,25 @@ export default class RPC {
     } catch (error) {
       console.log(`Critical Error txs list value transfers messages ${error}`);
       // relaunch the interval tasks just in case they are aborted.
-      this.configure();
+      await this.configure();
       return;
     }
   }
 
   // Send a transaction using the already constructed sendJson structure
-  async sendTransaction(
-    sendJson: Array<SendJsonToTypeType>,
-    setSendProgress: (arg0: SendProgressClass) => void,
-  ): Promise<string> {
+  async sendTransaction(sendJson: Array<SendJsonToTypeType>): Promise<string> {
+    // clear the timers - Tasks.
+    await this.clearTimers();
     // sending
     this.setInSend(true);
     // keep awake the screen/device while sending.
     this.keepAwake(true);
-    // First, get the previous send progress id, so we know which ID to track
-    const prev: string = await this.doSendProgress();
-    let prevSendId = -1;
-    if (prev && !prev.toLowerCase().startsWith(GlobalConst.error)) {
-      let prevProgress = {} as RPCSendProgressType;
-      try {
-        prevProgress = await JSON.parse(prev);
-        prevSendId = prevProgress.id;
-      } catch (e) {}
-    }
-
-    console.log('prev progress id', prevSendId);
-
     // sometimes we need the result of send as well
     let sendError: string = '';
     let sendTxids: string = '';
 
-    // This is async, so fire and forget
-    this.doSend(JSON.stringify(sendJson))
+    // I need to wait until the send process finished
+    await this.doSend(JSON.stringify(sendJson))
       .then(r => {
         try {
           const rJson: RPCSendType = JSON.parse(r);
@@ -1440,8 +1404,11 @@ export default class RPC {
         }
         console.log('End Send ERROR: ' + e);
       })
-      .finally(() => {
-        // sending is over
+      .finally(async () => {
+        // send process is about to finish - reactivate the syncing flag
+        await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.false);
+        // create the tasks
+        await this.configure();
         this.setInSend(false);
         if (!this.inRefresh) {
           // if not syncing, then not keep awake the screen/device when the send is finished.
@@ -1451,130 +1418,20 @@ export default class RPC {
         }
       });
 
-    const startTimeSeconds = new Date().getTime() / 1000;
-
     // The send command is async, so we need to poll to get the status
     const sendTxPromise = new Promise<string>((resolve, reject) => {
-      const intervalID = setInterval(async () => {
-        const pro: string = await this.doSendProgress();
-        console.log('send progress', pro);
-        if (pro && pro.toLowerCase().startsWith(GlobalConst.error) && !sendTxids && !sendError) {
-          return;
-        }
-        let progress = {} as RPCSendProgressType;
-        let sendId = -1;
-        try {
-          progress = await JSON.parse(pro);
-          sendId = progress.id;
-        } catch (e) {
-          console.log('Error parsing status send progress', e);
-          if (!sendTxids && !sendError) {
-            return;
-          }
-        }
-
-        // because I don't know what the user are doing, I force every 2 seconds
-        // the interrupt flag to true if the sync_interrupt is false
-        if (!progress.sync_interrupt) {
-          await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.true);
-        }
-
-        const updatedProgress = new SendProgressClass(0, 0, 0);
-        // if the send command fails really fast then the sendID never change.
-        // In this case I need to finish this promise right away.
-        if (sendId === prevSendId && !sendTxids && !sendError) {
-          console.log('progress id', sendId);
-          // Still not started, so wait for more time
-          return;
-        }
-
-        console.log('progress', progress);
-
-        // Calculate ETA.
-        let secondsPerComputation = 3; // default
-        if (progress.progress > 0) {
-          const currentTimeSeconds = new Date().getTime() / 1000;
-          secondsPerComputation = (currentTimeSeconds - startTimeSeconds) / progress.progress;
-        }
-        //console.log(`Seconds Per compute = ${secondsPerComputation}`);
-
-        //let eta = Math.round((progress.total - progress.progress) * secondsPerComputation);
-        let eta = Math.round((4 - progress.progress) * secondsPerComputation);
-        //console.log(`ETA = ${eta}`);
-        if (eta <= 0) {
-          eta = 1;
-        }
-
-        //console.log(`ETA calculated = ${eta}`);
-
-        // synchronize status with inSend
-        // this field always have `false`... IDK man.
-        //this.setInSend(progress.sending);
-
-        updatedProgress.progress = progress.progress;
-        updatedProgress.total = 3; // until sendprogress give me a good value... 3 is better.
-        updatedProgress.sendInProgress = progress.sending;
-        updatedProgress.etaSeconds = progress.progress === 0 ? '...' : eta;
-
-        // exists a possible problem:
-        // if the send process is really fast (likely an error) and sendprogress is over
-        // in this moment.
-
-        // sometimes the progress.sending is false and txid and error are null
-        // in this moment I can use the values from the command send
-
-        if (progress.txids.length === 0 && !progress.error && !sendTxids && !sendError) {
-          // Still processing
-          setSendProgress(updatedProgress);
-          console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRReturn', progress.txids, progress.error, sendTxids, sendError);
-          return;
-        }
-
-        // Finished processing
-        clearInterval(intervalID);
-        setSendProgress({} as SendProgressClass);
-
-        if (progress.txids.length > 0) {
-          // And refresh data (full refresh)
-          this.refresh(true);
-          this.setInSend(false);
-          // send process is about to finish - reactivate the syncing flag
-          if (progress.sync_interrupt) {
-            await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.false);
-          }
-          const progressTxids = progress.txids.join(', ');
-          resolve(progressTxids);
-        }
-
-        if (progress.error) {
-          this.setInSend(false);
-          // send process is about to finish - reactivate the syncing flag
-          if (progress.sync_interrupt) {
-            await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.false);
-          }
-          reject(progress.error);
-        }
-
-        if (sendTxids) {
-          // And refresh data (full refresh)
-          this.refresh(true);
-          this.setInSend(false);
-          // send process is about to finish - reactivate the syncing flag
-          if (progress.sync_interrupt) {
-            await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.false);
-          }
-          resolve(sendTxids);
-        }
-
-        if (sendError) {
-          this.setInSend(false);
-          // send process is about to finish - reactivate the syncing flag
-          if (progress.sync_interrupt) {
-            await RPC.rpcSetInterruptSyncAfterBatch(GlobalConst.false);
-          }
-          reject(sendError);
-        }
-      }, 2000); // Every 2 seconds
+      if (sendTxids) {
+        // And refresh data (full refresh)
+        this.refresh(true);
+        console.log('00000000 RESOLVE send');
+        resolve(sendTxids);
+        return;
+      }
+      if (sendError) {
+        console.log('00000000 REJECT send');
+        reject(sendError);
+        return;
+      }
     });
 
     return sendTxPromise;

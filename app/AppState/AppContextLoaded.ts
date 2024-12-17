@@ -3,7 +3,6 @@ import { StackScreenProps } from '@react-navigation/stack';
 import TotalBalanceClass from './classes/TotalBalanceClass';
 import AddressClass from './classes/AddressClass';
 import SendPageStateClass from './classes/SendPageStateClass';
-import SendProgressClass from './classes/SendProgressClass';
 import ReceivePageStateClass from './classes/ReceivePageStateClass';
 import WalletSettingsClass from './classes/WalletSettingsClass';
 import AddressBookFileClass from './classes/AddressBookFileClass';
@@ -57,9 +56,6 @@ export default interface AppContextLoaded {
 
   // syncing Info about the status of the process
   syncingStatus: SyncingStatusClass;
-
-  // Build progress from Tx
-  sendProgress: SendProgressClass;
 
   // wallet recovery info
   wallet: WalletType;

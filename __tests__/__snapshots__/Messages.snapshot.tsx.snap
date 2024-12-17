@@ -13,13 +13,6 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
     }
   }
 >
-  <Modal
-    animationType="slide"
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={false}
-    visible={false}
-  />
   <View>
     <View
       style={
@@ -354,64 +347,6 @@ exports[`Component Messages - test Messages currency USD, privacy high & mode ad
       }
     }
   />
-  <RCTScrollView
-    accessibilityLabel="text translated"
-    accessible={true}
-    onContentSizeChange={[Function]}
-    onLayout={[Function]}
-    onScroll={[Function]}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[MockFunction]}
-        refreshing={false}
-        tintColor="#c3c3c3"
-        title="text translated"
-      />
-    }
-    scrollEventThrottle={100}
-    style={
-      {
-        "flexGrow": 1,
-        "marginTop": 10,
-        "opacity": 0,
-        "width": "100%",
-      }
-    }
-  >
-    <RCTRefreshControl />
-    <View>
-      <View
-        style={
-          {
-            "alignItems": "center",
-            "display": "flex",
-            "justifyContent": "flex-start",
-            "marginBottom": 10,
-            "marginTop": 10,
-          }
-        }
-      >
-        <Text
-          selectable={true}
-          style={
-            {
-              "color": "#18bd18",
-              "opacity": 0.65,
-            }
-          }
-        >
-          text translated
-        </Text>
-      </View>
-      <View
-        style={
-          {
-            "marginBottom": 30,
-          }
-        }
-      />
-    </View>
-  </RCTScrollView>
 </View>
 `;
 
@@ -428,13 +363,6 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
     }
   }
 >
-  <Modal
-    animationType="slide"
-    hardwareAccelerated={false}
-    onRequestClose={[Function]}
-    transparent={false}
-    visible={false}
-  />
   <View>
     <View
       style={
@@ -652,63 +580,5 @@ exports[`Component Messages - test Messages no currency, privacy normal & mode b
       }
     }
   />
-  <RCTScrollView
-    accessibilityLabel="text translated"
-    accessible={true}
-    onContentSizeChange={[Function]}
-    onLayout={[Function]}
-    onScroll={[Function]}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[MockFunction]}
-        refreshing={false}
-        tintColor="#c3c3c3"
-        title="text translated"
-      />
-    }
-    scrollEventThrottle={100}
-    style={
-      {
-        "flexGrow": 1,
-        "marginTop": 10,
-        "opacity": 0,
-        "width": "100%",
-      }
-    }
-  >
-    <RCTRefreshControl />
-    <View>
-      <View
-        style={
-          {
-            "alignItems": "center",
-            "display": "flex",
-            "justifyContent": "flex-start",
-            "marginBottom": 10,
-            "marginTop": 10,
-          }
-        }
-      >
-        <Text
-          selectable={true}
-          style={
-            {
-              "color": "#18bd18",
-              "opacity": 0.65,
-            }
-          }
-        >
-          text translated
-        </Text>
-      </View>
-      <View
-        style={
-          {
-            "marginBottom": 30,
-          }
-        }
-      />
-    </View>
-  </RCTScrollView>
 </View>
 `;

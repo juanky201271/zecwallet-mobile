@@ -53,7 +53,7 @@ describe('Component Memo - test', () => {
     const onClose = jest.fn();
     const memo = render(
       <ContextAppLoadedProvider value={state}>
-        <Memo closeModal={onClose} updateToField={onClose} />
+        <Memo closeModal={onClose} memoUpdateToField={onClose} />
       </ContextAppLoadedProvider>,
     );
     expect(memo.toJSON()).toMatchSnapshot();

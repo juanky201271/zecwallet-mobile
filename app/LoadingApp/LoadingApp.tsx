@@ -638,7 +638,7 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
         (priorAppState === AppStateStatusEnum.inactive || priorAppState === AppStateStatusEnum.background) &&
         nextAppState === AppStateStatusEnum.active
       ) {
-        console.log('App LOADING has come to the foreground!');
+        //console.log('App LOADING has come to the foreground!');
         // reading background task info
         this.fetchBackgroundSyncing();
         // setting value for background task Android
@@ -652,7 +652,7 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
         (nextAppState === AppStateStatusEnum.inactive || nextAppState === AppStateStatusEnum.background) &&
         priorAppState === AppStateStatusEnum.active
       ) {
-        console.log('App LOADING is gone to the background!');
+        //console.log('App LOADING is gone to the background!');
         // setting value for background task Android
         await AsyncStorage.setItem(GlobalConst.background, GlobalConst.yes);
       }
