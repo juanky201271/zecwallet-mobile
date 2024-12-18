@@ -805,7 +805,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: noDrawMenu ? 'space-between' : 'center',
+            justifyContent: 'space-between',
             flexWrap: 'wrap',
             width: '100%',
             marginVertical: 5,
@@ -827,9 +827,11 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             </>
           ) : (
             <>
+              <View style={{ width: 30, height: 30, marginHorizontal: 10 }} />
               <RegText testID={testID} color={colors.money} style={{ paddingHorizontal: 5, textAlign: 'center' }}>
                 {title}
               </RegText>
+              <View style={{ width: 30, height: 30, marginHorizontal: 10 }} />
             </>
           )}
         </View>
