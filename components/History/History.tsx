@@ -195,10 +195,7 @@ const History: React.FunctionComponent<HistoryProps> = ({
           onRequestClose={() => setMessagesAddressModalShowing(false)}>
           <MessagesAddress
             doRefresh={doRefresh}
-            toggleMenuDrawer={toggleMenuDrawer}
-            syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
             setPrivacyOption={setPrivacyOption}
-            setUfvkViewModalVisible={setUfvkViewModalVisible}
             setSendPageState={setSendPageState}
             setScrollToBottom={setScrollToBottom}
             scrollToBottom={scrollToBottom}

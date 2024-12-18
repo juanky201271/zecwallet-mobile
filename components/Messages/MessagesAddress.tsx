@@ -13,10 +13,7 @@ import 'moment/locale/ru';
 
 type MessagesAddressProps = {
   doRefresh: () => void;
-  toggleMenuDrawer: () => void;
-  syncingStatusMoreInfoOnClick: () => void;
   setPrivacyOption: (value: boolean) => Promise<void>;
-  setUfvkViewModalVisible?: (v: boolean) => void;
   setSendPageState: (s: SendPageStateClass) => void;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
@@ -35,10 +32,7 @@ type MessagesAddressProps = {
 
 const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
   doRefresh,
-  toggleMenuDrawer,
-  syncingStatusMoreInfoOnClick,
   setPrivacyOption,
-  setUfvkViewModalVisible,
   setSendPageState,
   setScrollToBottom,
   scrollToBottom,
@@ -65,10 +59,7 @@ const MessagesAddress: React.FunctionComponent<MessagesAddressProps> = ({
       }}>
       <MessageList
         doRefresh={doRefresh}
-        toggleMenuDrawer={toggleMenuDrawer}
-        syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
         setPrivacyOption={setPrivacyOption}
-        setUfvkViewModalVisible={setUfvkViewModalVisible}
         setSendPageState={setSendPageState}
         setScrollToBottom={setScrollToBottom}
         scrollToBottom={scrollToBottom}

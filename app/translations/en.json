@@ -41,7 +41,9 @@
     "filter-contacts": "Contacts",
     "filter-no-contacts": "No contacts",
     "clear-filter": "Clear filter:",
-    "contacts-empty": "No Contacts or Addresses."
+    "contacts-empty": "No Contacts or Addresses.",
+    "link-all": "All messages",
+    "link-anonymous": "Anonymous messages"
   },
   "addressbook": {
     "title": "Address Book",

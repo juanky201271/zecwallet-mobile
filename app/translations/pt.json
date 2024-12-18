@@ -41,7 +41,9 @@
     "filtro-contatos": "Contatos",
     "filter-no-contacts": "Sem contatos",
     "clear-filter": "Limpar filtro:",
-    "contacts-empty": "Sem contatos ou endereços."
+    "contacts-empty": "Sem contatos ou endereços.",
+    "link-all": "Todas as mensagens",
+    "link-anonymous": "Mensagens anônimas"
   },
   "addressbook": {
     "title": "Address Book",

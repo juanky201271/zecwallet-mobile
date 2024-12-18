@@ -41,7 +41,9 @@
     "filter-contacts": "Контакты",
     "filter-no-contacts": "Нет контактов",
     "clear-filter": "Очистить фильтр:",
-    "contacts-empty": "Нет контактов и адресов."
+    "contacts-empty": "Нет контактов и адресов.",
+    "link-all": "Все сообщения",
+    "link-anonymous": "Анонимные сообщения"
   },
   "addressbook": {
     "title": "Адресная книга",

@@ -37,11 +37,13 @@
     "empty": "Todavía no hay mensajes.",
     "message-placeholder": "Mensaje",
     "search-placeholder": "Buscar",
-    "filtrar-todo": "Todos",
+    "filter-all": "Todos",
     "filter-contacts": "Contactos",
-    "filter-no-contacts": "Sin contactos",
+    "filter-no-contacts": "No contactos",
     "clear-filter": "Borrar filtro:",
-    "contacts-empty": "Sin contactos ni direcciones."
+    "contacts-empty": "Sin contactos ni direcciones.",
+    "link-all": "Todos los mensajes",
+    "link-anonymous": "Mensajes anónimos"
   },
   "addressbook": {
     "title": "Libreta de Direcciones",

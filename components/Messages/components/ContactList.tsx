@@ -18,7 +18,7 @@ import 'moment/locale/ru';
 
 import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faAnglesUp, faMagnifyingGlass, faXmark, faCircleArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faAnglesUp, faMagnifyingGlass, faXmark, faCircleArrowDown, faLink } from '@fortawesome/free-solid-svg-icons';
 
 import {
   AddressBookFileClass,
@@ -33,9 +33,10 @@ import { ThemeType } from '../../../app/types';
 import FadeText from '../../Components/FadeText';
 import { ContextAppLoaded } from '../../../app/context';
 import Header from '../../Header';
-import { MessagesAddress } from '../../Messages';
+import { MessagesAddress, MessagesAll } from '../../Messages';
 import Utils from '../../../app/utils';
 import ContactLine from './ContactLine';
+import RegText from '../../Components/RegText';
 
 type ContactListProps = {
   doRefresh: () => void;
@@ -79,6 +80,7 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
   moment.locale(language);
 
   const [isMessagesAddressModalShowing, setMessagesAddressModalShowing] = useState<boolean>(false);
+  const [isMessagesAllModalShowing, setMessagesAllModalShowing] = useState<boolean>(false);
   const [contactDetail, setContactDetail] = useState<ContactType>({} as ContactType);
   const [contacts, setContacts] = useState<ContactType[]>([]);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
@@ -88,6 +90,8 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
   const [searchMode, setSearchMode] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>('');
   const [searchTextField, setSearchTextField] = useState<string>('');
+  const [linkMode, setLinkMode] = useState<boolean>(false);
+  const [anonymous, setAnonymous] = useState<boolean | null>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
   useScrollToTop(scrollViewRef);
@@ -193,8 +197,8 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
     setIsAtTop(isTop);
   };
 
-  console.log('render Contacts', filter, searchMode);
-  console.log('search text:', searchText, 'field:', searchTextField);
+  //console.log('render Contacts', filter, searchMode);
+  //console.log('search text:', searchText, 'field:', searchTextField);
 
   return (
     <View
@@ -214,10 +218,7 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
           onRequestClose={() => setMessagesAddressModalShowing(false)}>
           <MessagesAddress
             doRefresh={doRefresh}
-            toggleMenuDrawer={toggleMenuDrawer}
-            syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
             setPrivacyOption={setPrivacyOption}
-            setUfvkViewModalVisible={setUfvkViewModalVisible}
             setSendPageState={setSendPageState}
             setScrollToBottom={setScrollToBottom}
             scrollToBottom={scrollToBottom}
@@ -227,6 +228,25 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
             sendTransaction={sendTransaction}
             clearToAddr={clearToAddr}
             setServerOption={setServerOption}
+          />
+        </Modal>
+      )}
+
+      {isMessagesAllModalShowing && anonymous !== null && (
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={isMessagesAllModalShowing}
+          onRequestClose={() => setMessagesAllModalShowing(false)}>
+          <MessagesAll
+            doRefresh={doRefresh}
+            setPrivacyOption={setPrivacyOption}
+            setSendPageState={setSendPageState}
+            setScrollToBottom={setScrollToBottom}
+            scrollToBottom={scrollToBottom}
+            anonymous={anonymous}
+            closeModal={() => setMessagesAllModalShowing(false)}
+            openModal={() => setMessagesAllModalShowing(true)}
           />
         </Modal>
       )}
@@ -341,6 +361,19 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
               </View>
             )}
             <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center' }}>
+              {!linkMode && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setLinkMode(true);
+                  }}>
+                  <FontAwesomeIcon
+                    style={{ marginLeft: 5, marginRight: 5, marginTop: 0 }}
+                    size={30}
+                    icon={faLink}
+                    color={colors.zingo}
+                  />
+                </TouchableOpacity>
+              )}
               <TouchableOpacity
                 onPress={() => {
                   setFilter(FilterEnum.all);
@@ -454,6 +487,69 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
                 </TouchableOpacity>
               )}
             </View>
+            {linkMode && (
+              <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center' }}>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    margin: 10,
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      // call the screen
+                      setLinkMode(false);
+                      setAnonymous(false);
+                      setMessagesAllModalShowing(true);
+                    }}>
+                    <View
+                      style={{
+                        paddingHorizontal: 15,
+                        marginHorizontal: 0,
+                      }}>
+                      <RegText
+                        style={{
+                          color: colors.primary,
+                          textDecorationLine: 'underline',
+                          fontWeight: 'bold',
+                        }}>
+                        {translate('messages.link-all') as string}
+                      </RegText>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      // call the screen
+                      setLinkMode(false);
+                      setAnonymous(true);
+                      setMessagesAllModalShowing(true);
+                    }}>
+                    <View
+                      style={{
+                        paddingHorizontal: 15,
+                        marginHorizontal: 10,
+                      }}>
+                      <RegText
+                        style={{
+                          color: colors.text,
+                          textDecorationLine: 'underline',
+                          fontWeight: 'bold',
+                        }}>
+                        {translate('messages.link-anonymous') as string}
+                      </RegText>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setLinkMode(false);
+                      setAnonymous(null);
+                    }}>
+                    <FontAwesomeIcon style={{ marginTop: 4 }} size={25} icon={faXmark} color={colors.primaryDisabled} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
             {contacts &&
               contacts.length > 0 &&
               contacts.flatMap((c, index) => {

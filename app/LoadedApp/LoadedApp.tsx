@@ -995,9 +995,9 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
         server,
         donation,
       );
-      const start = Date.now();
+      //const start = Date.now();
       const txid = await this.rpc.sendTransaction(sendJson);
-      console.log('&&&&&&&&&&&&&& send tx', Date.now() - start);
+      //console.log('&&&&&&&&&&&&&& send tx', Date.now() - start);
 
       return txid;
     } catch (err) {
@@ -1700,7 +1700,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       );
     };
 
-    console.log('render LoadedAppClass - 3', this.state.selectServer, this.state.server);
+    //console.log('render LoadedAppClass - 3', this.state.selectServer, this.state.server);
     //console.log('vt', valueTransfers);
     //console.log('ad', addresses);
     //console.log('ba', totalBalance);

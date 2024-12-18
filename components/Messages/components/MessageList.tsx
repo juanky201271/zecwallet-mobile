@@ -57,13 +57,11 @@ import { serverUris } from '../../../app/uris';
 
 type MessageListProps = {
   doRefresh: () => void;
-  toggleMenuDrawer: () => void;
-  syncingStatusMoreInfoOnClick: () => void;
   setPrivacyOption: (value: boolean) => Promise<void>;
-  setUfvkViewModalVisible?: (v: boolean) => void;
   setSendPageState: (s: SendPageStateClass) => void;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
+  anonymous?: boolean;
   address?: string;
   closeModal?: () => void;
   openModal?: () => void;
@@ -79,13 +77,11 @@ type MessageListProps = {
 
 const MessageList: React.FunctionComponent<MessageListProps> = ({
   doRefresh,
-  toggleMenuDrawer,
-  syncingStatusMoreInfoOnClick,
   setPrivacyOption,
-  setUfvkViewModalVisible,
   setSendPageState,
   setScrollToBottom,
   scrollToBottom,
+  anonymous,
   address,
   closeModal,
   openModal,
@@ -168,6 +164,22 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     [address],
   );
 
+  const anonymousFilter = useMemo(
+    () => (addr: string | undefined, memos: string[] | undefined) => {
+      if (!memos) {
+        return false;
+      }
+      const memoTotal = memos.join('\n');
+      let memoAddress;
+      if (memoTotal.includes('\nReply to: \n')) {
+        let memoArray = memoTotal.split('\nReply to: \n');
+        memoAddress = memoArray.pop();
+      }
+      return !addr && !memoAddress;
+    },
+    [],
+  );
+
   const fetchMessagesFiltered = useMemo(() => {
     if (!messages) {
       return [] as ValueTransferType[];
@@ -175,10 +187,13 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     if (address) {
       // filtering for this address
       return messages.filter((a: ValueTransferType) => addressFilter(a.address, a.memos));
+    } else if (anonymous) {
+      // filtering for anonymous messages
+      return messages.filter((a: ValueTransferType) => anonymousFilter(a.address, a.memos));
     } else {
       return messages;
     }
-  }, [messages, address, addressFilter]);
+  }, [messages, address, anonymous, addressFilter, anonymousFilter]);
 
   useEffect(() => {
     if (messages !== null) {
@@ -433,7 +448,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           display: 'flex',
           justifyContent: 'flex-start',
           width: '100%',
-          height: address ? (memoIcon ? '85%' : '90%') : '100%',
+          height: address ? (memoIcon ? '83%' : '88%') : '100%',
         }}>
         <Modal
           animationType="slide"
@@ -525,13 +540,13 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           </>
         ) : (
           <Header
-            toggleMenuDrawer={toggleMenuDrawer}
-            syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
             title={translate('messages.title') as string}
             noBalance={true}
-            setUfvkViewModalVisible={setUfvkViewModalVisible}
+            noSyncingStatus={true}
+            noDrawMenu={true}
             setPrivacyOption={setPrivacyOption}
             addLastSnackbar={addLastSnackbar}
+            closeScreen={closeModal}
           />
         )}
 
@@ -646,7 +661,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         )}
       </View>
       {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
-        <View style={{ height: memoIcon ? '15%' : '10%' }}>
+        <View style={{ height: memoIcon ? '17%' : '12%' }}>
           <View
             style={{
               display: 'flex',

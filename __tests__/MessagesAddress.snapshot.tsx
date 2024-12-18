@@ -113,8 +113,6 @@ describe('Component Messages Address - test', () => {
       <ContextAppLoadedProvider value={state}>
         <MessagesAddress
           doRefresh={onFunction}
-          toggleMenuDrawer={onFunction}
-          syncingStatusMoreInfoOnClick={onFunction}
           setPrivacyOption={onFunction}
           setSendPageState={onFunction}
           setScrollToBottom={onFunction}

@@ -1,39 +1,59 @@
-import React from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, { useContext } from 'react';
 import { SendPageStateClass } from '../../app/AppState';
 import MessageList from './components/MessageList';
+import { SafeAreaView } from 'react-native';
+import { ContextAppLoaded } from '../../app/context';
+import { useTheme } from '@react-navigation/native';
+import { ThemeType } from '../../app/types';
+import moment from 'moment';
 
 type MessagesAllProps = {
   doRefresh: () => void;
-  toggleMenuDrawer: () => void;
-  syncingStatusMoreInfoOnClick: () => void;
   setPrivacyOption: (value: boolean) => Promise<void>;
-  setUfvkViewModalVisible?: (v: boolean) => void;
   setSendPageState: (s: SendPageStateClass) => void;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
+  anonymous: boolean;
+  closeModal: () => void;
+  openModal: () => void;
 };
 
 const MessagesAll: React.FunctionComponent<MessagesAllProps> = ({
   doRefresh,
-  toggleMenuDrawer,
-  syncingStatusMoreInfoOnClick,
   setPrivacyOption,
-  setUfvkViewModalVisible,
   setSendPageState,
   setScrollToBottom,
   scrollToBottom,
+  anonymous,
+  closeModal,
+  openModal,
 }) => {
+  const context = useContext(ContextAppLoaded);
+  const { language } = context;
+  const { colors } = useTheme() as unknown as ThemeType;
+  moment.locale(language);
+
   return (
-    <MessageList
-      doRefresh={doRefresh}
-      toggleMenuDrawer={toggleMenuDrawer}
-      syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
-      setPrivacyOption={setPrivacyOption}
-      setUfvkViewModalVisible={setUfvkViewModalVisible}
-      setSendPageState={setSendPageState}
-      setScrollToBottom={setScrollToBottom}
-      scrollToBottom={scrollToBottom}
-    />
+    <SafeAreaView
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        height: '100%',
+        backgroundColor: colors.background,
+      }}>
+      <MessageList
+        doRefresh={doRefresh}
+        setPrivacyOption={setPrivacyOption}
+        setSendPageState={setSendPageState}
+        setScrollToBottom={setScrollToBottom}
+        scrollToBottom={scrollToBottom}
+        anonymous={anonymous}
+        closeModal={closeModal}
+        openModal={openModal}
+      />
+    </SafeAreaView>
   );
 };
 
