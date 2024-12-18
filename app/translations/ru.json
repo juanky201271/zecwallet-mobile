@@ -35,7 +35,13 @@
   "messages": {
     "title": "Сообщения",
     "empty": "Сообщений пока нет.",
-    "message-placeholder": "Сообщение"
+    "message-placeholder": "Сообщение",
+    "search-placeholder": "Поиск",
+    "filter-all": "Все",
+    "filter-contacts": "Контакты",
+    "filter-no-contacts": "Нет контактов",
+    "clear-filter": "Очистить фильтр:",
+    "contacts-empty": "Нет контактов и адресов."
   },
   "addressbook": {
     "title": "Адресная книга",

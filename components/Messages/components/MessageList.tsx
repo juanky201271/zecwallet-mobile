@@ -645,7 +645,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           </TouchableOpacity>
         )}
       </View>
-      {!loading && address && selectServer !== SelectServerEnum.offline && (
+      {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
         <View style={{ height: memoIcon ? '15%' : '10%' }}>
           <View
             style={{

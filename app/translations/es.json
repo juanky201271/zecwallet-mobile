@@ -35,7 +35,13 @@
   "messages": {
     "title": "Mensajes",
     "empty": "Todavía no hay mensajes.",
-    "message-placeholder": "Mensaje"
+    "message-placeholder": "Mensaje",
+    "search-placeholder": "Buscar",
+    "filtrar-todo": "Todos",
+    "filter-contacts": "Contactos",
+    "filter-no-contacts": "Sin contactos",
+    "clear-filter": "Borrar filtro:",
+    "contacts-empty": "Sin contactos ni direcciones."
   },
   "addressbook": {
     "title": "Libreta de Direcciones",

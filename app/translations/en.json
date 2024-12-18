@@ -35,7 +35,13 @@
   "messages": {
     "title": "Messages",
     "empty": "No Messages yet.",
-    "message-placeholder": "Message"
+    "message-placeholder": "Message",
+    "search-placeholder": "Search",
+    "filter-all": "All",
+    "filter-contacts": "Contacts",
+    "filter-no-contacts": "No contacts",
+    "clear-filter": "Clear filter:",
+    "contacts-empty": "No Contacts or Addresses."
   },
   "addressbook": {
     "title": "Address Book",

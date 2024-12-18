@@ -51,6 +51,7 @@ import { PrivacyLevelFromEnum } from './enums/PrivacyLevelFromEnum';
 import { SecurityTypeEnum } from './enums/SecurityTypeEnum';
 import { EventListenerEnum } from './enums/EventListenerEnum';
 import { ValueTransferKindEnum } from './enums/ValueTransferKindEnum';
+import { FilterEnum } from './enums/FilterEnum';
 
 import { GlobalConst } from './const/GlobalConst';
 
@@ -115,5 +116,6 @@ export {
   SecurityTypeEnum,
   EventListenerEnum,
   ValueTransferKindEnum,
+  FilterEnum,
   GlobalConst,
 };
