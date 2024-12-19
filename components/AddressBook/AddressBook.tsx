@@ -213,7 +213,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
         scrollEventThrottle={100}
         testID="addressbook.scroll-view"
         keyboardShouldPersistTaps="handled"
-        style={{ maxHeight: '85%' }}
+        style={{ height: '80%', maxHeight: '80%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

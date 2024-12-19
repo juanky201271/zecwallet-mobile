@@ -72,7 +72,7 @@ const PrivKey: React.FunctionComponent<PrivKeyProps> = ({ address, keyType, priv
       />
 
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ maxHeight: '90%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

@@ -203,7 +203,7 @@ exports[`Component PrivKey - test PrivKey Private - snapshot 1`] = `
     }
     style={
       {
-        "maxHeight": "85%",
+        "maxHeight": "90%",
       }
     }
   >
@@ -590,7 +590,7 @@ exports[`Component PrivKey - test PrivKey View - snapshot 1`] = `
     }
     style={
       {
-        "maxHeight": "85%",
+        "maxHeight": "90%",
       }
     }
   >

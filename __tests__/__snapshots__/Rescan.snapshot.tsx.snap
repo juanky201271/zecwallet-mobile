@@ -203,7 +203,8 @@ exports[`Component Rescan - test Rescan - snapshot 1`] = `
     }
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >

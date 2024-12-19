@@ -46,7 +46,7 @@ const Info: React.FunctionComponent<InfoProps> = ({ closeModal, setZecPrice }) =
       />
 
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ maxHeight: '90%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

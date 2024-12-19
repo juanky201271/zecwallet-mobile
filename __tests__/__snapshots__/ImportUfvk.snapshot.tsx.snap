@@ -30,7 +30,8 @@ exports[`Component ImportUfvk - test ImportUfvk - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >

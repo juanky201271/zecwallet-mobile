@@ -100,7 +100,8 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
 
       <ScrollView
         style={{
-          maxHeight: '70%',
+          height: '80%',
+          maxHeight: '80%',
           minHeight: '50%',
         }}
         contentContainerStyle={{

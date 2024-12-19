@@ -100,11 +100,8 @@ const ShowUfvk: React.FunctionComponent<ShowUfvkProps> = ({ onClickOK, onClickCa
         addLastSnackbar={addLastSnackbar}
         closeScreen={onClickCancel}
       />
-
-      <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
-
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ height: '80%', maxHeight: '80%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

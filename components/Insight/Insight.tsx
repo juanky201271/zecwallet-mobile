@@ -354,7 +354,7 @@ const Insight: React.FunctionComponent<InsightProps> = ({ closeModal, setPrivacy
         showsVerticalScrollIndicator={true}
         persistentScrollbar={true}
         indicatorStyle={'white'}
-        style={{ maxHeight: '85%' }}
+        style={{ maxHeight: '90%' }}
         contentContainerStyle={{}}>
         <View style={{ display: 'flex', margin: 20 }}>
           {!loading && (!pieAmounts || !pieAmounts.length) && (

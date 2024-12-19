@@ -47,7 +47,7 @@ const About: React.FunctionComponent<AboutProps> = ({ closeModal }) => {
       />
 
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ maxHeight: '90%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

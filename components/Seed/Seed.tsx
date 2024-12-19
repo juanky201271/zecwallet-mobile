@@ -204,12 +204,9 @@ const Seed: React.FunctionComponent<SeedProps> = ({
         receivedLegend={action === SeedActionEnum.view ? !basicFirstViewSeed : false}
         closeScreen={onClickCancel}
       />
-
-      <View style={{ width: '100%', height: 1, backgroundColor: colors.primary }} />
-
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        style={{ maxHeight: '85%' }}
+        style={{ height: '80%', maxHeight: '80%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

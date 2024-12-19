@@ -1707,10 +1707,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
 
     return (
       <ContextAppLoadedProvider value={context}>
-        <SideMenu
-          menu={isMenuDrawerOpen && menu}
-          isOpen={isMenuDrawerOpen}
-          onChange={(isOpen: boolean) => this.updateMenuState(isOpen)}>
+        <SideMenu menu={menu} isOpen={isMenuDrawerOpen} onChange={(isOpen: boolean) => this.updateMenuState(isOpen)}>
           <Modal
             animationType="slide"
             transparent={false}

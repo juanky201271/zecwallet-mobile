@@ -1387,7 +1387,7 @@ export class LoadingAppClass extends Component<LoadingAppClassProps, LoadingAppC
                 )}
               </View>
               <ScrollView
-                style={{ maxHeight: '100%' }}
+                style={{ maxHeight: '90%' }}
                 contentContainerStyle={{
                   flexDirection: 'column',
                   alignItems: 'stretch',

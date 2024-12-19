@@ -515,7 +515,7 @@ exports[`Component Insight - test Insight - snapshot 1`] = `
     showsVerticalScrollIndicator={true}
     style={
       {
-        "maxHeight": "85%",
+        "maxHeight": "90%",
       }
     }
   >

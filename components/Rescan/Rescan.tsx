@@ -51,9 +51,8 @@ const Rescan: React.FunctionComponent<RescanProps> = ({ closeModal, doRescan }) 
         noPrivacy={true}
         closeScreen={closeModal}
       />
-
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ height: '80%', maxHeight: '80%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

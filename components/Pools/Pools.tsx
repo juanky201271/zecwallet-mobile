@@ -73,7 +73,7 @@ const Pools: React.FunctionComponent<PoolsProps> = ({ closeModal, setPrivacyOpti
       />
 
       <ScrollView
-        style={{ maxHeight: '85%' }}
+        style={{ maxHeight: '90%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

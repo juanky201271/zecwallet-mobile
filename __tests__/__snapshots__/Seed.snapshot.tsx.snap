@@ -273,15 +273,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -293,7 +284,8 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >
@@ -878,15 +870,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -898,7 +881,8 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >
@@ -1483,15 +1467,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -1503,7 +1478,8 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >
@@ -2088,15 +2064,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -2108,7 +2075,8 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >
@@ -2693,15 +2661,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -2713,7 +2672,8 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >

@@ -569,7 +569,7 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
       <ScrollView
         keyboardShouldPersistTaps="handled"
         testID="settings.scroll-view"
-        style={{ maxHeight: '85%' }}
+        style={{ height: '80%', maxHeight: '80%' }}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'stretch',

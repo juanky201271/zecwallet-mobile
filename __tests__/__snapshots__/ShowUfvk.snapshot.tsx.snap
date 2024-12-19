@@ -273,15 +273,6 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
       }
     />
   </View>
-  <View
-    style={
-      {
-        "backgroundColor": "rgb(0, 122, 255)",
-        "height": 1,
-        "width": "100%",
-      }
-    }
-  />
   <RCTScrollView
     contentContainerStyle={
       {
@@ -292,7 +283,8 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
     }
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
   >

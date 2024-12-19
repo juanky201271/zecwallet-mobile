@@ -23,7 +23,8 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
     keyboardShouldPersistTaps="handled"
     style={
       {
-        "maxHeight": "85%",
+        "height": "80%",
+        "maxHeight": "80%",
       }
     }
     testID="settings.scroll-view"
