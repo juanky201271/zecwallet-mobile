@@ -635,7 +635,7 @@ const Send: React.FunctionComponent<SendProps> = ({
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 25, { duration: 100, easing: Easing.linear });
+      slideAnim.value = withTiming(0 - titleViewHeight + 30, { duration: 100, easing: Easing.linear });
       setKeyboardVisible(true);
     });
     const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
