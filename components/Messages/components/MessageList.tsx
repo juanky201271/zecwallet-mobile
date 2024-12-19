@@ -447,7 +447,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           display: 'flex',
           justifyContent: 'flex-start',
           width: '100%',
-          height: address ? (memoIcon ? '83%' : '88%') : '100%',
+          height: address ? (memoIcon ? '80%' : '85%') : '100%',
         }}>
         <Modal
           animationType="slide"
@@ -711,7 +711,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         )}
       </View>
       {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
-        <View style={{ height: memoIcon ? '17%' : '12%' }}>
+        <View style={{ height: memoIcon ? '20%' : '15%' }}>
           <View
             style={{
               display: 'flex',

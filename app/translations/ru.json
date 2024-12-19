@@ -34,6 +34,7 @@
   "body": "мне нужна помощь с...",
   "messages": {
     "title": "Сообщения",
+    "title-chats": "Чаты",
     "empty": "Сообщений пока нет.",
     "message-placeholder": "Сообщение",
     "search-placeholder": "Поиск",

@@ -250,7 +250,7 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
       <Header
         toggleMenuDrawer={toggleMenuDrawer}
         syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
-        title={translate('messages.title') as string}
+        title={translate('messages.title-chats') as string}
         noBalance={true}
         setUfvkViewModalVisible={setUfvkViewModalVisible}
         setPrivacyOption={setPrivacyOption}

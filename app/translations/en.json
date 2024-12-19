@@ -34,6 +34,7 @@
   "body": "I need help with...",
   "messages": {
     "title": "Messages",
+    "title-chats": "Chats",
     "empty": "No Messages yet.",
     "message-placeholder": "Message",
     "search-placeholder": "Search",
