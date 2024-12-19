@@ -536,12 +536,21 @@ exports[`Component Header - test Header Complex - snapshot 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "justifyContent": "center",
+          "justifyContent": "space-between",
           "marginVertical": 5,
           "width": "100%",
         }
       }
     >
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
       <Text
         selectable={true}
         style={
@@ -558,6 +567,15 @@ exports[`Component Header - test Header Complex - snapshot 1`] = `
       >
         title
       </Text>
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
     </View>
     <View
       style={
@@ -662,6 +680,15 @@ exports[`Component Header - test Header Simple - snapshot 1`] = `
         }
       }
     >
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
       <Text
         selectable={true}
         style={
@@ -677,6 +704,15 @@ exports[`Component Header - test Header Simple - snapshot 1`] = `
       >
         title
       </Text>
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
     </View>
     <View
       style={

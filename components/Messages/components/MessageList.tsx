@@ -61,7 +61,6 @@ type MessageListProps = {
   setSendPageState: (s: SendPageStateClass) => void;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
-  anonymous?: boolean;
   address?: string;
   closeModal?: () => void;
   openModal?: () => void;
@@ -81,7 +80,6 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   setSendPageState,
   setScrollToBottom,
   scrollToBottom,
-  anonymous,
   address,
   closeModal,
   openModal,
@@ -124,6 +122,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   const [memoModalVisible, setMemoModalVisible] = useState<boolean>(false);
   const [validMemo, setValidMemo] = useState<number>(0); // 1 - OK, 0 - Empty, -1 - KO
   const [disableSend, setDisableSend] = useState<boolean>(false);
+  const [anonymous, setAnonymous] = useState<boolean>(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -539,15 +538,67 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
             </View>
           </>
         ) : (
-          <Header
-            title={translate('messages.title') as string}
-            noBalance={true}
-            noSyncingStatus={true}
-            noDrawMenu={true}
-            setPrivacyOption={setPrivacyOption}
-            addLastSnackbar={addLastSnackbar}
-            closeScreen={closeModal}
-          />
+          <>
+            <Header
+              title={translate('messages.title') as string}
+              noBalance={true}
+              noSyncingStatus={true}
+              noDrawMenu={true}
+              setPrivacyOption={setPrivacyOption}
+              addLastSnackbar={addLastSnackbar}
+              closeScreen={closeModal}
+            />
+            <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', margin: 10 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setAnonymous(false);
+                  setLoading(true);
+                }}>
+                <View
+                  style={{
+                    backgroundColor: !anonymous ? colors.primary : colors.sideMenuBackground,
+                    borderRadius: 15,
+                    borderColor: !anonymous ? colors.primary : colors.zingo,
+                    borderWidth: 1,
+                    paddingHorizontal: 10,
+                    paddingVertical: 5,
+                    marginHorizontal: 10,
+                  }}>
+                  <FadeText
+                    style={{
+                      color: !anonymous ? colors.sideMenuBackground : colors.zingo,
+                      fontWeight: 'bold',
+                    }}>
+                    {translate('messages.link-all') as string}
+                  </FadeText>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setAnonymous(true);
+                  setLoading(true);
+                }}>
+                <View
+                  style={{
+                    backgroundColor: anonymous ? colors.primary : colors.sideMenuBackground,
+                    borderRadius: 15,
+                    borderColor: anonymous ? colors.primary : colors.zingo,
+                    borderWidth: 1,
+                    paddingHorizontal: 10,
+                    paddingVertical: 5,
+                    marginHorizontal: 0,
+                  }}>
+                  <FadeText
+                    style={{
+                      color: anonymous ? colors.sideMenuBackground : colors.zingo,
+                      fontWeight: 'bold',
+                    }}>
+                    {translate('messages.link-anonymous') as string}
+                  </FadeText>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </>
         )}
 
         {(loading || !firstScrollToBottomDone) && (

@@ -14,7 +14,6 @@ type MessagesAllProps = {
   setSendPageState: (s: SendPageStateClass) => void;
   setScrollToBottom: (value: boolean) => void;
   scrollToBottom: boolean;
-  anonymous: boolean;
   closeModal: () => void;
   openModal: () => void;
 };
@@ -25,7 +24,6 @@ const MessagesAll: React.FunctionComponent<MessagesAllProps> = ({
   setSendPageState,
   setScrollToBottom,
   scrollToBottom,
-  anonymous,
   closeModal,
   openModal,
 }) => {
@@ -49,7 +47,6 @@ const MessagesAll: React.FunctionComponent<MessagesAllProps> = ({
         setSendPageState={setSendPageState}
         setScrollToBottom={setScrollToBottom}
         scrollToBottom={scrollToBottom}
-        anonymous={anonymous}
         closeModal={closeModal}
         openModal={openModal}
       />

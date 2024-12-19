@@ -40,10 +40,10 @@
     "filter-all": "All",
     "filter-contacts": "Contacts",
     "filter-no-contacts": "No contacts",
-    "clear-filter": "Clear filter:",
+    "clear-filter": "Clear:",
     "contacts-empty": "No Contacts or Addresses.",
-    "link-all": "All messages",
-    "link-anonymous": "Anonymous messages"
+    "link-all": "Global",
+    "link-anonymous": "Anonymous"
   },
   "addressbook": {
     "title": "Address Book",

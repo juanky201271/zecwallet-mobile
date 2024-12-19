@@ -40,10 +40,10 @@
     "filter-all": "Todos",
     "filter-contacts": "Contactos",
     "filter-no-contacts": "No contactos",
-    "clear-filter": "Borrar filtro:",
+    "clear-filter": "Borrar:",
     "contacts-empty": "Sin contactos ni direcciones.",
-    "link-all": "Todos los mensajes",
-    "link-anonymous": "Mensajes anónimos"
+    "link-all": "Global",
+    "link-anonymous": "Anónimos"
   },
   "addressbook": {
     "title": "Libreta de Direcciones",

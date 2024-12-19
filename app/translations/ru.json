@@ -40,10 +40,10 @@
     "filter-all": "Все",
     "filter-contacts": "Контакты",
     "filter-no-contacts": "Нет контактов",
-    "clear-filter": "Очистить фильтр:",
+    "clear-filter": "Очистить:",
     "contacts-empty": "Нет контактов и адресов.",
-    "link-all": "Все сообщения",
-    "link-anonymous": "Анонимные сообщения"
+    "link-all": "Глобальный",
+    "link-anonymous": "Анонимно"
   },
   "addressbook": {
     "title": "Адресная книга",

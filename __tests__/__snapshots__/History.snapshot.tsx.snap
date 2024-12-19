@@ -697,12 +697,21 @@ exports[`Component History - test History currency USD, privacy high & mode adva
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "justifyContent": "center",
+          "justifyContent": "space-between",
           "marginVertical": 5,
           "width": "100%",
         }
       }
     >
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
       <Text
         selectable={true}
         style={
@@ -719,6 +728,15 @@ exports[`Component History - test History currency USD, privacy high & mode adva
       >
         text translated
       </Text>
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
     </View>
     <View
       style={
@@ -1110,12 +1128,21 @@ exports[`Component History - test History no currency, privacy normal & mode bas
           "display": "flex",
           "flexDirection": "row",
           "flexWrap": "wrap",
-          "justifyContent": "center",
+          "justifyContent": "space-between",
           "marginVertical": 5,
           "width": "100%",
         }
       }
     >
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
       <Text
         selectable={true}
         style={
@@ -1132,6 +1159,15 @@ exports[`Component History - test History no currency, privacy normal & mode bas
       >
         text translated
       </Text>
+      <View
+        style={
+          {
+            "height": 30,
+            "marginHorizontal": 10,
+            "width": 30,
+          }
+        }
+      />
     </View>
     <View
       style={
