@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
-import { ScrollView, View, Text, Dimensions } from 'react-native';
+import { ScrollView, View, Text, Dimensions, SafeAreaView } from 'react-native';
 
 import RegText from '../../../components/Components/RegText';
 
@@ -80,7 +80,14 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
   };
 
   return (
-    <View style={{ height: '100%' }}>
+    <SafeAreaView
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        height: '100%',
+        backgroundColor: colors.background,
+      }}>
       <ScrollView
         scrollsToTop={false}
         style={{
@@ -88,8 +95,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
           width: dimensions.width,
           height: dimensions.height,
           backgroundColor: colors.sideMenuBackground,
-        }}
-        contentContainerStyle={{ display: 'flex' }}>
+        }}>
         <RegText color={colors.money} style={{ marginVertical: 10, marginLeft: 30 }}>
           {translate('loadedapp.options') as string}
         </RegText>
@@ -223,7 +229,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
           `settings.value-mode-${mode}`,
         )}`}</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

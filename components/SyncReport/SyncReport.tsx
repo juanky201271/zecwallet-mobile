@@ -230,7 +230,6 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
         noPrivacy={true}
         closeScreen={closeModal}
       />
-
       <ScrollView
         testID="syncreport.scroll-view"
         style={{ maxHeight: '90%' }}

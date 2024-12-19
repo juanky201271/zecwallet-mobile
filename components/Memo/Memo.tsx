@@ -1,9 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { View, ScrollView, SafeAreaView, TextInput, Dimensions, Keyboard, TouchableOpacity } from 'react-native';
+import React, { useCallback, useContext, useState } from 'react';
+import { View, ScrollView, SafeAreaView, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import Animated, { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-
 import Button from '../Components/Button';
 import { ThemeType } from '../../app/types';
 import { ContextAppLoaded } from '../../app/context';
@@ -12,7 +10,6 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/pt';
 import 'moment/locale/ru';
-
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ButtonTypeEnum, GlobalConst } from '../../app/AppState';
@@ -30,10 +27,8 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
   moment.locale(language);
 
   const [memo, setMemo] = useState<string>(sendPageState.toaddr.memo);
-  const [titleViewHeight, setTitleViewHeight] = useState<number>(0);
 
   const includeUAMemo = sendPageState.toaddr.includeUAMemo;
-  const slideAnim = useSharedValue(0);
 
   const dimensions = {
     width: Dimensions.get('screen').width,
@@ -44,21 +39,6 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
     memoUpdateToField(memo);
     closeModal();
   };
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 25, { duration: 100, easing: Easing.linear });
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
-    });
-
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-      slideAnim.value = 0;
-    };
-  }, [slideAnim, titleViewHeight]);
 
   const memoTotal = useCallback(
     (memoStr: string, includeUAMemoBoo: boolean) => {
@@ -81,23 +61,14 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
         height: '100%',
         backgroundColor: colors.background,
       }}>
-      <Animated.View style={{ marginTop: slideAnim }}>
-        <View
-          onLayout={e => {
-            const { height } = e.nativeEvent.layout;
-            setTitleViewHeight(height);
-          }}>
-          <Header
-            title={translate('send.memo') as string}
-            noBalance={true}
-            noSyncingStatus={true}
-            noDrawMenu={true}
-            noPrivacy={true}
-            closeScreen={closeModal}
-          />
-        </View>
-      </Animated.View>
-
+      <Header
+        title={translate('send.memo') as string}
+        noBalance={true}
+        noSyncingStatus={true}
+        noDrawMenu={true}
+        noPrivacy={true}
+        closeScreen={closeModal}
+      />
       <ScrollView
         style={{
           height: '80%',

@@ -208,7 +208,6 @@ const History: React.FunctionComponent<HistoryProps> = ({
           />
         </Modal>
       )}
-
       <Header
         testID="valuetransfer text"
         poolsMoreInfoOnClick={poolsMoreInfoOnClick}
@@ -224,7 +223,6 @@ const History: React.FunctionComponent<HistoryProps> = ({
         setShieldingAmount={setShieldingAmount}
         setScrollToTop={setScrollToTop}
       />
-
       {loading ? (
         <ActivityIndicator size="large" color={colors.primary} style={{ marginVertical: 20 }} />
       ) : (

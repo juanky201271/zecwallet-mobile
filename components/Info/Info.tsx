@@ -44,7 +44,6 @@ const Info: React.FunctionComponent<InfoProps> = ({ closeModal, setZecPrice }) =
         noPrivacy={true}
         closeScreen={closeModal}
       />
-
       <ScrollView
         style={{ maxHeight: '90%' }}
         contentContainerStyle={{

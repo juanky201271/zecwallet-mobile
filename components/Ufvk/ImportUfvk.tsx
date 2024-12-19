@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useEffect, useState } from 'react';
-import { View, ScrollView, SafeAreaView, TouchableOpacity, Modal, TextInput, Keyboard } from 'react-native';
+import { View, ScrollView, SafeAreaView, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { faQrcode, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import Animated, { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-
 import FadeText from '../Components/FadeText';
 import RegText from '../Components/RegText';
 import Button from '../Components/Button';
@@ -33,25 +31,7 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
   const [seedufvkText, setSeedufvkText] = useState<string>('');
   const [birthday, setBirthday] = useState<string>('');
   const [qrcodeModalVisible, setQrcodeModalVisible] = useState<boolean>(false);
-  const [titleViewHeight, setTitleViewHeight] = useState<number>(0);
   const [latestBlock, setLatestBlock] = useState<number>(0);
-
-  const slideAnim = useSharedValue(0);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 25, { duration: 100, easing: Easing.linear });
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
-    });
-
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-      slideAnim.value = 0;
-    };
-  }, [slideAnim, titleViewHeight]);
 
   useEffect(() => {
     if (info.latestBlock) {
@@ -171,27 +151,17 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
         onRequestClose={() => setQrcodeModalVisible(false)}>
         <ScannerUfvk setUfvkText={setSeedufvkText} closeModal={() => setQrcodeModalVisible(false)} />
       </Modal>
-
-      <Animated.View style={{ marginTop: slideAnim }}>
-        <View
-          onLayout={e => {
-            const { height } = e.nativeEvent.layout;
-            setTitleViewHeight(height);
-          }}>
-          <Header
-            title={translate('import.title') as string}
-            noBalance={true}
-            noSyncingStatus={true}
-            noDrawMenu={true}
-            noPrivacy={true}
-            translate={translate}
-            netInfo={netInfo}
-            mode={mode}
-            closeScreen={onClickCancel}
-          />
-        </View>
-      </Animated.View>
-
+      <Header
+        title={translate('import.title') as string}
+        noBalance={true}
+        noSyncingStatus={true}
+        noDrawMenu={true}
+        noPrivacy={true}
+        translate={translate}
+        netInfo={netInfo}
+        mode={mode}
+        closeScreen={onClickCancel}
+      />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         style={{ height: '80%', maxHeight: '80%' }}
@@ -327,7 +297,6 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
           type={ButtonTypeEnum.Primary}
           title={translate('import.button') as string}
           onPress={() => {
-            Keyboard.dismiss();
             okButton();
           }}
         />

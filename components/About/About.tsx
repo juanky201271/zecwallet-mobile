@@ -45,7 +45,6 @@ const About: React.FunctionComponent<AboutProps> = ({ closeModal }) => {
         noPrivacy={true}
         closeScreen={closeModal}
       />
-
       <ScrollView
         style={{ maxHeight: '90%' }}
         contentContainerStyle={{

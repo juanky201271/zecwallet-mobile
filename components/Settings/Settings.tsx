@@ -1,11 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useEffect, useState } from 'react';
-import { View, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Keyboard, Platform } from 'react-native';
+import { View, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { IconDefinition, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
-import Animated, { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import RegText from '../Components/RegText';
 import FadeText from '../Components/FadeText';
@@ -195,11 +194,8 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
   const [customIcon, setCustomIcon] = useState<IconDefinition>(farCircle);
   const [offlineIcon, setOfflineIcon] = useState<IconDefinition>(farCircle);
   const [disabled, setDisabled] = useState<boolean>();
-  const [titleViewHeight, setTitleViewHeight] = useState<number>(0);
   const [hasRecoveryWalletInfoSaved, setHasRecoveryWalletInfoSaved] = useState<boolean>(false);
   const [storageRecoveryWalletInfo, setStorageRecoveryWalletInfo] = useState<string>('');
-
-  const slideAnim = useSharedValue(0);
 
   useEffect(() => {
     (async () => {
@@ -251,21 +247,6 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
       }));
     setItemsPicker(items);
   }, [translate]);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 25, { duration: 100, easing: Easing.linear });
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
-    });
-
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-      slideAnim.value = 0;
-    };
-  }, [slideAnim, titleViewHeight]);
 
   const securityObject: () => SecurityType = () => {
     return {
@@ -549,23 +530,14 @@ const Settings: React.FunctionComponent<SettingsProps> = ({
         height: '100%',
         backgroundColor: colors.background,
       }}>
-      <Animated.View style={{ marginTop: slideAnim }}>
-        <View
-          onLayout={e => {
-            const { height } = e.nativeEvent.layout;
-            setTitleViewHeight(height);
-          }}>
-          <Header
-            title={translate('settings.title') as string}
-            noBalance={true}
-            noSyncingStatus={true}
-            noDrawMenu={true}
-            noPrivacy={true}
-            closeScreen={closeModal}
-          />
-        </View>
-      </Animated.View>
-
+      <Header
+        title={translate('settings.title') as string}
+        noBalance={true}
+        noSyncingStatus={true}
+        noDrawMenu={true}
+        noPrivacy={true}
+        closeScreen={closeModal}
+      />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         testID="settings.scroll-view"

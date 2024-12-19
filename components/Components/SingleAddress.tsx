@@ -65,11 +65,9 @@ const SingleAddress: React.FunctionComponent<SingleAddressProps> = ({ address, i
   return (
     <View style={{ flexDirection: 'column' }}>
       <ScrollView
-        contentContainerStyle={[
-          {
-            alignItems: 'center',
-          },
-        ]}>
+        contentContainerStyle={{
+          alignItems: 'center',
+        }}>
         {!!address && address !== (translate('receive.noaddress') as string) ? (
           <>
             <View style={{ marginTop: 20, marginHorizontal: 20, padding: 10, backgroundColor: colors.text }}>

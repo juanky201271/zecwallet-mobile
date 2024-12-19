@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  Keyboard,
   Platform,
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -14,10 +13,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/pt';
 import 'moment/locale/ru';
-
 import { useTheme, useScrollToTop } from '@react-navigation/native';
-import Animated, { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-
 import {
   AddressBookActionEnum,
   AddressBookFileClass,
@@ -56,11 +52,9 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
   const [addressBookProtected, setAddressBookProtected] = useState<AddressBookFileClass[]>([]);
 
   const [currentItem, setCurrentItem] = useState<number | null>(null);
-  const [titleViewHeight, setTitleViewHeight] = useState<number>(0);
   const [action, setAction] = useState<AddressBookActionEnum | null>(null);
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
 
-  const slideAnim = useSharedValue(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
   useScrollToTop(scrollViewRef);
@@ -114,21 +108,6 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
       }
     })();
   }, [addressBookCurrentAddress, fetchAddressBookProtected, fetchAddressBookSorted, numAb]);
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 25, { duration: 100, easing: Easing.linear });
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
-    });
-
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-      slideAnim.value = 0;
-    };
-  }, [slideAnim, titleViewHeight]);
 
   const loadMoreClicked = useCallback(() => {
     setNumAb(numAb + 50);
@@ -190,23 +169,14 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
         height: '100%',
         backgroundColor: colors.background,
       }}>
-      <Animated.View style={{ marginTop: slideAnim }}>
-        <View
-          onLayout={e => {
-            const { height } = e.nativeEvent.layout;
-            setTitleViewHeight(height);
-          }}>
-          <Header
-            title={translate('addressbook.title') as string}
-            noBalance={true}
-            noSyncingStatus={true}
-            noDrawMenu={true}
-            noPrivacy={true}
-            closeScreen={closeModal}
-          />
-        </View>
-      </Animated.View>
-
+      <Header
+        title={translate('addressbook.title') as string}
+        noBalance={true}
+        noSyncingStatus={true}
+        noDrawMenu={true}
+        noPrivacy={true}
+        closeScreen={closeModal}
+      />
       <ScrollView
         ref={scrollViewRef}
         onScroll={handleScroll}

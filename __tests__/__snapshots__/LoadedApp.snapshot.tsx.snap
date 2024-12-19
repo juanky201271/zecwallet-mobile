@@ -26,19 +26,18 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
       ]
     }
   >
-    <View
+    <RCTSafeAreaView
       style={
         {
+          "alignItems": "stretch",
+          "backgroundColor": "rgb(242, 242, 242)",
+          "display": "flex",
           "height": "100%",
+          "justifyContent": "flex-start",
         }
       }
     >
       <RCTScrollView
-        contentContainerStyle={
-          {
-            "display": "flex",
-          }
-        }
         scrollsToTop={false}
         style={
           {
@@ -238,7 +237,7 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
           text translatedtext translated
         </Text>
       </View>
-    </View>
+    </RCTSafeAreaView>
   </View>
   <View
     collapsable={false}

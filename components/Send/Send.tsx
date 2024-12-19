@@ -961,7 +961,6 @@ const Send: React.FunctionComponent<SendProps> = ({
           />
         </View>
       </Animated.View>
-
       <ScrollView
         ref={scrollViewRef}
         onContentSizeChange={(_, height) => setContentHeight(height)}

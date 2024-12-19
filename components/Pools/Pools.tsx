@@ -71,7 +71,6 @@ const Pools: React.FunctionComponent<PoolsProps> = ({ closeModal, setPrivacyOpti
         addLastSnackbar={addLastSnackbar}
         closeScreen={closeModal}
       />
-
       <ScrollView
         style={{ maxHeight: '90%' }}
         contentContainerStyle={{

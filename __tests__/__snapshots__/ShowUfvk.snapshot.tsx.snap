@@ -324,11 +324,9 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
         >
           <RCTScrollView
             contentContainerStyle={
-              [
-                {
-                  "alignItems": "center",
-                },
-              ]
+              {
+                "alignItems": "center",
+              }
             }
           >
             <View>

@@ -600,7 +600,6 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
             </View>
           </>
         )}
-
         {(loading || !firstScrollToBottomDone) && (
           <ActivityIndicator size="large" color={colors.primary} style={{ marginVertical: 20 }} />
         )}

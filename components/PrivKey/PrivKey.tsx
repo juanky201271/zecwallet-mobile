@@ -70,7 +70,6 @@ const PrivKey: React.FunctionComponent<PrivKeyProps> = ({ address, keyType, priv
         noPrivacy={true}
         closeScreen={closeModal}
       />
-
       <ScrollView
         style={{ maxHeight: '90%' }}
         contentContainerStyle={{

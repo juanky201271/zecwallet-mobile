@@ -349,7 +349,6 @@ const Insight: React.FunctionComponent<InsightProps> = ({ closeModal, setPrivacy
           </View>
         </TouchableOpacity>
       </View>
-
       <ScrollView
         showsVerticalScrollIndicator={true}
         persistentScrollbar={true}

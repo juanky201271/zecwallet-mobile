@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   TextInput,
-  Keyboard,
 } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -161,24 +160,6 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
   };
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {});
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      Keyboard.dismiss();
-      if (searchTextField) {
-        setSearchText(searchTextField);
-        setSearchMode(false);
-        setLoading(true);
-      }
-    });
-
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     const fetchZennyTips = async () => {
       const zt: string = await Utils.getZenniesDonationAddress(server.chainName);
       setZennyTips(zt);
@@ -266,7 +247,6 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
           />
         </Modal>
       )}
-
       <Header
         toggleMenuDrawer={toggleMenuDrawer}
         syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
@@ -276,7 +256,6 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
         setPrivacyOption={setPrivacyOption}
         addLastSnackbar={addLastSnackbar}
       />
-
       {loading ? (
         <ActivityIndicator size="large" color={colors.primary} style={{ marginVertical: 20 }} />
       ) : (
@@ -333,15 +312,14 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
                         textAlignVertical: 'top',
                       }}
                       value={searchTextField}
-                      onChangeText={(text: string) => setSearchTextField(text)}
+                      onChangeText={(text: string) => setSearchTextField(text.trim())}
                       onEndEditing={(e: any) => {
-                        setSearchTextField(e.nativeEvent.text);
+                        setSearchTextField(e.nativeEvent.text.trim());
                       }}
                       editable={true}
                       returnKeyLabel={translate('messages.search-placeholder') as string}
                       returnKeyType="done"
                       onSubmitEditing={() => {
-                        Keyboard.dismiss();
                         if (searchTextField) {
                           setSearchText(searchTextField);
                           setSearchMode(false);
