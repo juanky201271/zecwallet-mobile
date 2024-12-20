@@ -42,9 +42,6 @@ exports[`Component LoadedApp - test LoadedApp - snapshot 1`] = `
         style={
           {
             "backgroundColor": undefined,
-            "flex": 1,
-            "height": 1334,
-            "width": 750,
           }
         }
       >

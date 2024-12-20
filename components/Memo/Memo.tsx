@@ -31,8 +31,8 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
   const includeUAMemo = sendPageState.toaddr.includeUAMemo;
 
   const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   };
 
   const doSaveAndClose = () => {

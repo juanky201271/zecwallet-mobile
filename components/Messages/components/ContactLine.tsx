@@ -59,8 +59,8 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
   const [messagesAddress, setMessagesAddress] = useState<boolean>(false);
 
   const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   };
   const maxWidthHit = useRef<boolean>(false);
   const swipeableRef = useRef<Swipeable | null>(null);

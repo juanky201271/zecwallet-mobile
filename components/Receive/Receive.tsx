@@ -46,8 +46,8 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
   const [taddrs, setTaddrs] = useState<AddressClass[]>([]);
 
   const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   };
 
   useEffect(() => {

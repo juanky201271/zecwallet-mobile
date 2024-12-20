@@ -12,6 +12,8 @@ import {
   Text,
   TextInput,
   Platform,
+  Dimensions,
+  Keyboard,
 } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -25,7 +27,7 @@ import {
   faCircleUser,
   faXmark,
   faMagnifyingGlassPlus,
-  faCircleArrowUp,
+  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -123,10 +125,17 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   const [validMemo, setValidMemo] = useState<number>(0); // 1 - OK, 0 - Empty, -1 - KO
   const [disableSend, setDisableSend] = useState<boolean>(false);
   const [anonymous, setAnonymous] = useState<boolean>(false);
+  const [memoFieldHeight, setMemoFieldHeight] = useState<number>(90);
+  const [keyboardVisible, setKeyboardVisible] = useState<boolean>(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
   var lastMonth = '';
+
+  const dimensions = {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  };
 
   const getIcon = () => {
     return faCircleUser;
@@ -248,6 +257,20 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
       setFirstScrollToBottomDone(true);
     }
   }, [contentScrollViewHeight, scrollViewHeight]);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      !!keyboardDidShowListener && keyboardDidShowListener.remove();
+      !!keyboardDidHideListener && keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const countMemoBytes = (memo: string, includeUAMemo: boolean) => {
     const len = Buffer.byteLength(memoTotal(memo, includeUAMemo, uaAddress), 'utf8');
@@ -434,9 +457,15 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     });
   };
 
-  //if (address) {
-  //  console.log('render Messages - 4', messagesSliced);
-  //}
+  if (address) {
+    console.log(
+      'render Messages',
+      dimensions.height,
+      dimensions.height - memoFieldHeight,
+      memoFieldHeight,
+      keyboardVisible,
+    );
+  }
 
   return (
     <>
@@ -447,7 +476,9 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           display: 'flex',
           justifyContent: 'flex-start',
           width: '100%',
-          height: address ? (memoIcon ? '80%' : '85%') : '100%',
+          height: address
+            ? `${100 - ((memoFieldHeight + (keyboardVisible ? 40 : -10)) * 100) / dimensions.height}%`
+            : '100%',
         }}>
         <Modal
           animationType="slide"
@@ -711,7 +742,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         )}
       </View>
       {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
-        <View style={{ height: memoIcon ? '20%' : '15%' }}>
+        <View style={{ height: `${((memoFieldHeight + (keyboardVisible ? 40 : -10)) * 100) / dimensions.height}%` }}>
           <View
             style={{
               display: 'flex',
@@ -754,6 +785,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 }}
                 editable={!disableSend}
                 onContentSizeChange={(e: any) => {
+                  console.log(e.nativeEvent.contentSize.height);
+                  if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 106 : 53)) {
+                    setMemoFieldHeight(
+                      e.nativeEvent.contentSize.height + (Platform.OS === GlobalConst.platformOSandroid ? 52 : 26),
+                    );
+                  }
                   if (
                     e.nativeEvent.contentSize.height > (Platform.OS === GlobalConst.platformOSandroid ? 70 : 35) &&
                     !memoIcon
@@ -795,7 +832,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               )}
             </View>
             {validMemo === 1 && !disableSend && (
-              <View style={{ alignSelf: 'flex-end', marginLeft: 10 }}>
+              <View style={{ alignSelf: 'center', marginLeft: 10 }}>
                 <TouchableOpacity
                   onPress={() => {
                     if (!netInfo.isConnected) {
@@ -804,7 +841,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                     }
                     confirmSend();
                   }}>
-                  <FontAwesomeIcon size={35} icon={faCircleArrowUp} color={colors.primary} />
+                  <FontAwesomeIcon size={32} icon={faPaperPlane} color={colors.primary} />
                 </TouchableOpacity>
               </View>
             )}
@@ -815,7 +852,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               justifyContent: 'flex-end',
               alignItems: 'center',
               marginRight: validMemo === 1 ? 50 : 10,
-              marginTop: -10,
+              marginTop: -11,
             }}>
             <FadeText
               style={{

@@ -94,8 +94,8 @@ const Insight: React.FunctionComponent<InsightProps> = ({ closeModal, setPrivacy
   const [loading, setLoading] = useState<boolean>(false);
   const [tab, setTab] = useState<'sent' | 'sends' | 'memobytes'>('sent');
   const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   };
 
   useEffect(() => {

@@ -18,7 +18,7 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
     style={
       {
         "display": "flex",
-        "height": "88%",
+        "height": "94.00299850074963%",
         "justifyContent": "flex-start",
         "width": "100%",
       }

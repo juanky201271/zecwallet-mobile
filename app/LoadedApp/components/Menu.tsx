@@ -38,8 +38,8 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
   moment.locale(language);
 
   const dimensions = {
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   };
 
   const item = {
@@ -91,9 +91,6 @@ const Menu: React.FunctionComponent<MenuProps> = ({ onItemSelected, updateMenuSt
       <ScrollView
         scrollsToTop={false}
         style={{
-          flex: 1,
-          width: dimensions.width,
-          height: dimensions.height,
           backgroundColor: colors.sideMenuBackground,
         }}>
         <RegText color={colors.money} style={{ marginVertical: 10, marginLeft: 30 }}>
