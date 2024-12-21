@@ -356,15 +356,15 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{
-                justifyContent: 'center',
-                alignItems: 'center',
+                width: '100%',
               }}>
               <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  alignSelf: 'center',
+                  justifyContent: 'center',
                   marginHorizontal: 10,
+                  width: '100%',
                 }}>
                 <TouchableOpacity
                   onPress={() => {

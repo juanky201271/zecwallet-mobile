@@ -97,6 +97,12 @@ android {
         jvmTarget = '17'
     }
 
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
     defaultConfig {
         applicationId 'org.ZingoLabs.Zingo' // Real
         minSdkVersion rootProject.ext.minSdkVersion
