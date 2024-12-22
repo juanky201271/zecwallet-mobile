@@ -14,9 +14,17 @@ type CurrencyAmountProps = {
   style?: TextStyle;
   currency: CurrencyEnum;
   privacy?: boolean;
+  selectable?: boolean;
 };
 
-const CurrencyAmount: React.FunctionComponent<CurrencyAmountProps> = ({ price, style, amtZec, currency, privacy }) => {
+const CurrencyAmount: React.FunctionComponent<CurrencyAmountProps> = ({
+  price,
+  style,
+  amtZec,
+  currency,
+  privacy,
+  selectable,
+}) => {
   const [privacyHigh, setPrivacyHigh] = useState<boolean>(privacy || false);
   const [currencyString, setCurrencyString] = useState<string>('');
   const { colors } = useTheme() as unknown as ThemeType;
@@ -63,7 +71,7 @@ const CurrencyAmount: React.FunctionComponent<CurrencyAmountProps> = ({ price, s
                 {'$ -' + decimalSeparator + '--'}
               </Text>
             ) : (
-              <Text style={{ color: colors.money, fontSize: 20, fontWeight: '700', ...style }} selectable>
+              <Text style={{ color: colors.money, fontSize: 20, fontWeight: '700', ...style }} selectable={selectable}>
                 {'$ ' + currencyString}
               </Text>
             )}

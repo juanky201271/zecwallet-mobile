@@ -160,7 +160,6 @@ exports[`Component Address Book - test Address Book - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "#ffffff",
@@ -225,7 +224,6 @@ exports[`Component Address Book - test Address Book - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "#18bd18",

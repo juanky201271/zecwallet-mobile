@@ -2,7 +2,6 @@
 
 exports[`Component Components - test BoldText - snapshot 1`] = `
 <Text
-  selectable={true}
   style={
     {
       "backgroundColor": "red",
@@ -137,7 +136,6 @@ exports[`Component Components - test CurrencyAmount Normal Privacy - snapshot 1`
       }
     >
       <Text
-        selectable={true}
         style={
           {
             "backgroundColor": "red",
@@ -156,7 +154,6 @@ exports[`Component Components - test CurrencyAmount Normal Privacy - snapshot 1`
 
 exports[`Component Components - test ErrorText - snapshot 1`] = `
 <Text
-  selectable={true}
   style={
     {
       "backgroundColor": "white",
@@ -170,7 +167,6 @@ exports[`Component Components - test ErrorText - snapshot 1`] = `
 
 exports[`Component Components - test FadeText - snapshot 1`] = `
 <Text
-  selectable={true}
   style={
     {
       "backgroundColor": "red",
@@ -186,7 +182,6 @@ exports[`Component Components - test FadeText - snapshot 1`] = `
 exports[`Component Components - test RegText - snapshot 1`] = `
 <Text
   onPress={[MockFunction]}
-  selectable={true}
   style={
     {
       "backgroundColor": "white",

@@ -77,7 +77,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
               }
             >
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",
@@ -308,7 +307,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -321,7 +319,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
               </View>
             </View>
             <Text
-              selectable={true}
               style={
                 {
                   "color": "#18bd18",
@@ -360,7 +357,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -473,7 +469,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                     }
                   >
                     <Text
-                      selectable={true}
                       style={
                         {
                           "color": "#ffffff",
@@ -704,7 +699,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                       }
                     />
                     <Text
-                      selectable={true}
                       style={
                         {
                           "color": "#c3c3c3",
@@ -739,7 +733,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -809,7 +802,6 @@ exports[`Component Send - test Send currency USD, privacy high & mode advanced -
                   }
                 >
                   <Text
-                    selectable={true}
                     style={
                       {
                         "color": "#c3c3c3",
@@ -1243,7 +1235,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
               }
             >
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",
@@ -1474,7 +1465,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -1487,7 +1477,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
               </View>
             </View>
             <Text
-              selectable={true}
               style={
                 {
                   "color": "#18bd18",
@@ -1526,7 +1515,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -1639,7 +1627,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                     }
                   >
                     <Text
-                      selectable={true}
                       style={
                         {
                           "color": "#ffffff",
@@ -1871,7 +1858,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                       }
                     />
                     <Text
-                      selectable={true}
                       style={
                         {
                           "color": "#c3c3c3",
@@ -1906,7 +1892,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                 }
               >
                 <Text
-                  selectable={true}
                   style={
                     {
                       "color": "#c3c3c3",
@@ -1976,7 +1961,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                   }
                 >
                   <Text
-                    selectable={true}
                     style={
                       {
                         "color": "#c3c3c3",
@@ -2040,7 +2024,6 @@ exports[`Component Send - test Send no currency, privacy normal & mode basic - s
                         }
                       >
                         <Text
-                          selectable={true}
                           style={
                             {
                               "color": "#ffffff",

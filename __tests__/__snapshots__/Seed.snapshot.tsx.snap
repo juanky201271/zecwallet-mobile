@@ -240,7 +240,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -291,7 +290,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -353,7 +351,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -437,7 +434,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -483,7 +479,6 @@ exports[`Component Seed - test Seed Backup - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -837,7 +832,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -888,7 +882,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -950,7 +943,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1034,7 +1026,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1080,7 +1071,6 @@ exports[`Component Seed - test Seed Change - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1434,7 +1424,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -1485,7 +1474,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -1547,7 +1535,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1631,7 +1618,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1677,7 +1663,6 @@ exports[`Component Seed - test Seed New - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2031,7 +2016,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -2082,7 +2066,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -2144,7 +2127,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2228,7 +2210,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2274,7 +2255,6 @@ exports[`Component Seed - test Seed Server - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2628,7 +2608,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -2679,7 +2658,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -2741,7 +2719,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2825,7 +2802,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2871,7 +2847,6 @@ exports[`Component Seed - test Seed View - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",

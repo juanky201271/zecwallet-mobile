@@ -160,7 +160,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -227,7 +226,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -272,7 +270,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -309,7 +306,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(0, 122, 255)",
@@ -319,7 +315,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             1600099
           </Text>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(0, 122, 255)",
@@ -409,7 +404,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(0, 122, 255)",
@@ -432,7 +426,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           />
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -455,7 +448,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(0, 122, 255)",
@@ -478,7 +470,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           />
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -508,7 +499,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -553,7 +543,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -577,7 +566,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -622,7 +610,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -654,7 +641,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -699,7 +685,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
               }
             >
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -737,7 +722,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -782,7 +766,6 @@ exports[`Component SyncReport - test SyncReport - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",

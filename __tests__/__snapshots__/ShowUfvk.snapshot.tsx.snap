@@ -240,7 +240,6 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -290,7 +289,6 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
   >
     <View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -553,7 +551,6 @@ exports[`Component ShowUfvk - test ShowUfvk - snapshot 1`] = `
                           }
                         >
                           <Text
-                            selectable={true}
                             style={
                               {
                                 "color": "rgb(28, 28, 30)",

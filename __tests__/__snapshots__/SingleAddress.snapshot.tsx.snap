@@ -237,7 +237,6 @@ exports[`Component SingleAddress - test SingleAddress - snapshot 1`] = `
                   }
                 >
                   <Text
-                    selectable={true}
                     style={
                       {
                         "color": "rgb(28, 28, 30)",

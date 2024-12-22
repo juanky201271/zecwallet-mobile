@@ -713,7 +713,6 @@ exports[`Component History - test History currency USD, privacy high & mode adva
         }
       />
       <Text
-        selectable={true}
         style={
           {
             "color": "#ffffff",
@@ -1144,7 +1143,6 @@ exports[`Component History - test History no currency, privacy normal & mode bas
         }
       />
       <Text
-        selectable={true}
         style={
           {
             "color": "#ffffff",

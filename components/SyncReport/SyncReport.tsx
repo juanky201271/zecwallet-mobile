@@ -327,7 +327,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                       marginTop: 10,
                     }}>
                     {labels.map((label: string) => (
-                      <Text key={label} style={{ color: colors.primary }} selectable>
+                      <Text key={label} style={{ color: colors.primary }}>
                         {label}
                       </Text>
                     ))}
@@ -405,9 +405,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                         alignItems: 'center',
                         marginTop: 5,
                       }}>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {translate('report.server-title') as string}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{translate('report.server-title') as string}</Text>
                       <View
                         style={{
                           display: 'flex',
@@ -419,7 +417,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                           margin: 5,
                         }}
                       />
-                      <Text style={{ color: colors.text }} selectable>
+                      <Text style={{ color: colors.text }}>
                         {serverServer + (translate('report.blocks') as string)}
                       </Text>
                     </View>
@@ -434,9 +432,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                         alignItems: 'center',
                         marginTop: 5,
                       }}>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {translate('report.wallet') as string}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{translate('report.wallet') as string}</Text>
                       <View
                         style={{
                           display: 'flex',
@@ -448,7 +444,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                           margin: 5,
                         }}
                       />
-                      <Text testID="syncreport.wallettotalblocks" style={{ color: colors.text }} selectable>
+                      <Text testID="syncreport.wallettotalblocks" style={{ color: colors.text }}>
                         {serverWallet + (translate('report.blocks') as string)}
                       </Text>
                     </View>
@@ -471,12 +467,10 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                       marginTop: 10,
                     }}>
                     <>
-                      <Text style={{ color: colors.primary }} selectable>
+                      <Text style={{ color: colors.primary }}>
                         {processEndBlockFixed >= wallet.birthday ? wallet.birthday : processEndBlockFixed}
                       </Text>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {syncingStatus.lastBlockServer}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{syncingStatus.lastBlockServer}</Text>
                     </>
                   </View>
                   <View
@@ -554,9 +548,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                         alignItems: 'center',
                         marginTop: 5,
                       }}>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {translate('report.syncedbefore') as string}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{translate('report.syncedbefore') as string}</Text>
                       <View
                         style={{
                           display: 'flex',
@@ -568,7 +560,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                           margin: 5,
                         }}
                       />
-                      <Text style={{ color: colors.text }} selectable>
+                      <Text style={{ color: colors.text }}>
                         {wallet1 +
                           (translate('report.blocks') as string) +
                           Utils.parseNumberFloatToStringLocale(walletOldSyncedPercent, 2) +
@@ -586,9 +578,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                         alignItems: 'center',
                         marginTop: 5,
                       }}>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {translate('report.syncednow') as string}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{translate('report.syncednow') as string}</Text>
                       <View
                         style={{
                           display: 'flex',
@@ -600,7 +590,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                           margin: 5,
                         }}
                       />
-                      <Text testID="syncreport.syncednow" style={{ color: colors.text }} selectable>
+                      <Text testID="syncreport.syncednow" style={{ color: colors.text }}>
                         {wallet2 +
                           (translate('report.blocks') as string) +
                           Utils.parseNumberFloatToStringLocale(walletNewSyncedPercent, 2) +
@@ -618,9 +608,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                         alignItems: 'center',
                         marginTop: 5,
                       }}>
-                      <Text style={{ color: colors.primary }} selectable>
-                        {translate('report.notyetsynced') as string}
-                      </Text>
+                      <Text style={{ color: colors.primary }}>{translate('report.notyetsynced') as string}</Text>
                       <View
                         style={{
                           display: 'flex',
@@ -632,7 +620,7 @@ const SyncReport: React.FunctionComponent<SyncReportProps> = ({ closeModal }) =>
                           margin: 5,
                         }}
                       />
-                      <Text testID="syncreport.notyetsynced" style={{ color: colors.text }} selectable>
+                      <Text testID="syncreport.notyetsynced" style={{ color: colors.text }}>
                         {wallet3 +
                           (translate('report.blocks') as string) +
                           Utils.parseNumberFloatToStringLocale(walletForSyncedPercent, 2) +

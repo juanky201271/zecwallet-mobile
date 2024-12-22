@@ -186,7 +186,6 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "#ffffff",
@@ -331,7 +330,6 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
               }
             >
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "#c3c3c3",
@@ -464,7 +462,6 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "#18bd18",

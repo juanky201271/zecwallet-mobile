@@ -160,7 +160,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         />
       </View>
       <Text
-        selectable={true}
         style={
           {
             "color": "rgb(28, 28, 30)",
@@ -220,7 +219,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -250,7 +248,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -353,7 +350,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -369,7 +365,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -451,7 +446,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -467,7 +461,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -488,7 +481,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -580,7 +572,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -596,7 +587,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -689,7 +679,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -705,7 +694,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -798,7 +786,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -814,7 +801,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -907,7 +893,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -923,7 +908,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -944,7 +928,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1047,7 +1030,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1063,7 +1045,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1145,7 +1126,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1161,7 +1141,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1182,7 +1161,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1212,7 +1190,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1315,7 +1292,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1331,7 +1307,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1413,7 +1388,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1429,7 +1403,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1450,7 +1423,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1553,7 +1525,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1569,7 +1540,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1651,7 +1621,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1667,7 +1636,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1688,7 +1656,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -1791,7 +1758,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1815,7 +1781,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -1897,7 +1862,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1911,7 +1875,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 text translated
               </Text>
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -1933,7 +1896,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2059,7 +2021,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -2084,7 +2045,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           }
         >
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -2177,7 +2137,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -2200,7 +2159,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             }
           >
             <Text
-              selectable={true}
               style={
                 {
                   "color": "rgb(28, 28, 30)",
@@ -2222,7 +2180,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2302,7 +2259,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2382,7 +2338,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2462,7 +2417,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2542,7 +2496,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2622,7 +2575,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2702,7 +2654,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2782,7 +2733,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2862,7 +2812,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
           />
         </View>
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2885,7 +2834,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -2952,7 +2900,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -3055,7 +3002,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -3071,7 +3017,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -3153,7 +3098,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -3169,7 +3113,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -3262,7 +3205,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -3278,7 +3220,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -3299,7 +3240,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "color": "rgb(28, 28, 30)",
@@ -3391,7 +3331,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -3407,7 +3346,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -3500,7 +3438,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
                 size={20}
               />
               <Text
-                selectable={true}
                 style={
                   {
                     "color": "rgb(28, 28, 30)",
@@ -3516,7 +3453,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
             </View>
           </View>
           <Text
-            selectable={true}
             style={
               {
                 "color": "rgb(28, 28, 30)",
@@ -3537,7 +3473,6 @@ exports[`Component Settings - test Settings - snapshot 1`] = `
         }
       >
         <Text
-          selectable={true}
           style={
             {
               "borderColor": "red",
