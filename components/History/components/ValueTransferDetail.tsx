@@ -385,7 +385,7 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
                       duration: SnackbarDurationEnum.short,
                     });
                   }}>
-                  <RegText>{memo}</RegText>
+                  <RegText selectable={true}>{memo}</RegText>
                 </TouchableOpacity>
               )}
               {!!memoUA && (

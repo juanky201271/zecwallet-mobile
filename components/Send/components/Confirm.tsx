@@ -392,7 +392,9 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
               {!!to.memo && (
                 <>
                   <FadeText style={{ marginTop: 10 }}>{translate('send.confirm-memo') as string}</FadeText>
-                  <RegText testID="send.confirm-memo">{memoTotal}</RegText>
+                  <RegText testID="send.confirm-memo" selectable={true}>
+                    {memoTotal}
+                  </RegText>
                 </>
               )}
             </View>

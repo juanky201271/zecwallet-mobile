@@ -140,7 +140,7 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
                       duration: SnackbarDurationEnum.short,
                     });
                   }}>
-                  <RegText>{memo}</RegText>
+                  <RegText selectable={true}>{memo}</RegText>
                 </TouchableOpacity>
               )}
               {!!memoUA && (
