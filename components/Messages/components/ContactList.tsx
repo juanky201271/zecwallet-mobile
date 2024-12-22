@@ -356,15 +356,14 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{
-                width: '100%',
+                width: 'auto',
               }}>
               <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginHorizontal: 10,
-                  width: '100%',
+                  width: 'auto',
                 }}>
                 <TouchableOpacity
                   onPress={() => {
@@ -479,7 +478,7 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
                         borderRadius: 15,
                         paddingHorizontal: 10,
                         paddingVertical: 2,
-                        marginHorizontal: 0,
+                        marginRight: 5,
                       }}>
                       <FadeText
                         style={{

@@ -209,7 +209,7 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                     });
                     swipeable.reset();
                   }}>
-                  <FontAwesomeIcon size={27} icon={faPaperPlane} color={colors.primary} />
+                  <FontAwesomeIcon size={30} icon={faPaperPlane} color={colors.primary} />
                 </TouchableOpacity>
               </View>
             )}

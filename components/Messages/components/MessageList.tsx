@@ -841,7 +841,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                     }
                     confirmSend();
                   }}>
-                  <FontAwesomeIcon size={32} icon={faPaperPlane} color={colors.primary} />
+                  <FontAwesomeIcon size={30} icon={faPaperPlane} color={colors.primary} />
                 </TouchableOpacity>
               </View>
             )}

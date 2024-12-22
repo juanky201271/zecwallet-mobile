@@ -195,7 +195,7 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                   setValueTransferDetailModalShowing(true);
                   swipeable.reset();
                 }}>
-                <FontAwesomeIcon style={{ opacity: 0.8 }} size={25} icon={faFileLines} color={colors.money} />
+                <FontAwesomeIcon style={{ opacity: 0.8 }} size={30} icon={faFileLines} color={colors.money} />
               </TouchableOpacity>
             </View>
             {!!vt.address && !readOnly && selectServer !== SelectServerEnum.offline && !addressProtected && (
@@ -218,7 +218,7 @@ const ValueTransferLine: React.FunctionComponent<ValueTransferLineProps> = ({
                     });
                     swipeable.reset();
                   }}>
-                  <FontAwesomeIcon size={27} icon={faPaperPlane} color={colors.primary} />
+                  <FontAwesomeIcon size={30} icon={faPaperPlane} color={colors.primary} />
                 </TouchableOpacity>
               </View>
             )}
