@@ -287,7 +287,8 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'flex-start',
-                    margin: 10,
+                    marginHorizontal: 10,
+                    marginBottom: 10,
                   }}>
                   <View
                     accessible={true}
@@ -364,6 +365,8 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: 'auto',
+                  marginHorizontal: 5,
+                  marginBottom: 2,
                 }}>
                 <TouchableOpacity
                   onPress={() => {

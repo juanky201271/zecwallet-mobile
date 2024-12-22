@@ -728,7 +728,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               />
             );
           })}
-          <View style={{ marginBottom: 30 }} />
+          <View style={{ marginBottom: 10 }} />
         </ScrollView>
         {!isAtBottom && scrollable && !loading && firstScrollToBottomDone && (
           <TouchableOpacity onPress={handleScrollToBottom} style={{ position: 'absolute', bottom: 30, right: 10 }}>
@@ -852,7 +852,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               justifyContent: 'flex-end',
               alignItems: 'center',
               marginRight: validMemo === 1 ? 50 : 10,
-              marginTop: -11,
+              marginTop: -28,
             }}>
             <FadeText
               style={{
