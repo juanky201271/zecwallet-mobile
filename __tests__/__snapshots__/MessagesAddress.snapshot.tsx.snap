@@ -475,7 +475,7 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
         <View
           style={
             {
-              "marginBottom": 30,
+              "marginBottom": 10,
             }
           }
         />

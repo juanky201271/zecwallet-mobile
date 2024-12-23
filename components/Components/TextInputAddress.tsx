@@ -16,13 +16,13 @@ import 'moment/locale/pt';
 import 'moment/locale/ru';
 import Utils from '../../app/utils';
 
-type InputTextAddressProps = {
+type TextInputAddressProps = {
   address: string;
   setAddress: (a: string) => void;
   setError: (e: string) => void;
   disabled: boolean;
 };
-const InputTextAddress: React.FunctionComponent<InputTextAddressProps> = ({
+const TextInputAddress: React.FunctionComponent<TextInputAddressProps> = ({
   address,
   setAddress,
   setError,
@@ -134,4 +134,4 @@ const InputTextAddress: React.FunctionComponent<InputTextAddressProps> = ({
   );
 };
 
-export default InputTextAddress;
+export default TextInputAddress;

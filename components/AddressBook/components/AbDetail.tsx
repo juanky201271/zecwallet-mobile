@@ -7,7 +7,7 @@ import { AddressBookActionEnum, AddressBookFileClass, ButtonTypeEnum, GlobalCons
 import { ThemeType } from '../../../app/types';
 import RegText from '../../Components/RegText';
 import { ContextAppLoaded } from '../../../app/context';
-import InputTextAddress from '../../Components/InputTextAddress';
+import TextInputAddress from '../../Components/TextInputAddress';
 import { ZcashURITargetClass, parseZcashURI } from '../../../app/uris';
 import Button from '../../Components/Button';
 import FadeText from '../../Components/FadeText';
@@ -164,7 +164,7 @@ const AbDetail: React.FunctionComponent<AbDetailProps> = ({
           />
         </View>
       </View>
-      <InputTextAddress
+      <TextInputAddress
         address={address}
         setAddress={updateAddress}
         setError={setErrorAddress}
