@@ -14,6 +14,7 @@ import {
   Platform,
   Dimensions,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -202,6 +203,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
       return messages;
     }
   }, [messages, address, anonymous, addressFilter, anonymousFilter]);
+
+  useEffect(() => {
+    // need to reset this info because is shared
+    // with all the App.
+    setSendPageState(new SendPageStateClass(new ToAddrClass(0)));
+  }, []);
 
   useEffect(() => {
     if (messages !== null) {
@@ -457,6 +464,13 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     });
   };
 
+  const closeModalAndClean = () => {
+    setSendPageState(new SendPageStateClass(new ToAddrClass(0)));
+    if (closeModal) {
+      closeModal();
+    }
+  };
+
   if (address) {
     console.log(
       'render Messages',
@@ -468,7 +482,10 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   }
 
   return (
-    <>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === GlobalConst.platformOSios ? 'padding' : 'height'}
+      keyboardVerticalOffset={0}
+    >
       <View
         accessible={true}
         accessibilityLabel={translate('history.title-acc') as string}
@@ -522,7 +539,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               noDrawMenu={true}
               setPrivacyOption={setPrivacyOption}
               addLastSnackbar={addLastSnackbar}
-              closeScreen={closeModal}
+              closeScreen={closeModalAndClean}
             />
             <View
               style={{
@@ -579,7 +596,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               noDrawMenu={true}
               setPrivacyOption={setPrivacyOption}
               addLastSnackbar={addLastSnackbar}
-              closeScreen={closeModal}
+              closeScreen={closeModalAndClean}
             />
             <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', margin: 10 }}>
               <TouchableOpacity
@@ -797,7 +814,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                   if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 48 : 48)) {
                     setMemoFieldHeight(48 + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30));
                   } else if (
-                    e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 90 : 45)
+                    e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 90 : 90)
                   ) {
                     setMemoFieldHeight(
                       e.nativeEvent.contentSize.height + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30),
@@ -884,7 +901,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           )}
         </View>
       )}
-    </>
+    </KeyboardAvoidingView>
   );
 };
 
