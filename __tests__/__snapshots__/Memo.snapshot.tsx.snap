@@ -221,7 +221,7 @@ exports[`Component Memo - test Memo - snapshot 1`] = `
             "flexDirection": "row",
             "flexGrow": 1,
             "maxHeight": 533.6,
-            "minHeight": 400.2,
+            "minHeight": 48,
             "minWidth": 48,
           }
         }
@@ -337,7 +337,7 @@ memo10"
             {
               "color": "rgb(28, 28, 30)",
               "fontWeight": "bold",
-              "marginTop": 5,
+              "marginTop": 0,
               "opacity": 0.65,
             }
           }
@@ -348,7 +348,7 @@ memo10"
           style={
             {
               "color": "rgb(28, 28, 30)",
-              "marginTop": 5,
+              "marginTop": 0,
               "opacity": 0.65,
             }
           }
@@ -359,7 +359,7 @@ memo10"
           style={
             {
               "color": "rgb(28, 28, 30)",
-              "marginTop": 5,
+              "marginTop": 0,
               "opacity": 0.65,
             }
           }

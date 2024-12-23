@@ -17,8 +17,10 @@ exports[`Component Messages Address - test Messages Address - snapshot 1`] = `
     accessible={true}
     style={
       {
+        "borderColor": "blue",
+        "borderWidth": 1,
         "display": "flex",
-        "height": "94.00299850074963%",
+        "height": "94.15292353823088%",
         "justifyContent": "flex-start",
         "width": "100%",
       }
