@@ -1,6 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useCallback, useContext, useState } from 'react';
-import { View, ScrollView, SafeAreaView, TextInput, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  View,
+  ScrollView,
+  SafeAreaView,
+  TextInput,
+  Dimensions,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Button from '../Components/Button';
 import { ThemeType } from '../../app/types';
@@ -53,11 +62,10 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === GlobalConst.platformOSios ? 'padding' : 'height'}
-      keyboardVerticalOffset={10}
-      style={{ backgroundColor: colors.background }}
-    >
+      keyboardVerticalOffset={Platform.OS === GlobalConst.platformOSios ? 10 : 0}
+      style={{ backgroundColor: colors.background }}>
       <SafeAreaView
         style={{
           display: 'flex',
@@ -149,7 +157,7 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            marginVertical: 5,
+            marginVertical: 10,
           }}>
           <Button
             type={ButtonTypeEnum.Primary}

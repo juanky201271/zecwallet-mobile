@@ -208,7 +208,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     // need to reset this info because is shared
     // with all the App.
     setSendPageState(new SendPageStateClass(new ToAddrClass(0)));
-  }, []);
+  }, [setSendPageState]);
 
   useEffect(() => {
     if (messages !== null) {
@@ -482,10 +482,9 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   }
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === GlobalConst.platformOSios ? 'padding' : 'height'}
-      keyboardVerticalOffset={0}
-    >
+      keyboardVerticalOffset={0}>
       <View
         accessible={true}
         accessibilityLabel={translate('history.title-acc') as string}
