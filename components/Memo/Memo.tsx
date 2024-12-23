@@ -90,7 +90,7 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
             borderRadius: 5,
             borderColor: colors.text,
             minWidth: 48,
-            minHeight: dimensions.height * 0.3,
+            minHeight: 48,
             maxHeight: dimensions.height * 0.4,
             flexDirection: 'row',
           }}>
@@ -130,12 +130,12 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
           }}>
           <FadeText
             style={{
-              marginTop: 5,
+              marginTop: 0,
               fontWeight: 'bold',
               color: countMemoBytes(memo, includeUAMemo) > GlobalConst.memoMaxLength ? 'red' : colors.text,
             }}>{`${countMemoBytes(memo, includeUAMemo)} `}</FadeText>
-          <FadeText style={{ marginTop: 5 }}>{translate('loadedapp.of') as string}</FadeText>
-          <FadeText style={{ marginTop: 5 }}>{' ' + GlobalConst.memoMaxLength.toString() + ' '}</FadeText>
+          <FadeText style={{ marginTop: 0 }}>{translate('loadedapp.of') as string}</FadeText>
+          <FadeText style={{ marginTop: 0 }}>{' ' + GlobalConst.memoMaxLength.toString() + ' '}</FadeText>
         </View>
       </ScrollView>
       <View

@@ -125,7 +125,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   const [validMemo, setValidMemo] = useState<number>(0); // 1 - OK, 0 - Empty, -1 - KO
   const [disableSend, setDisableSend] = useState<boolean>(false);
   const [anonymous, setAnonymous] = useState<boolean>(false);
-  const [memoFieldHeight, setMemoFieldHeight] = useState<number>(90);
+  const [memoFieldHeight, setMemoFieldHeight] = useState<number>(48 + 30);
   const [keyboardVisible, setKeyboardVisible] = useState<boolean>(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -477,8 +477,10 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           justifyContent: 'flex-start',
           width: '100%',
           height: address
-            ? `${100 - ((memoFieldHeight + (keyboardVisible ? 40 : -10)) * 100) / dimensions.height}%`
+            ? `${100 - ((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`
             : '100%',
+          borderColor: 'blue',
+          borderWidth: 1,
         }}>
         <Modal
           animationType="slide"
@@ -742,7 +744,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         )}
       </View>
       {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
-        <View style={{ height: `${((memoFieldHeight + (keyboardVisible ? 40 : -10)) * 100) / dimensions.height}%` }}>
+        <View
+          style={{
+            height: `${((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`,
+            borderColor: 'red',
+            borderWidth: 1,
+          }}>
           <View
             style={{
               display: 'flex',
@@ -759,9 +766,8 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 borderWidth: 2,
                 borderRadius: 5,
                 borderColor: colors.text,
-                minWidth: 48,
                 minHeight: 48,
-                maxHeight: 100,
+                maxHeight: 90,
               }}>
               <TextInput
                 placeholder={translate('messages.message-placeholder') as string}
@@ -772,11 +778,13 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                   color: colors.text,
                   fontWeight: '600',
                   fontSize: 14,
-                  minWidth: 48,
                   minHeight: 48,
+                  maxHeight: 90,
                   marginLeft: 5,
                   backgroundColor: 'transparent',
                   textAlignVertical: 'top',
+                  borderColor: 'red',
+                  borderWidth: 1,
                 }}
                 value={sendPageState.toaddr.memo}
                 onChangeText={(text: string) => updateToField(text)}
@@ -786,10 +794,16 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 editable={!disableSend}
                 onContentSizeChange={(e: any) => {
                   console.log(e.nativeEvent.contentSize.height);
-                  if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 106 : 53)) {
+                  if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 48 : 48)) {
+                    setMemoFieldHeight(48 + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30));
+                  } else if (
+                    e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 90 : 45)
+                  ) {
                     setMemoFieldHeight(
-                      e.nativeEvent.contentSize.height + (Platform.OS === GlobalConst.platformOSandroid ? 52 : 26),
+                      e.nativeEvent.contentSize.height + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30),
                     );
+                  } else {
+                    setMemoFieldHeight(90 + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30));
                   }
                   if (
                     e.nativeEvent.contentSize.height > (Platform.OS === GlobalConst.platformOSandroid ? 70 : 35) &&
@@ -846,26 +860,28 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
               </View>
             )}
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              marginRight: validMemo === 1 ? 50 : 10,
-              marginTop: -28,
-            }}>
-            <FadeText
+          {validMemo === -1 && (
+            <View
               style={{
-                marginTop: 0,
-                fontWeight: 'bold',
-                fontSize: 12.5,
-                color: validMemo === -1 ? 'red' : colors.text,
-              }}>{`${countMemoBytes(sendPageState.toaddr.memo, sendPageState.toaddr.includeUAMemo)} `}</FadeText>
-            <FadeText style={{ marginTop: 0, fontSize: 12.5 }}>{translate('loadedapp.of') as string}</FadeText>
-            <FadeText style={{ marginTop: 0, fontSize: 12.5 }}>
-              {' ' + GlobalConst.memoMaxLength.toString() + ' '}
-            </FadeText>
-          </View>
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                marginRight: 10,
+                marginTop: -28,
+              }}>
+              <FadeText
+                style={{
+                  marginTop: 0,
+                  fontWeight: 'bold',
+                  fontSize: 12.5,
+                  color: validMemo === -1 ? 'red' : colors.text,
+                }}>{`${countMemoBytes(sendPageState.toaddr.memo, sendPageState.toaddr.includeUAMemo)} `}</FadeText>
+              <FadeText style={{ marginTop: 0, fontSize: 12.5 }}>{translate('loadedapp.of') as string}</FadeText>
+              <FadeText style={{ marginTop: 0, fontSize: 12.5 }}>
+                {' ' + GlobalConst.memoMaxLength.toString() + ' '}
+              </FadeText>
+            </View>
+          )}
         </View>
       )}
     </>
