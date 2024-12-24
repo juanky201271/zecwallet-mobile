@@ -633,25 +633,28 @@ const Send: React.FunctionComponent<SendProps> = ({
     );
   }, [memoEnabled, sendPageState.toaddr.amount, validAddress, validAmount, validMemo, fee]);
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      slideAnim.value = withTiming(0 - titleViewHeight + 30, { duration: 100, easing: Easing.linear });
-      setKeyboardVisible(true);
-      console.log('OPENNNNNNNNNN');
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
-      setKeyboardVisible(false);
-      console.log('CLOSEEEEEEEEE');
-    });
+  useEffect(
+    () => {
+      const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+        slideAnim.value = withTiming(0 - titleViewHeight + 30, { duration: 100, easing: Easing.linear });
+        setKeyboardVisible(true);
+        console.log('OPENNNNNNNNNN');
+      });
+      const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+        slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
+        setKeyboardVisible(false);
+        console.log('CLOSEEEEEEEEE');
+      });
 
-    return () => {
-      !!keyboardDidShowListener && keyboardDidShowListener.remove();
-      !!keyboardDidHideListener && keyboardDidHideListener.remove();
-      slideAnim.value = 0;
-    };
+      return () => {
+        !!keyboardDidShowListener && keyboardDidShowListener.remove();
+        !!keyboardDidHideListener && keyboardDidHideListener.remove();
+        slideAnim.value = 0;
+      };
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, Platform.OS === GlobalConst.platformOSandroid ? [titleViewHeight] : []);
+    Platform.OS === GlobalConst.platformOSandroid ? [titleViewHeight] : [],
+  );
 
   useEffect(() => {
     (async () => {
