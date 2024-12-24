@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, View, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { Animated, Dimensions, View, TouchableOpacity, Text, ActivityIndicator, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -21,6 +21,7 @@ import {
   SelectServerEnum,
   ContactType,
   AddressBookFileClass,
+  GlobalConst,
 } from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import moment from 'moment';
@@ -326,13 +327,13 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
                   }}>
-                  <FadeText numberOfLines={2} ellipsizeMode={'tail'} style={{ width: '90%', maxWidth: '90%' }}>
+                  <FadeText numberOfLines={2} ellipsizeMode={'tail'} style={{ width: '85%', maxWidth: '85%' }}>
                     {(c.kind === ValueTransferKindEnum.MemoToSelf || c.kind === ValueTransferKindEnum.Sent
                       ? 'You: '
                       : '') + getMemo(c)}
                   </FadeText>
-                  <View style={{ display: 'flex', justifyContent: 'center' }}>
-                    <View style={{ flexDirection: 'row' }}>
+                  <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                       {(c.status === RPCValueTransfersStatusEnum.calculated ||
                         c.status === RPCValueTransfersStatusEnum.transmitted) && (
                         <FontAwesomeIcon
@@ -368,7 +369,9 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                         />
                       )}
                       {c.status !== RPCValueTransfersStatusEnum.confirmed && (
-                        <ActivityIndicator size={12} color={colors.primary} style={{ marginLeft: 2, marginTop: 2 }} />
+                        <View  style={{marginLeft: 2, marginTop: 2 }}>
+                          <ActivityIndicator size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12} color={colors.primary} />
+                        </View>
                       )}
                     </View>
                   </View>

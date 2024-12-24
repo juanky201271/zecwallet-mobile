@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
-import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTriangleExclamation, faCircleCheck as faCircleCheckSolid } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +16,7 @@ import {
   AddressBookFileClass,
   AddressClass,
   SnackbarDurationEnum,
+  GlobalConst,
 } from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import moment from 'moment';
@@ -200,8 +201,8 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
             <View>
               <FadeText>{vt.time ? moment((vt.time || 0) * 1000).format('MMM D, h:mm a') : '--'}</FadeText>
             </View>
-            <View style={{ display: 'flex', justifyContent: 'center' }}>
-              <View style={{ flexDirection: 'row' }}>
+            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 {(vt.status === RPCValueTransfersStatusEnum.calculated ||
                   vt.status === RPCValueTransfersStatusEnum.transmitted) && (
                   <FontAwesomeIcon
@@ -237,7 +238,9 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
                   />
                 )}
                 {vt.status !== RPCValueTransfersStatusEnum.confirmed && (
-                  <ActivityIndicator size={12} color={colors.primary} style={{ marginLeft: 2, marginTop: 2 }} />
+                  <View  style={{marginLeft: 2, marginTop: 2 }}>
+                    <ActivityIndicator size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12} color={colors.primary} />
+                  </View>
                 )}
               </View>
             </View>
