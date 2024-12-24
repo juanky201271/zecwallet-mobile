@@ -637,10 +637,12 @@ const Send: React.FunctionComponent<SendProps> = ({
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
       slideAnim.value = withTiming(0 - titleViewHeight + 30, { duration: 100, easing: Easing.linear });
       setKeyboardVisible(true);
+      console.log('OPENNNNNNNNNN');
     });
     const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
       slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
       setKeyboardVisible(false);
+      console.log('CLOSEEEEEEEEE')
     });
 
     return () => {
@@ -648,7 +650,7 @@ const Send: React.FunctionComponent<SendProps> = ({
       !!keyboardDidHideListener && keyboardDidHideListener.remove();
       slideAnim.value = 0;
     };
-  }, [slideAnim, titleViewHeight]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -873,6 +875,8 @@ const Send: React.FunctionComponent<SendProps> = ({
   //  keyboardVisible,
   //  contentHeight,
   //);
+
+  console.log(titleViewHeight, slideAnim.value);
 
   const returnPage = (
     <View

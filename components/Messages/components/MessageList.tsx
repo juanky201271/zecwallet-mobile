@@ -495,8 +495,6 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           height: address
             ? `${100 - ((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`
             : '100%',
-          borderColor: 'blue',
-          borderWidth: 1,
         }}>
         <Modal
           animationType="slide"
@@ -763,8 +761,6 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         <View
           style={{
             height: `${((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`,
-            borderColor: 'red',
-            borderWidth: 1,
           }}>
           <View
             style={{
@@ -799,8 +795,6 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                   marginLeft: 5,
                   backgroundColor: 'transparent',
                   textAlignVertical: 'top',
-                  borderColor: 'red',
-                  borderWidth: 1,
                 }}
                 value={sendPageState.toaddr.memo}
                 onChangeText={(text: string) => updateToField(text)}
