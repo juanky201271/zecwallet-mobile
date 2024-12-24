@@ -369,8 +369,11 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                         />
                       )}
                       {c.status !== RPCValueTransfersStatusEnum.confirmed && (
-                        <View  style={{marginLeft: 2, marginTop: 2 }}>
-                          <ActivityIndicator size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12} color={colors.primary} />
+                        <View style={{ marginLeft: 2, marginTop: 2 }}>
+                          <ActivityIndicator
+                            size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12}
+                            color={colors.primary}
+                          />
                         </View>
                       )}
                     </View>

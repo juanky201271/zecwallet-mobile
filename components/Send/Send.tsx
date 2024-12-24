@@ -642,7 +642,7 @@ const Send: React.FunctionComponent<SendProps> = ({
     const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
       slideAnim.value = withTiming(0, { duration: 100, easing: Easing.linear });
       setKeyboardVisible(false);
-      console.log('CLOSEEEEEEEEE')
+      console.log('CLOSEEEEEEEEE');
     });
 
     return () => {
@@ -650,7 +650,8 @@ const Send: React.FunctionComponent<SendProps> = ({
       !!keyboardDidHideListener && keyboardDidHideListener.remove();
       slideAnim.value = 0;
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [titleViewHeight]);
 
   useEffect(() => {
     (async () => {
