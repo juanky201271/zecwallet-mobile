@@ -651,7 +651,7 @@ const Send: React.FunctionComponent<SendProps> = ({
       slideAnim.value = 0;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [titleViewHeight]);
+  }, Platform.OS === GlobalConst.platformOSandroid ? [titleViewHeight] : []);
 
   useEffect(() => {
     (async () => {

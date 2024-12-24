@@ -316,7 +316,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
         )}
       </ScrollView>
       {!isAtTop && (
-        <TouchableOpacity onPress={handleScrollToTop} style={{ position: 'absolute', bottom: 70, right: 10 }}>
+        <TouchableOpacity onPress={handleScrollToTop} style={{ position: 'absolute', bottom: 105, right: 10 }}>
           <FontAwesomeIcon
             style={{ marginLeft: 5, marginRight: 5, marginTop: 0 }}
             size={50}
