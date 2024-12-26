@@ -37,6 +37,7 @@
     "title-chats": "Chats",
     "empty": "No Messages yet.",
     "message-placeholder": "Message",
+    "message-placeholder-error": "No spendable funds available",
     "search-placeholder": "Search",
     "filter-all": "All",
     "filter-contacts": "Contacts",

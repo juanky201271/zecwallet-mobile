@@ -37,6 +37,7 @@
     "title-chats": "Chats",
     "empty": "Nenhuma mensagem ainda.",
     "message-placeholder": "Mensagem",
+    "message-placeholder-error": "Não há fundos disponíveis para gastar",
     "search-placeholder": "Procurar",
     "filtro-tudo": "Todos",
     "filtro-contatos": "Contatos",

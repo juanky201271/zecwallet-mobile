@@ -104,6 +104,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     info,
     setBackgroundError,
     server,
+    totalBalance,
   } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
@@ -128,6 +129,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   const [anonymous, setAnonymous] = useState<boolean>(false);
   const [memoFieldHeight, setMemoFieldHeight] = useState<number>(48 + 30);
   const [keyboardVisible, setKeyboardVisible] = useState<boolean>(false);
+  const [spendable, setSpendable] = useState<number>(0);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -471,6 +473,10 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     }
   };
 
+  useEffect(() => {
+    setSpendable(totalBalance ? totalBalance.spendableOrchard + totalBalance.spendablePrivate : 0);
+  }, [totalBalance, totalBalance?.spendableOrchard, totalBalance?.spendablePrivate]);
+
   if (address) {
     console.log(
       'render Messages',
@@ -482,9 +488,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === GlobalConst.platformOSios ? 'padding' : 'height'}
-      keyboardVerticalOffset={0}>
+    <KeyboardAvoidingView behavior={Platform.OS === GlobalConst.platformOSios ? 'padding' : 'height'}>
       <View
         accessible={true}
         accessibilityLabel={translate('history.title-acc') as string}
@@ -493,7 +497,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
           justifyContent: 'flex-start',
           width: '100%',
           height: address
-            ? `${100 - ((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`
+            ? `${
+                100 -
+                ((memoFieldHeight + (keyboardVisible ? (Platform.OS === GlobalConst.platformOSandroid ? 0 : 60) : 0)) *
+                  100) /
+                  dimensions.height
+              }%`
             : '100%',
         }}>
         <Modal
@@ -760,7 +769,11 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
       {!loading && firstScrollToBottomDone && address && selectServer !== SelectServerEnum.offline && (
         <View
           style={{
-            height: `${((memoFieldHeight + (keyboardVisible ? 60 : 0)) * 100) / dimensions.height}%`,
+            height: `${
+              ((memoFieldHeight + (keyboardVisible ? (Platform.OS === GlobalConst.platformOSandroid ? 0 : 60) : 0)) *
+                100) /
+              dimensions.height
+            }%`,
           }}>
           <View
             style={{
@@ -782,8 +795,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 maxHeight: 90,
               }}>
               <TextInput
-                placeholder={translate('messages.message-placeholder') as string}
-                placeholderTextColor={colors.placeholder}
+                placeholder={
+                  spendable > 0
+                    ? (translate('messages.message-placeholder') as string)
+                    : (translate('messages.message-placeholder-error') as string)
+                }
+                placeholderTextColor={spendable > 0 ? colors.placeholder : 'red'}
                 multiline
                 style={{
                   flex: 1,
@@ -801,7 +818,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 onEndEditing={(e: any) => {
                   updateToField(e.nativeEvent.text);
                 }}
-                editable={!disableSend}
+                editable={!disableSend && spendable > 0}
                 onContentSizeChange={(e: any) => {
                   console.log(e.nativeEvent.contentSize.height);
                   if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 48 : 48)) {

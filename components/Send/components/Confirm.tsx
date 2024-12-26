@@ -406,9 +406,10 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
       <View
         style={{
           flexGrow: 1,
-          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
           alignItems: 'center',
-          marginTop: 10,
+          marginVertical: 5,
         }}>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
           <Button

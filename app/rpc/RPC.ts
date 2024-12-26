@@ -32,6 +32,7 @@ import { RPCValueTransfersKindEnum } from './enums/RPCValueTransfersKindEnum';
 import { RPCValueTransferType } from './types/RPCValueTransferType';
 import { ValueTransferKindEnum } from '../AppState/enums/ValueTransferKindEnum';
 import { RPCValueTransfersStatusEnum } from './enums/RPCValueTransfersStatusEnum';
+import { RPCSendProposeType } from './types/RPCSendProposeType';
 
 export default class RPC {
   fnSetInfo: (info: InfoType) => void;
@@ -576,7 +577,24 @@ export default class RPC {
   async doSend(sendJSON: string): Promise<string> {
     try {
       console.log('send JSON', sendJSON);
-      await RPCModule.execute(CommandEnum.send, sendJSON);
+      // creating the propose
+      const proposeStr: string = await RPCModule.execute(CommandEnum.send, sendJSON);
+      if (proposeStr) {
+        if (proposeStr.toLowerCase().startsWith(GlobalConst.error)) {
+          console.log(`Error send ${proposeStr}`);
+          return proposeStr;
+        }
+      } else {
+        console.log('Internal Error send');
+        return 'Error: Internal RPC Error: send';
+      }
+      const proposeJSON: RPCSendProposeType = await JSON.parse(proposeStr);
+      if (proposeJSON.error) {
+        console.log(`Error send ${proposeStr}`);
+        return proposeStr;
+      }
+
+      // creating the transaction
       const sendStr: string = await RPCModule.execute(CommandEnum.confirm, '');
       if (sendStr) {
         if (sendStr.toLowerCase().startsWith(GlobalConst.error)) {
