@@ -798,9 +798,9 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 placeholder={
                   spendable > 0
                     ? (translate('messages.message-placeholder') as string)
-                    : (translate('messages.message-placeholder-error') as string)
+                    : (translate('send.somefunds') as string)
                 }
-                placeholderTextColor={spendable > 0 ? colors.placeholder : 'red'}
+                placeholderTextColor={spendable > 0 ? colors.placeholder : colors.primary}
                 multiline
                 style={{
                   flex: 1,

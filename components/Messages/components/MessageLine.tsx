@@ -125,7 +125,7 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
               vt.kind === ValueTransferKindEnum.Received ? colors.primaryDisabled : colors.secondaryDisabled,
           }}>
           {!!vt.address && !messageAddress && (
-            <View style={{ marginTop: -15, marginBottom: 10, marginLeft: 30 }}>
+            <View style={{ marginTop: -10, marginBottom: 10, marginLeft: 30 }}>
               <AddressItem address={vt.address} oneLine={true} closeModal={() => {}} openModal={() => {}} />
             </View>
           )}
