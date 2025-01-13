@@ -4,7 +4,6 @@ import {
   faCheck,
   faInfoCircle,
   faPlay,
-  faPause,
   faCloudDownload,
   faLockOpen,
   faLock,
@@ -500,28 +499,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                         </View>
                       </View>
                     )}
-                    {!syncingStatus.inProgress &&
-                      syncingStatus.lastBlockServer !== syncingStatus.lastBlockWallet &&
-                      mode === ModeEnum.advanced && (
-                        <View
-                          style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: 0,
-                            marginRight: 5,
-                            padding: 1,
-                            borderColor: colors.zingo,
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            minWidth: 25,
-                            minHeight: 25,
-                          }}>
-                          <TouchableOpacity
-                            onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                            <FontAwesomeIcon icon={faPause} color={colors.zingo} size={17} />
-                          </TouchableOpacity>
-                        </View>
-                      )}
                     {syncingStatus.inProgress && blocksRemaining > 0 && (
                       <View
                         style={{
