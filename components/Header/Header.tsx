@@ -147,6 +147,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   const [showShieldButton, setShowShieldButton] = useState<boolean>(false);
   const [blocksRemaining, setBlocksRemaining] = useState<number>(0);
   const [shieldingFee, setShieldingFee] = useState<number>(0);
+  const [viewSyncStatus, setViewSyncStatus] = useState<boolean>(false);
 
   useEffect(() => {
     let currentBl, lastBlockSe;
@@ -244,6 +245,20 @@ const Header: React.FunctionComponent<HeaderProps> = ({
       !readOnly && selectServer !== SelectServerEnum.offline && (somePending ? 0 : shieldingAmount) > 0,
     );
   }, [readOnly, shieldingAmount, somePending, selectServer]);
+
+  useEffect(() => {
+    const showIt = () => {
+      setViewSyncStatus(true);
+      setTimeout(() => {
+        setViewSyncStatus(false);
+      }, 5 * 1000);
+    };
+    const inter = setInterval(() => {
+      showIt();
+    }, 30 * 1000);
+
+    return () => clearInterval(inter);
+  }, []);
 
   const shieldFunds = async () => {
     if (!setComputingModalVisible || !setBackgroundError || !addLastSnackbar) {
@@ -494,8 +509,18 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                           minWidth: 25,
                           minHeight: 25,
                         }}>
-                        <View testID="header.checkicon" style={{ margin: 0, padding: 0 }}>
+                        <View
+                          testID="header.checkicon"
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingHorizontal: 3,
+                          }}>
                           <FontAwesomeIcon icon={faCheck} color={colors.primary} size={20} />
+                          {viewSyncStatus && (
+                            <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{translate('synced') as string}</FadeText>
+                          )}
                         </View>
                       </View>
                     )}
@@ -524,6 +549,11 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                           {mode === ModeEnum.basic ? (
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                               <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
+                              {viewSyncStatus && (
+                                <FadeText style={{ fontSize: 10, marginLeft: 2 }}>
+                                  {translate('syncing') as string}
+                                </FadeText>
+                              )}
                               <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
                             </View>
                           ) : (
@@ -532,6 +562,11 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                               onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
                               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                 <FontAwesomeIcon icon={faPlay} color={colors.syncing} size={17} />
+                                {viewSyncStatus && (
+                                  <FadeText style={{ fontSize: 10, marginLeft: 2 }}>
+                                    {translate('syncing') as string}
+                                  </FadeText>
+                                )}
                                 <FadeText style={{ fontSize: 10, marginLeft: 2 }}>{`${blocksRemaining}`}</FadeText>
                               </View>
                             </TouchableOpacity>
@@ -558,7 +593,19 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                         }}>
                         <TouchableOpacity
                           onPress={() => syncingStatusMoreInfoOnClick && syncingStatusMoreInfoOnClick()}>
-                          <FontAwesomeIcon icon={faWifi} color={colors.primaryDisabled} size={18} />
+                          <View
+                            testID="header.wifiicon"
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              paddingHorizontal: 3,
+                            }}>
+                            <FontAwesomeIcon icon={faWifi} color={colors.primaryDisabled} size={18} />
+                            <FadeText style={{ fontSize: 10, marginLeft: 2 }}>
+                              {translate('connecting') as string}
+                            </FadeText>
+                          </View>
                         </TouchableOpacity>
                       </View>
                     )}
@@ -611,9 +658,16 @@ const Header: React.FunctionComponent<HeaderProps> = ({
                   minWidth: 25,
                   minHeight: 25,
                 }}>
-                <View style={{ flexDirection: 'row', margin: 0, padding: 0 }}>
+                <View
+                  testID="header.offlineicon"
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingHorizontal: 3,
+                  }}>
                   <FontAwesomeIcon icon={faWifi} color={'red'} size={18} />
-                  <FadeText style={{ marginLeft: 10, marginRight: 5 }}>
+                  <FadeText style={{ fontSize: 10, marginLeft: 2 }}>
                     {translate('settings.server-offline') as string}
                   </FadeText>
                 </View>

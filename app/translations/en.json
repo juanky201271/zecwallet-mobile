@@ -32,6 +32,9 @@
   "email": "zingo@zingolabs.org",
   "subject": "Zingo Support...",
   "body": "I need help with...",
+  "connecting": "Connecting",
+  "syncing": "Syncing",
+  "synced": "Synced",
   "messages": {
     "title": "Messages",
     "title-chats": "Chats",

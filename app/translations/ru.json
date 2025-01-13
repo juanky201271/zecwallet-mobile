@@ -32,6 +32,9 @@
   "email": "zingo@zingolabs.org",
   "subject": "Поддержка Зинго...",
   "body": "мне нужна помощь с...",
+  "connecting": "Соединение",
+  "syncing": "Синхронизация",
+  "synced": "Синхронизировано",
   "messages": {
     "title": "Сообщения",
     "title-chats": "Чаты",
