@@ -319,7 +319,7 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                     alignItems: 'center',
                   }}>
                   <AddressItem address={c.address} oneLine={true} closeModal={() => {}} openModal={() => {}} />
-                  <FadeText>{c.time ? moment((c.time || 0) * 1000).format('MMM D, h:mm a') : '--'}</FadeText>
+                  <FadeText>{c.time ? moment((c.time || 0) * 1000).format('MMM D, h:mm a') : ''}</FadeText>
                 </View>
                 <View
                   style={{
@@ -333,50 +333,52 @@ const ContactLine: React.FunctionComponent<ContactLineProps> = ({
                       : '') + getMemo(c)}
                   </FadeText>
                   <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                      {(c.status === RPCValueTransfersStatusEnum.calculated ||
-                        c.status === RPCValueTransfersStatusEnum.transmitted) && (
-                        <FontAwesomeIcon
-                          style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
-                          size={12}
-                          icon={faCircleCheckRegular}
-                          color={colors.primary}
-                        />
-                      )}
-                      {(c.status === RPCValueTransfersStatusEnum.mempool ||
-                        c.status === RPCValueTransfersStatusEnum.confirmed) && (
-                        <FontAwesomeIcon
-                          style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
-                          size={12}
-                          icon={faCircleCheckSolid}
-                          color={colors.primary}
-                        />
-                      )}
-                      {c.status !== RPCValueTransfersStatusEnum.confirmed && (
-                        <FontAwesomeIcon
-                          style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
-                          size={12}
-                          icon={faCircleCheckRegular}
-                          color={colors.primary}
-                        />
-                      )}
-                      {c.status === RPCValueTransfersStatusEnum.confirmed && (
-                        <FontAwesomeIcon
-                          style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
-                          size={12}
-                          icon={faCircleCheckSolid}
-                          color={colors.primary}
-                        />
-                      )}
-                      {c.status !== RPCValueTransfersStatusEnum.confirmed && (
-                        <View style={{ marginLeft: 2, marginTop: 2 }}>
-                          <ActivityIndicator
-                            size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12}
+                    {!!c.status && (
+                      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        {(c.status === RPCValueTransfersStatusEnum.calculated ||
+                          c.status === RPCValueTransfersStatusEnum.transmitted) && (
+                          <FontAwesomeIcon
+                            style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                            size={12}
+                            icon={faCircleCheckRegular}
                             color={colors.primary}
                           />
-                        </View>
-                      )}
-                    </View>
+                        )}
+                        {(c.status === RPCValueTransfersStatusEnum.mempool ||
+                          c.status === RPCValueTransfersStatusEnum.confirmed) && (
+                          <FontAwesomeIcon
+                            style={{ marginLeft: 5, marginRight: 1, marginTop: 2 }}
+                            size={12}
+                            icon={faCircleCheckSolid}
+                            color={colors.primary}
+                          />
+                        )}
+                        {c.status !== RPCValueTransfersStatusEnum.confirmed && (
+                          <FontAwesomeIcon
+                            style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                            size={12}
+                            icon={faCircleCheckRegular}
+                            color={colors.primary}
+                          />
+                        )}
+                        {c.status === RPCValueTransfersStatusEnum.confirmed && (
+                          <FontAwesomeIcon
+                            style={{ marginLeft: 1, marginRight: 0, marginTop: 2 }}
+                            size={12}
+                            icon={faCircleCheckSolid}
+                            color={colors.primary}
+                          />
+                        )}
+                        {c.status !== RPCValueTransfersStatusEnum.confirmed && (
+                          <View style={{ marginLeft: 2, marginTop: 2 }}>
+                            <ActivityIndicator
+                              size={Platform.OS === GlobalConst.platformOSios ? 'small' : 12}
+                              color={colors.primary}
+                            />
+                          </View>
+                        )}
+                      </View>
+                    )}
                   </View>
                 </View>
               </View>

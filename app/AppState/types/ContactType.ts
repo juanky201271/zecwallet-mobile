@@ -8,8 +8,8 @@ export default interface ContactType {
   time: number;
   memos: string[];
   confirmations: number;
-  status: RPCValueTransfersStatusEnum;
-  kind: ValueTransferKindEnum;
+  status?: RPCValueTransfersStatusEnum;
+  kind?: ValueTransferKindEnum;
 
   // eslint-disable-next-line semi
 }

@@ -156,6 +156,36 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
         }
       });
 
+    // need to add all the contacts even with no messages
+    if (filter === FilterEnum.all || filter === FilterEnum.contacts) {
+      addressBook
+        .filter((ab: AddressBookFileClass) => ab.address !== zennyTips)
+        .forEach((ab: AddressBookFileClass) => {
+          const exists = cont.filter((c: ContactType) => c.address === ab.address);
+          if (exists.length === 0) {
+            let found = false;
+            if (searchText) {
+              if (
+                ab.address.toLowerCase().includes(searchText.toLowerCase()) ||
+                ab.label.toLowerCase().includes(searchText.toLowerCase())
+              ) {
+                found = true;
+              }
+            } else {
+              found = true;
+            }
+            if (found) {
+              cont.push({
+                address: ab.address,
+                time: 0,
+                memos: [],
+                confirmations: 0,
+              });
+            }
+          }
+        });
+    }
+
     return cont;
   };
 
@@ -500,7 +530,7 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
             {contacts &&
               contacts.length > 0 &&
               contacts.flatMap((c, index) => {
-                let txmonth = c && c.time ? moment(c.time * 1000).format('MMM YYYY') : '--- ----';
+                let txmonth = c && c.time ? moment(c.time * 1000).format('MMM YYYY') : '';
 
                 var month = '';
                 if (txmonth !== lastMonth) {
