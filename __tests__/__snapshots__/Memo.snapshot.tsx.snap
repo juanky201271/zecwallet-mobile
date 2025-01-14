@@ -240,7 +240,6 @@ exports[`Component Memo - test Memo - snapshot 1`] = `
           }
         >
           <TextInput
-            editable={true}
             maxLength={511}
             multiline={true}
             onChangeText={[Function]}

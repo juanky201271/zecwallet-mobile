@@ -816,7 +816,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 value={sendPageState.toaddr.memo}
                 onChangeText={(text: string) => {
                   if (text !== sendPageState.toaddr.memo) {
-                    updateToField(text)
+                    updateToField(text);
                   }
                 }}
                 onEndEditing={(e: any) => {
@@ -827,16 +827,12 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                 editable={!disableSend && spendable > 0}
                 onContentSizeChange={(e: any) => {
                   console.log(e.nativeEvent.contentSize.height);
-                  if (e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 48 : 48)) {
-                    setMemoFieldHeight(48 + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30));
-                  } else if (
-                    e.nativeEvent.contentSize.height < (Platform.OS === GlobalConst.platformOSandroid ? 90 : 90)
-                  ) {
-                    setMemoFieldHeight(
-                      e.nativeEvent.contentSize.height + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30),
-                    );
+                  if (e.nativeEvent.contentSize.height < 48) {
+                    setMemoFieldHeight(48 + 30);
+                  } else if (e.nativeEvent.contentSize.height < 90) {
+                    setMemoFieldHeight(e.nativeEvent.contentSize.height + 30);
                   } else {
-                    setMemoFieldHeight(90 + (Platform.OS === GlobalConst.platformOSandroid ? 30 : 30));
+                    setMemoFieldHeight(90 + 30);
                   }
                   if (
                     e.nativeEvent.contentSize.height > (Platform.OS === GlobalConst.platformOSandroid ? 70 : 35) &&
