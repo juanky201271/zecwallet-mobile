@@ -159,7 +159,10 @@ const ContactList: React.FunctionComponent<ContactListProps> = ({
     // need to add all the contacts even with no messages
     if (filter === FilterEnum.all || filter === FilterEnum.contacts) {
       addressBook
-        .filter((ab: AddressBookFileClass) => ab.address !== zennyTips)
+        .filter(
+          (ab: AddressBookFileClass) =>
+            ab.address !== zennyTips && Utils.isMessagesAddress({ address: ab.address } as ContactType),
+        )
         .forEach((ab: AddressBookFileClass) => {
           const exists = cont.filter((c: ContactType) => c.address === ab.address);
           if (exists.length === 0) {
