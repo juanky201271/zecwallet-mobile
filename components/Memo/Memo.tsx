@@ -123,7 +123,6 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, memoUpdateToFiel
               }}
               value={memo}
               onChangeText={(text: string) => setMemo(text)}
-              editable={true}
               maxLength={GlobalConst.memoMaxLength}
             />
             {memo && (

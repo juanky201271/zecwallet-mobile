@@ -356,7 +356,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
 
     newState.toaddr = newToAddr;
     setSendPageState(newState);
-    //console.log(newState);
+    console.log('Updating', newState);
   };
 
   const interceptCustomError = (error: string) => {
@@ -814,9 +814,15 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
                   textAlignVertical: 'top',
                 }}
                 value={sendPageState.toaddr.memo}
-                onChangeText={(text: string) => updateToField(text)}
+                onChangeText={(text: string) => {
+                  if (text !== sendPageState.toaddr.memo) {
+                    updateToField(text)
+                  }
+                }}
                 onEndEditing={(e: any) => {
-                  updateToField(e.nativeEvent.text);
+                  if (e.nativeEvent.text !== sendPageState.toaddr.memo) {
+                    updateToField(e.nativeEvent.text);
+                  }
                 }}
                 editable={!disableSend && spendable > 0}
                 onContentSizeChange={(e: any) => {

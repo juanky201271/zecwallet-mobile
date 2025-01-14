@@ -1608,7 +1608,6 @@ const Send: React.FunctionComponent<SendProps> = ({
                               CommandEnum.send,
                             );
                           }}
-                          editable={true}
                           onContentSizeChange={(e: any) => {
                             if (
                               e.nativeEvent.contentSize.height >

@@ -210,7 +210,6 @@ const ImportUfvk: React.FunctionComponent<ImportUfvkProps> = ({ onClickCancel, o
               }}
               value={seedufvkText}
               onChangeText={setSeedufvkText}
-              editable={true}
             />
           </View>
           {seedufvkText && (
