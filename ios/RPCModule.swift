@@ -65,8 +65,9 @@ class RPCModule: NSObject {
   @objc(walletExists:reject:)
   func walletExists(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
+      let result = try fileExists(Constants.WalletFileName.rawValue)
       DispatchQueue.main.async {
-        resolve(try fileExists(Constants.WalletFileName.rawValue))
+        resolve(result)
       }
     } catch {
       NSLog("wallet exists error: \(error.localizedDescription)")
@@ -79,8 +80,9 @@ class RPCModule: NSObject {
   @objc(walletBackupExists:reject:)
   func walletBackupExists(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     do {
+      let result = try fileExists(Constants.WalletBackupFileName.rawValue)
       DispatchQueue.main.async {
-        resolve(try fileExists(Constants.WalletBackupFileName.rawValue))
+        resolve(result)
       }
     } catch {
       NSLog("wallet backup exists error: \(error.localizedDescription)")
