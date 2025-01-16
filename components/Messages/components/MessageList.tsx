@@ -19,7 +19,7 @@ import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 
-import { ButtonTypeEnum, SendPageStateClass, ValueTransferType } from '../../../app/AppState';
+import { ButtonTypeEnum, GlobalConst, SendPageStateClass, ValueTransferType } from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import FadeText from '../../Components/FadeText';
 import Button from '../../Components/Button';
@@ -85,8 +85,8 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
       }
       const memoTotal = memos.join('\n');
       let memoAddress;
-      if (memoTotal.includes('\nReply to: \n')) {
-        let memoArray = memoTotal.split('\nReply to: \n');
+      if (memoTotal.includes(GlobalConst.replyTo)) {
+        let memoArray = memoTotal.split(GlobalConst.replyTo);
         memoAddress = memoArray.pop();
       }
       return addr === address || memoAddress === address;

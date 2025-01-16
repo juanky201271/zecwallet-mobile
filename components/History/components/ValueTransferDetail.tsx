@@ -18,6 +18,7 @@ import {
   SnackbarDurationEnum,
   ValueTransferType,
   ValueTransferKindEnum,
+  GlobalConst,
 } from '../../../app/AppState';
 import Utils from '../../../app/utils';
 import RegText from '../../Components/RegText';
@@ -74,8 +75,8 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
   const memoTotal = vt.memos && vt.memos.length > 0 ? vt.memos.join('\n') : '';
   let memo = '';
   let memoUA = '';
-  if (memoTotal.includes('\nReply to: \n')) {
-    let memoArray = memoTotal.split('\nReply to: \n');
+  if (memoTotal.includes(GlobalConst.replyTo)) {
+    let memoArray = memoTotal.split(GlobalConst.replyTo);
     const memoPoped = memoArray.pop();
     memoUA = memoPoped ? memoPoped : '';
     memo = memoArray.join('');
@@ -404,7 +405,7 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
                       duration: SnackbarDurationEnum.short,
                     });
                   }}>
-                  <RegText>{'\nReply to:'}</RegText>
+                  <RegText>{GlobalConst.replyTo}</RegText>
                   {!thisWalletAddress(memoUA) && (
                     <FontAwesomeIcon icon={faTriangleExclamation} color={'red'} size={18} />
                   )}

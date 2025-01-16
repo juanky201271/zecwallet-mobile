@@ -14,6 +14,7 @@ import {
   AddressBookFileClass,
   AddressClass,
   SnackbarDurationEnum,
+  GlobalConst,
 } from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import moment from 'moment';
@@ -52,8 +53,8 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
   const memoTotal = vt.memos && vt.memos.length > 0 ? vt.memos.join('\n') : '';
   let memo = '';
   let memoUA = '';
-  if (memoTotal.includes('\nReply to: \n')) {
-    let memoArray = memoTotal.split('\nReply to: \n');
+  if (memoTotal.includes(GlobalConst.replyTo)) {
+    let memoArray = memoTotal.split(GlobalConst.replyTo);
     const memoPoped = memoArray.pop();
     memoUA = memoPoped ? memoPoped : '';
     memo = memoArray.join('');
@@ -155,7 +156,7 @@ const MessageLine: React.FunctionComponent<MessageLineProps> = ({
                       duration: SnackbarDurationEnum.short,
                     });
                   }}>
-                  <RegText>{'\nReply to:'}</RegText>
+                  <RegText>{GlobalConst.replyTo}</RegText>
                   {!thisWalletAddress(memoUA) && (
                     <FontAwesomeIcon icon={faTriangleExclamation} color={'red'} size={18} />
                   )}

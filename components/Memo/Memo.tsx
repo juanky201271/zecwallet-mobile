@@ -68,7 +68,7 @@ const Memo: React.FunctionComponent<MemoProps> = ({ closeModal, updateToField })
 
   const memoTotal = useCallback(
     (memoStr: string, includeUAMemoBoo: boolean) => {
-      return `${memoStr || ''}${includeUAMemoBoo ? '\nReply to: \n' + uaAddress : ''}`;
+      return `${memoStr || ''}${includeUAMemoBoo ? GlobalConst.replyTo + uaAddress : ''}`;
     },
     [uaAddress],
   );

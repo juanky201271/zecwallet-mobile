@@ -403,7 +403,7 @@ const Send: React.FunctionComponent<SendProps> = ({
   );
 
   const memoTotal = useCallback((memoPar: string, includeUAMemoPar: boolean, uaAddressPar: string) => {
-    return `${memoPar || ''}${includeUAMemoPar ? '\nReply to: \n' + uaAddressPar : ''}`;
+    return `${memoPar || ''}${includeUAMemoPar ? GlobalConst.replyTo + uaAddressPar : ''}`;
   }, []);
 
   const updateToField = async (

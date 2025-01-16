@@ -246,7 +246,7 @@ export default class Utils {
     let donationAddress: boolean = false;
     const json: Promise<SendJsonToTypeType[][]> = Promise.all(
       [sendPageState.toaddr].flatMap(async (to: ToAddrClass) => {
-        const memo = `${to.memo || ''}${to.includeUAMemo ? '\nReply to: \n' + uaAddress : ''}`;
+        const memo = `${to.memo || ''}${to.includeUAMemo ? GlobalConst.replyTo + uaAddress : ''}`;
         const amount = parseInt((Utils.parseStringLocaleToNumberFloat(to.amount) * 10 ** 8).toFixed(0), 10);
 
         donationAddress =
@@ -368,8 +368,8 @@ export default class Utils {
       return !vt.address.startsWith('t');
     } else {
       const memoTotal = vt.memos && vt.memos.length > 0 ? vt.memos.join('\n') : '';
-      if (memoTotal.includes('\nReply to: \n')) {
-        let memoArray = memoTotal.split('\nReply to: \n');
+      if (memoTotal.includes(GlobalConst.replyTo)) {
+        let memoArray = memoTotal.split(GlobalConst.replyTo);
         const memoPoped = memoArray.pop();
         return !!memoPoped;
       }
@@ -382,8 +382,8 @@ export default class Utils {
       return vt.address;
     } else {
       const memoTotal = vt.memos && vt.memos.length > 0 ? vt.memos.join('\n') : '';
-      if (memoTotal.includes('\nReply to: \n')) {
-        let memoArray = memoTotal.split('\nReply to: \n');
+      if (memoTotal.includes(GlobalConst.replyTo)) {
+        let memoArray = memoTotal.split(GlobalConst.replyTo);
         const memoPoped = memoArray.pop();
         if (memoPoped) {
           return memoPoped;
