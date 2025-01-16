@@ -752,22 +752,6 @@ export default class RPC {
                 const resultJSON: RPCSyncRescan = JSON.parse(result);
                 if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
                   this.latestBlock = resultJSON.latest_block;
-                  console.log('REFRESH ----> Rescan finished, inform the UI');
-                  // Here I know the rescan process is over, I need to inform to the UI.
-                  this.fnSetSyncingStatus({
-                    syncID: this.syncId < 0 ? 0 : this.syncId,
-                    totalBatches: 0,
-                    currentBatch: 0,
-                    lastBlockWallet: this.latestBlock,
-                    currentBlock: this.latestBlock,
-                    inProgress: false,
-                    lastError: '',
-                    blocksPerBatch: this.blocksPerBatch,
-                    secondsPerBatch: 0,
-                    processEndBlock: this.latestBlock,
-                    lastBlockServer: this.latestBlock,
-                    syncProcessStalled: false,
-                  } as SyncingStatusClass);
                 }
               }
             })
@@ -782,22 +766,6 @@ export default class RPC {
                 const resultJSON: RPCSyncRescan = JSON.parse(result);
                 if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
                   this.latestBlock = resultJSON.latest_block;
-                  console.log('REFRESH ----> Sync finished, inform the UI');
-                  // Here I know the sync process is over, I need to inform to the UI.
-                  this.fnSetSyncingStatus({
-                    syncID: this.syncId < 0 ? 0 : this.syncId,
-                    totalBatches: 0,
-                    currentBatch: 0,
-                    lastBlockWallet: this.latestBlock,
-                    currentBlock: this.latestBlock,
-                    inProgress: false,
-                    lastError: '',
-                    blocksPerBatch: this.blocksPerBatch,
-                    secondsPerBatch: 0,
-                    processEndBlock: this.latestBlock,
-                    lastBlockServer: this.latestBlock,
-                    syncProcessStalled: false,
-                  } as SyncingStatusClass);
                 }
               }
             })
