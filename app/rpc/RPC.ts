@@ -367,6 +367,7 @@ export default class RPC {
     if (!this.refreshTimerID) {
       this.refreshTimerID = setInterval(() => {
         console.log('++++++++++ interval try refresh 15 secs', this.timers);
+        this.sanitizeTimers();
         this.refresh(false);
       }, 15 * 1000); // 15 seconds
       //console.log('create refresh timer', this.refreshTimerID);
@@ -398,23 +399,7 @@ export default class RPC {
       this.timers.push(this.updateMTimerID);
     }
 
-    // and now the array of timers...
-    let deleted: number[] = [];
-    for (var i = 0; i < this.timers.length; i++) {
-      if (
-        this.timers[i] !== this.refreshTimerID &&
-        this.timers[i] !== this.updateVTTimerID &&
-        this.timers[i] !== this.updateMTimerID
-      ) {
-        clearInterval(this.timers[i]);
-        deleted.push(i);
-        //console.log('kill item array timers', this.timers[i]);
-      }
-    }
-    // remove the cleared timers.
-    for (var i = 0; i < deleted.length; i++) {
-      this.timers.splice(deleted[i], 1);
-    }
+    this.sanitizeTimers();
 
     // Call the refresh after configure to update the UI. Do it in a timeout
     // to allow the UI to render first
@@ -499,11 +484,13 @@ export default class RPC {
     let deleted: number[] = [];
     for (var i = 0; i < this.timers.length; i++) {
       if (
-        this.timers[i] !== this.refreshTimerID &&
-        this.timers[i] !== this.updateVTTimerID &&
-        this.timers[i] !== this.updateMTimerID &&
-        this.timers[i] !== this.syncStatusTimerID
+        (this.refreshTimerID && this.timers[i] === this.refreshTimerID) ||
+        (this.updateVTTimerID && this.timers[i] === this.updateVTTimerID) ||
+        (this.updateMTimerID && this.timers[i] === this.updateMTimerID) ||
+        (this.syncStatusTimerID && this.timers[i] === this.syncStatusTimerID)
       ) {
+        // do nothing
+      } else {
         clearInterval(this.timers[i]);
         deleted.push(i);
         //console.log('sanitize - kill item array timers', this.timers[i]);
@@ -620,11 +607,11 @@ export default class RPC {
   async loadWalletVTData() {
     const start: number = Date.now();
     await this.fetchTandZandOValueTransfers();
-    //console.log('@@@@@@@@@@@@@@@ VT time', Date.now() - start);
+    console.log('@@@@@@@@@@@@@@@ VT time', Date.now() - start);
     //console.log('RPC - 4.0 - fetch value transfers');
-    //const start2: number = Date.now();
+    const start2: number = Date.now();
     await this.fetchAddresses();
-    console.log('@@@@@@@@@@@@@@@ VT TOTAL time', Date.now() - start);
+    console.log('@@@@@@@@@@@@@@@ VT-ADDRS time', Date.now() - start2);
     //console.log('RPC - 4.1 - fetch addresses');
   }
 
@@ -757,258 +744,38 @@ export default class RPC {
           spendablePrivate: 0,
           total: 0,
         } as TotalBalanceClass);
-        this.doRescan()
-          .then(result => {
-            console.log('rescan finished', result);
-            if (result && !result.toLowerCase().startsWith(GlobalConst.error)) {
-              const resultJSON: RPCSyncRescan = JSON.parse(result);
-              if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
-                this.latestBlock = resultJSON.latest_block;
+        setTimeout(() => {
+          this.doRescan()
+            .then(result => {
+              console.log('rescan finished', result);
+              if (result && !result.toLowerCase().startsWith(GlobalConst.error)) {
+                const resultJSON: RPCSyncRescan = JSON.parse(result);
+                if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
+                  this.latestBlock = resultJSON.latest_block;
+                }
               }
-            }
-          })
-          .catch(error => console.log('rescan error', error));
+            })
+            .catch(error => console.log('rescan error', error));
+        }, 1);
       } else {
-        this.doSync()
-          .then(result => {
-            console.log('sync finished', result);
-            if (result && !result.toLowerCase().startsWith(GlobalConst.error)) {
-              const resultJSON: RPCSyncRescan = JSON.parse(result);
-              if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
-                this.latestBlock = resultJSON.latest_block;
+        setTimeout(() => {
+          this.doSync()
+            .then(result => {
+              console.log('sync finished', result);
+              if (result && !result.toLowerCase().startsWith(GlobalConst.error)) {
+                const resultJSON: RPCSyncRescan = JSON.parse(result);
+                if (resultJSON.result === GlobalConst.success && resultJSON.latest_block) {
+                  this.latestBlock = resultJSON.latest_block;
+                }
               }
-            }
-          })
-          .catch(error => console.log('sync error', error));
+            })
+            .catch(error => console.log('sync error', error));
+        }, 1);
       }
 
       // We need to wait for the sync to finish. The sync is done when
-      this.syncStatusTimerID = setInterval(async () => {
-        console.log('++++++++++ interval syncing 5 secs');
-        const returnStatus = await this.doSyncStatus();
-        if (returnStatus.toLowerCase().startsWith(GlobalConst.error)) {
-          return;
-        }
-        let ss = {} as RPCSyncStatusType;
-        try {
-          ss = await JSON.parse(returnStatus);
-        } catch (e) {
-          return;
-        }
+      this.syncStatusTimerID = setInterval(() => this.fetchSyncStatus(), 5 * 1000);
 
-        //console.log('sync wallet birthday', this.walletBirthday);
-        //console.log('sync', this.syncStatusTimerID);
-        console.log(
-          'in progress',
-          ss.in_progress,
-          'synced',
-          ss.synced_blocks,
-          'trialDecryptions',
-          ss.trial_decryptions_blocks,
-          'txnScan',
-          ss.txn_scan_blocks,
-          'witnesses',
-          ss.witnesses_updated,
-          'TOTAL',
-          ss.total_blocks,
-          'batchNum',
-          ss.batch_num,
-          'batchTotal',
-          ss.batch_total,
-          'endBlock',
-          ss.end_block,
-          'startBlock',
-          ss.start_block,
-        );
-        //console.log('--------------------------------------');
-
-        // synchronize status
-        if (this.syncStatusTimerID) {
-          this.setInRefresh(ss.in_progress);
-        }
-
-        this.syncId = ss.sync_id;
-
-        // if the syncId change then reset the %
-        if (this.prevSyncId !== this.syncId) {
-          if (this.prevSyncId !== -1) {
-            await this.fetchWalletHeight();
-            await this.fetchWalletBirthday();
-            await this.fetchInfoAndServerHeight();
-
-            await RPCModule.doSave();
-
-            //console.log('sync status', ss);
-            //console.log(`new sync process id: ${this.syncId}. Save the wallet.`);
-            this.prevBatchNum = -1;
-            this.secondsBatch = 0;
-            this.secondsBlock = 0;
-            this.batches = 0;
-          }
-          this.prevSyncId = this.syncId;
-        }
-
-        // Post sync updates
-        let syncedBlocks: number = ss.synced_blocks || 0;
-        let trialDecryptionsBlocks: number = ss.trial_decryptions_blocks || 0;
-        let txnScanBlocks: number = ss.txn_scan_blocks || 0;
-        let witnessesUpdated: number = ss.witnesses_updated || 0;
-
-        // just in case
-        if (syncedBlocks < 0) {
-          syncedBlocks = 0;
-        }
-        if (syncedBlocks > this.blocksPerBatch) {
-          syncedBlocks = this.blocksPerBatch;
-        }
-        if (trialDecryptionsBlocks < 0) {
-          trialDecryptionsBlocks = 0;
-        }
-        if (trialDecryptionsBlocks > this.blocksPerBatch) {
-          trialDecryptionsBlocks = this.blocksPerBatch;
-        }
-        if (txnScanBlocks < 0) {
-          txnScanBlocks = 0;
-        }
-        if (txnScanBlocks > this.blocksPerBatch) {
-          txnScanBlocks = this.blocksPerBatch;
-        }
-        if (witnessesUpdated < 0) {
-          witnessesUpdated = 0;
-        }
-        if (witnessesUpdated > this.blocksPerBatch) {
-          witnessesUpdated = this.blocksPerBatch;
-        }
-
-        const batchTotal: number = ss.batch_total || 0;
-        const batchNum: number = ss.batch_num || 0;
-
-        const endBlock: number = ss.end_block || 0; // lower
-
-        // I want to know what was the first block of the current sync process
-        let processEndBlock: number = 0;
-        // when the App is syncing the new blocks and sync finished really fast
-        // the synstatus have almost all of the fields undefined.
-        // if we have latestBlock means that the sync process finished in that block
-        if (endBlock === 0 && batchNum === 0) {
-          processEndBlock = this.latestBlock !== -1 ? this.latestBlock : this.lastServerBlockHeight;
-        } else {
-          processEndBlock = endBlock - batchNum * this.blocksPerBatch;
-        }
-
-        const progressBlocks: number = (syncedBlocks + trialDecryptionsBlocks + witnessesUpdated) / 3;
-
-        let currentBlock = endBlock + progressBlocks;
-        if (currentBlock > this.lastServerBlockHeight) {
-          currentBlock = this.lastServerBlockHeight;
-        }
-        currentBlock = Number(currentBlock.toFixed(0));
-
-        // if the current block is stalled I need to restart the App
-        let syncProcessStalled = false;
-        if (this.prevCurrentBlock !== -1) {
-          if (currentBlock > 0 && this.prevCurrentBlock === currentBlock) {
-            this.secondsBlock += 5;
-            // 5 minutes
-            if (this.secondsBlock >= 300) {
-              this.secondsBlock = 0;
-              syncProcessStalled = true;
-            }
-          }
-          if (currentBlock > 0 && this.prevCurrentBlock !== currentBlock) {
-            this.secondsBlock = 0;
-            syncProcessStalled = false;
-          }
-        }
-
-        // if current block is lower than the previous current block
-        // The user need to see something not confusing.
-        if (currentBlock > 0 && this.prevCurrentBlock !== -1 && currentBlock < this.prevCurrentBlock) {
-          // I decided to add only one fake block because otherwise could seems stalled
-          // the user expect every 5 seconds the blocks change...
-          currentBlock = this.prevCurrentBlock + 1;
-        }
-
-        this.prevCurrentBlock = currentBlock;
-
-        this.secondsBatch += 5;
-
-        //console.log('interval sync/rescan, secs', this.secondsBatch, 'timer', this.syncStatusTimerID);
-
-        // store SyncStatus object for a new screen
-        this.fnSetSyncingStatus({
-          syncID: this.syncId,
-          totalBatches: batchTotal,
-          currentBatch: ss.in_progress ? batchNum + 1 : 0,
-          lastBlockWallet: this.lastWalletBlockHeight,
-          currentBlock: currentBlock,
-          inProgress: ss.in_progress,
-          lastError: ss.last_error,
-          blocksPerBatch: this.blocksPerBatch,
-          secondsPerBatch: this.secondsBatch,
-          processEndBlock: processEndBlock,
-          lastBlockServer: this.lastServerBlockHeight,
-          syncProcessStalled: syncProcessStalled,
-        } as SyncingStatusClass);
-
-        // Close the poll timer if the sync finished(checked via promise above)
-        if (!this.inRefresh) {
-          // We are synced. Cancel the poll timer
-          if (this.syncStatusTimerID) {
-            clearInterval(this.syncStatusTimerID);
-            this.syncStatusTimerID = undefined;
-          }
-
-          // here we can release the screen...
-          this.keepAwake(false);
-
-          await this.fetchWalletHeight();
-          await this.fetchWalletBirthday();
-          await this.fetchInfoAndServerHeight();
-
-          await RPCModule.doSave();
-
-          // store SyncStatus object for a new screen
-          this.fnSetSyncingStatus({
-            syncID: this.syncId,
-            totalBatches: 0,
-            currentBatch: 0,
-            lastBlockWallet: this.lastWalletBlockHeight,
-            currentBlock: currentBlock,
-            inProgress: false,
-            lastError: ss.last_error,
-            blocksPerBatch: this.blocksPerBatch,
-            secondsPerBatch: 0,
-            processEndBlock: processEndBlock,
-            lastBlockServer: this.lastServerBlockHeight,
-            syncProcessStalled: false,
-          } as SyncingStatusClass);
-
-          //console.log('sync status', ss);
-          //console.log(`Finished refresh at ${this.lastWalletBlockHeight} id: ${this.syncId}`);
-        } else {
-          // If we're doing a long sync, every time the batchNum changes, save the wallet
-          if (this.prevBatchNum !== batchNum) {
-            // if finished batches really fast, the App have to save the wallet delayed.
-            if (this.prevBatchNum !== -1 && this.batches >= 1) {
-              await this.fetchWalletHeight();
-              await this.fetchWalletBirthday();
-              await this.fetchInfoAndServerHeight();
-
-              await RPCModule.doSave();
-              this.batches = 0;
-
-              //console.log('sync status', ss);
-              //console.log(
-              //  `@@@@@@@@@@@ Saving because batch num changed ${this.prevBatchNum} - ${batchNum}. seconds: ${this.secondsBatch}`,
-              //);
-            }
-            this.batches += batchNum - this.prevBatchNum;
-            this.prevBatchNum = batchNum;
-            this.secondsBatch = 0;
-          }
-        }
-      }, 5000);
       //console.log('create sync/rescan timer', this.syncStatusTimerID);
       this.timers.push(this.syncStatusTimerID);
     } else {
@@ -1029,6 +796,236 @@ export default class RPC {
         lastBlockServer: this.lastServerBlockHeight,
         syncProcessStalled: false,
       } as SyncingStatusClass);
+    }
+  }
+
+  async fetchSyncStatus(): Promise<void> {
+    console.log('++++++++++ interval syncing 5 secs');
+    const start = Date.now();
+    const returnStatus = await this.doSyncStatus();
+    console.log('@@@@@@@@@@@@@@@ SS time', Date.now() - start);
+    if (returnStatus.toLowerCase().startsWith(GlobalConst.error)) {
+      console.log('SYNC STATUS ERROR', returnStatus);
+      return;
+    }
+    let ss = {} as RPCSyncStatusType;
+    try {
+      ss = await JSON.parse(returnStatus);
+    } catch (e) {
+      return;
+    }
+
+    //console.log('sync wallet birthday', this.walletBirthday);
+    //console.log('sync', this.syncStatusTimerID);
+    console.log(
+      'in progress',
+      ss.in_progress,
+      'synced',
+      ss.synced_blocks,
+      'trialDecryptions',
+      ss.trial_decryptions_blocks,
+      'txnScan',
+      ss.txn_scan_blocks,
+      'witnesses',
+      ss.witnesses_updated,
+      'TOTAL',
+      ss.total_blocks,
+      'batchNum',
+      ss.batch_num,
+      'batchTotal',
+      ss.batch_total,
+      'endBlock',
+      ss.end_block,
+      'startBlock',
+      ss.start_block,
+    );
+    //console.log('--------------------------------------');
+
+    // synchronize status
+    if (this.syncStatusTimerID) {
+      this.setInRefresh(ss.in_progress);
+    }
+
+    this.syncId = ss.sync_id;
+
+    // if the syncId change then reset the %
+    if (this.prevSyncId !== this.syncId) {
+      if (this.prevSyncId !== -1) {
+        await this.fetchWalletHeight();
+        await this.fetchWalletBirthday();
+        await this.fetchInfoAndServerHeight();
+
+        await RPCModule.doSave();
+
+        //console.log('sync status', ss);
+        //console.log(`new sync process id: ${this.syncId}. Save the wallet.`);
+        this.prevBatchNum = -1;
+        this.secondsBatch = 0;
+        this.secondsBlock = 0;
+        this.batches = 0;
+      }
+      this.prevSyncId = this.syncId;
+    }
+
+    // Post sync updates
+    let syncedBlocks: number = ss.synced_blocks || 0;
+    let trialDecryptionsBlocks: number = ss.trial_decryptions_blocks || 0;
+    let txnScanBlocks: number = ss.txn_scan_blocks || 0;
+    let witnessesUpdated: number = ss.witnesses_updated || 0;
+
+    // just in case
+    if (syncedBlocks < 0) {
+      syncedBlocks = 0;
+    }
+    if (syncedBlocks > this.blocksPerBatch) {
+      syncedBlocks = this.blocksPerBatch;
+    }
+    if (trialDecryptionsBlocks < 0) {
+      trialDecryptionsBlocks = 0;
+    }
+    if (trialDecryptionsBlocks > this.blocksPerBatch) {
+      trialDecryptionsBlocks = this.blocksPerBatch;
+    }
+    if (txnScanBlocks < 0) {
+      txnScanBlocks = 0;
+    }
+    if (txnScanBlocks > this.blocksPerBatch) {
+      txnScanBlocks = this.blocksPerBatch;
+    }
+    if (witnessesUpdated < 0) {
+      witnessesUpdated = 0;
+    }
+    if (witnessesUpdated > this.blocksPerBatch) {
+      witnessesUpdated = this.blocksPerBatch;
+    }
+
+    const batchTotal: number = ss.batch_total || 0;
+    const batchNum: number = ss.batch_num || 0;
+
+    const endBlock: number = ss.end_block || 0; // lower
+
+    // I want to know what was the first block of the current sync process
+    let processEndBlock: number = 0;
+    // when the App is syncing the new blocks and sync finished really fast
+    // the synstatus have almost all of the fields undefined.
+    // if we have latestBlock means that the sync process finished in that block
+    if (endBlock === 0 && batchNum === 0) {
+      processEndBlock = this.latestBlock !== -1 ? this.latestBlock : this.lastServerBlockHeight;
+    } else {
+      processEndBlock = endBlock - batchNum * this.blocksPerBatch;
+    }
+
+    const progressBlocks: number = (syncedBlocks + trialDecryptionsBlocks + witnessesUpdated) / 3;
+
+    let currentBlock = endBlock + progressBlocks;
+    if (currentBlock > this.lastServerBlockHeight) {
+      currentBlock = this.lastServerBlockHeight;
+    }
+    currentBlock = Number(currentBlock.toFixed(0));
+
+    // if the current block is stalled I need to restart the App
+    let syncProcessStalled = false;
+    if (this.prevCurrentBlock !== -1) {
+      if (currentBlock > 0 && this.prevCurrentBlock === currentBlock) {
+        this.secondsBlock += 5;
+        // 5 minutes
+        if (this.secondsBlock >= 300) {
+          this.secondsBlock = 0;
+          syncProcessStalled = true;
+        }
+      }
+      if (currentBlock > 0 && this.prevCurrentBlock !== currentBlock) {
+        this.secondsBlock = 0;
+        syncProcessStalled = false;
+      }
+    }
+
+    // if current block is lower than the previous current block
+    // The user need to see something not confusing.
+    if (currentBlock > 0 && this.prevCurrentBlock !== -1 && currentBlock < this.prevCurrentBlock) {
+      // I decided to add only one fake block because otherwise could seems stalled
+      // the user expect every 5 seconds the blocks change...
+      currentBlock = this.prevCurrentBlock + 1;
+    }
+
+    this.prevCurrentBlock = currentBlock;
+
+    this.secondsBatch += 5;
+
+    //console.log('interval sync/rescan, secs', this.secondsBatch, 'timer', this.syncStatusTimerID);
+
+    // store SyncStatus object for a new screen
+    this.fnSetSyncingStatus({
+      syncID: this.syncId,
+      totalBatches: batchTotal,
+      currentBatch: ss.in_progress ? batchNum + 1 : 0,
+      lastBlockWallet: this.lastWalletBlockHeight,
+      currentBlock: currentBlock,
+      inProgress: ss.in_progress,
+      lastError: ss.last_error,
+      blocksPerBatch: this.blocksPerBatch,
+      secondsPerBatch: this.secondsBatch,
+      processEndBlock: processEndBlock,
+      lastBlockServer: this.lastServerBlockHeight,
+      syncProcessStalled: syncProcessStalled,
+    } as SyncingStatusClass);
+
+    // Close the poll timer if the sync finished(checked via promise above)
+    if (!this.inRefresh) {
+      // We are synced. Cancel the poll timer
+      if (this.syncStatusTimerID) {
+        clearInterval(this.syncStatusTimerID);
+        this.syncStatusTimerID = undefined;
+      }
+
+      // here we can release the screen...
+      this.keepAwake(false);
+
+      await this.fetchWalletHeight();
+      await this.fetchWalletBirthday();
+      await this.fetchInfoAndServerHeight();
+
+      await RPCModule.doSave();
+
+      // store SyncStatus object for a new screen
+      this.fnSetSyncingStatus({
+        syncID: this.syncId,
+        totalBatches: 0,
+        currentBatch: 0,
+        lastBlockWallet: this.lastWalletBlockHeight,
+        currentBlock: currentBlock,
+        inProgress: false,
+        lastError: ss.last_error,
+        blocksPerBatch: this.blocksPerBatch,
+        secondsPerBatch: 0,
+        processEndBlock: processEndBlock,
+        lastBlockServer: this.lastServerBlockHeight,
+        syncProcessStalled: false,
+      } as SyncingStatusClass);
+
+      //console.log('sync status', ss);
+      //console.log(`Finished refresh at ${this.lastWalletBlockHeight} id: ${this.syncId}`);
+    } else {
+      // If we're doing a long sync, every time the batchNum changes, save the wallet
+      if (this.prevBatchNum !== batchNum) {
+        // if finished batches really fast, the App have to save the wallet delayed.
+        if (this.prevBatchNum !== -1 && this.batches >= 1) {
+          await this.fetchWalletHeight();
+          await this.fetchWalletBirthday();
+          await this.fetchInfoAndServerHeight();
+
+          await RPCModule.doSave();
+          this.batches = 0;
+
+          //console.log('sync status', ss);
+          //console.log(
+          //  `@@@@@@@@@@@ Saving because batch num changed ${this.prevBatchNum} - ${batchNum}. seconds: ${this.secondsBatch}`,
+          //);
+        }
+        this.batches += batchNum - this.prevBatchNum;
+        this.prevBatchNum = batchNum;
+        this.secondsBatch = 0;
+      }
     }
   }
 
