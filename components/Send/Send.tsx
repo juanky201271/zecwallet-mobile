@@ -126,7 +126,7 @@ const Send: React.FunctionComponent<SendProps> = ({
     language,
     donation,
     addresses,
-    uaAddress,
+    uaOrchardAddress,
     shieldingAmount,
     selectServer,
   } = context;
@@ -253,7 +253,7 @@ const Send: React.FunctionComponent<SendProps> = ({
 
         sendJson = await Utils.getSendManyJSON(
           sendPageStateCalculateFee,
-          uaAddress,
+          uaOrchardAddress,
           addresses ? addresses : ([] as AddressClass[]),
           server,
           donation,
@@ -324,7 +324,7 @@ const Send: React.FunctionComponent<SendProps> = ({
       setFee(proposeFee);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [addresses, donation, server, translate, uaAddress, validAddress, validAmount, validMemo],
+    [addresses, donation, server, translate, uaOrchardAddress, validAddress, validAmount, validMemo],
   );
 
   const calculateSpendableBalance = useCallback(
@@ -402,8 +402,8 @@ const Send: React.FunctionComponent<SendProps> = ({
     ],
   );
 
-  const memoTotal = useCallback((memoPar: string, includeUAMemoPar: boolean, uaAddressPar: string) => {
-    return `${memoPar || ''}${includeUAMemoPar ? GlobalConst.replyTo + uaAddressPar : ''}`;
+  const memoTotal = useCallback((memoPar: string, includeUAMemoPar: boolean, uaOrchardAddressPar: string) => {
+    return `${memoPar || ''}${includeUAMemoPar ? GlobalConst.replyTo + uaOrchardAddressPar : ''}`;
   }, []);
 
   const updateToField = async (
@@ -570,7 +570,7 @@ const Send: React.FunctionComponent<SendProps> = ({
     }
 
     if (to.memo || to.includeUAMemo) {
-      const len = Buffer.byteLength(memoTotal(to.memo, to.includeUAMemo, uaAddress), 'utf8');
+      const len = Buffer.byteLength(memoTotal(to.memo, to.includeUAMemo, uaOrchardAddress), 'utf8');
       if (len > GlobalConst.memoMaxLength) {
         setValidMemo(-1);
       } else {
@@ -620,7 +620,7 @@ const Send: React.FunctionComponent<SendProps> = ({
     spendable,
     fee,
     maxAmount,
-    uaAddress,
+    uaOrchardAddress,
     memoTotal,
   ]);
 
@@ -869,7 +869,7 @@ const Send: React.FunctionComponent<SendProps> = ({
   };
 
   const countMemoBytes = (memo: string, includeUAMemo: boolean) => {
-    const len = Buffer.byteLength(memoTotal(memo, includeUAMemo, uaAddress), 'utf8');
+    const len = Buffer.byteLength(memoTotal(memo, includeUAMemo, uaOrchardAddress), 'utf8');
     return len;
   };
 

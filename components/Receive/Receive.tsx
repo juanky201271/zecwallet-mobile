@@ -18,20 +18,20 @@ import 'moment/locale/ru';
 import { AddressClass, AddressKindEnum, ModeEnum } from '../../app/AppState';
 
 type ReceiveProps = {
-  setUaAddress: (uaAddress: string) => void;
+  setUaOrchardAddress: (uaOrchardAddress: string) => void;
   toggleMenuDrawer: () => void;
   syncingStatusMoreInfoOnClick: () => void;
   setUfvkViewModalVisible?: (v: boolean) => void;
 };
 
 const Receive: React.FunctionComponent<ReceiveProps> = ({
-  setUaAddress,
+  setUaOrchardAddress,
   toggleMenuDrawer,
   syncingStatusMoreInfoOnClick,
   setUfvkViewModalVisible,
 }) => {
   const context = useContext(ContextAppLoaded);
-  const { translate, addresses, uaAddress, mode, addLastSnackbar, language } = context;
+  const { translate, addresses, uaOrchardAddress, mode, addLastSnackbar, language } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
@@ -51,23 +51,25 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
   };
 
   useEffect(() => {
-    if (addresses && addresses.length > 0 && uaAddress) {
+    if (addresses && addresses.length > 0 && uaOrchardAddress) {
       const uadd = addresses.filter(a => a.addressKind === AddressKindEnum.u) || [];
-      const zadd = addresses.filter(a => a.uaAddress === uaAddress && a.addressKind === AddressKindEnum.z) || [];
-      const tadd = addresses.filter(a => a.uaAddress === uaAddress && a.addressKind === AddressKindEnum.t) || [];
+      const zadd =
+        addresses.filter(a => a.uaOrchardAddress === uaOrchardAddress && a.addressKind === AddressKindEnum.z) || [];
+      const tadd =
+        addresses.filter(a => a.uaOrchardAddress === uaOrchardAddress && a.addressKind === AddressKindEnum.t) || [];
       setUaddrs(uadd);
       setZaddrs(zadd);
       setTaddrs(tadd);
 
-      const uaAddressIndex = uadd.findIndex(a => a.address === uaAddress);
-      setUIndex(uaAddressIndex);
+      const uaOrchardAddressIndex = uadd.findIndex(a => a.address === uaOrchardAddress);
+      setUIndex(uaOrchardAddressIndex);
     } else if (addresses && addresses.length > 0) {
       const uadd = addresses.filter(a => a.addressKind === AddressKindEnum.u) || [];
       setUaddrs(uadd);
 
       setUIndex(0);
     }
-  }, [addresses, uaAddress]);
+  }, [addresses, uaOrchardAddress]);
 
   const prev = (type: AddressKindEnum) => {
     if (type === AddressKindEnum.u) {
@@ -79,7 +81,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
         newIndex = uaddrs.length - 1;
       }
       setUIndex(newIndex);
-      setUaAddress(uaddrs[newIndex].address);
+      setUaOrchardAddress(uaddrs[newIndex].address);
     } else if (type === AddressKindEnum.z) {
       if (zaddrs.length === 0) {
         return;
@@ -108,7 +110,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
       }
       const newIndex = (uindex + 1) % uaddrs.length;
       setUIndex(newIndex);
-      setUaAddress(uaddrs[newIndex].address);
+      setUaOrchardAddress(uaddrs[newIndex].address);
     } else if (type === AddressKindEnum.z) {
       if (zaddrs.length === 0) {
         return;
@@ -148,7 +150,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
 
         return (
           !!addresses &&
-          !!uaAddress && (
+          !!uaOrchardAddress && (
             <SingleAddress
               address={uaddr}
               index={uindex}
@@ -171,7 +173,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
 
         return (
           !!addresses &&
-          !!uaAddress && (
+          !!uaOrchardAddress && (
             <SingleAddress
               address={zaddr}
               index={zindex}
@@ -194,7 +196,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
 
         return (
           !!addresses &&
-          !!uaAddress && (
+          !!uaOrchardAddress && (
             <SingleAddress
               address={taddr}
               index={tindex}

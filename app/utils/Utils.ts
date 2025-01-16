@@ -238,7 +238,7 @@ export default class Utils {
 
   static async getSendManyJSON(
     sendPageState: SendPageStateClass,
-    uaAddress: string,
+    uaOrchardAddress: string,
     addresses: AddressClass[],
     server: ServerType,
     donation: boolean,
@@ -246,7 +246,7 @@ export default class Utils {
     let donationAddress: boolean = false;
     const json: Promise<SendJsonToTypeType[][]> = Promise.all(
       [sendPageState.toaddr].flatMap(async (to: ToAddrClass) => {
-        const memo = `${to.memo || ''}${to.includeUAMemo ? GlobalConst.replyTo + uaAddress : ''}`;
+        const memo = `${to.memo || ''}${to.includeUAMemo ? GlobalConst.replyTo + uaOrchardAddress : ''}`;
         const amount = parseInt((Utils.parseStringLocaleToNumberFloat(to.amount) * 10 ** 8).toFixed(0), 10);
 
         donationAddress =

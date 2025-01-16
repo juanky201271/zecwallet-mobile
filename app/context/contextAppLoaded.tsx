@@ -39,7 +39,7 @@ export const defaultAppContextLoaded: AppContextLoaded = {
   walletSettings: new WalletSettingsClass(),
   sendProgress: new SendProgressClass(0, 0, 0),
   wallet: {} as WalletType,
-  uaAddress: '',
+  uaOrchardAddress: '',
   server: {} as ServerType,
   currency: CurrencyEnum.noCurrency,
   language: LanguageEnum.en,

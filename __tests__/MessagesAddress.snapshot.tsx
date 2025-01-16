@@ -95,7 +95,7 @@ describe('Component Messages Address - test', () => {
   //snapshot test
   const state = defaultAppContextLoaded;
   state.valueTransfers = mockValueTransfers;
-  state.uaAddress = mockAddresses[0].uaAddress;
+  state.uaOrchardAddress = mockAddresses[0].uaOrchardAddress;
   state.addresses = mockAddresses;
   state.translate = mockTranslate;
   state.info = mockInfo;
@@ -119,7 +119,7 @@ describe('Component Messages Address - test', () => {
           setSendPageState={onFunction}
           setScrollToBottom={onFunction}
           scrollToBottom={false}
-          address={mockAddresses[0].uaAddress}
+          address={mockAddresses[0].uaOrchardAddress}
           closeModal={onFunction}
           openModal={onFunction}
         />
