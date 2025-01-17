@@ -1155,25 +1155,26 @@ export default class RPC {
 
       let allAddresses: AddressClass[] = [];
 
-      addressesJSON.forEach((u: RPCAddressType) => {
-        // If this has any pending txns, show that in the UI
-        const receivers: string =
-          (u.receivers.orchard_exists ? ReceiverEnum.o : '') +
-          (u.receivers.sapling ? ReceiverEnum.z : '') +
-          (u.receivers.transparent ? ReceiverEnum.t : '');
-        if (u.address) {
-          const abu = new AddressClass(uOrchardAddress, u.address, AddressKindEnum.u, receivers);
-          allAddresses.push(abu);
-        }
-        if (u.address && u.receivers.sapling) {
-          const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, receivers);
-          allAddresses.push(abz);
-        }
-        if (u.address && u.receivers.transparent) {
-          const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, receivers);
-          allAddresses.push(abt);
-        }
-      });
+      addressesJSON &&
+        addressesJSON.forEach((u: RPCAddressType) => {
+          // If this has any pending txns, show that in the UI
+          const receivers: string =
+            (u.receivers.orchard_exists ? ReceiverEnum.o : '') +
+            (u.receivers.sapling ? ReceiverEnum.z : '') +
+            (u.receivers.transparent ? ReceiverEnum.t : '');
+          if (u.address) {
+            const abu = new AddressClass(uOrchardAddress, u.address, AddressKindEnum.u, receivers);
+            allAddresses.push(abu);
+          }
+          if (u.address && u.receivers.sapling) {
+            const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, receivers);
+            allAddresses.push(abz);
+          }
+          if (u.address && u.receivers.transparent) {
+            const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, receivers);
+            allAddresses.push(abt);
+          }
+        });
 
       // adding the UA only orchard receiver
       const abo = new AddressClass(uOrchardAddress, uOrchardAddress, AddressKindEnum.u, 'o');
@@ -1248,65 +1249,67 @@ export default class RPC {
 
       // oscar idea and I think it is the correct way to build the history of
       // value transfers.
-      valueTransfersJSON.value_transfers.forEach((vt: RPCValueTransferType) => {
-        const currentValueTransferList: ValueTransferType = {} as ValueTransferType;
+      valueTransfersJSON &&
+        valueTransfersJSON.value_transfers &&
+        valueTransfersJSON.value_transfers.forEach((vt: RPCValueTransferType) => {
+          const currentValueTransferList: ValueTransferType = {} as ValueTransferType;
 
-        currentValueTransferList.txid = vt.txid;
-        currentValueTransferList.time = vt.datetime;
-        currentValueTransferList.kind =
-          vt.kind === RPCValueTransfersKindEnum.memoToSelf
-            ? ValueTransferKindEnum.MemoToSelf
-            : vt.kind === RPCValueTransfersKindEnum.basic
-            ? ValueTransferKindEnum.SendToSelf
-            : vt.kind === RPCValueTransfersKindEnum.received
-            ? ValueTransferKindEnum.Received
-            : vt.kind === RPCValueTransfersKindEnum.sent
-            ? ValueTransferKindEnum.Sent
-            : vt.kind === RPCValueTransfersKindEnum.shield
-            ? ValueTransferKindEnum.Shield
-            : vt.kind === RPCValueTransfersKindEnum.rejection
-            ? ValueTransferKindEnum.Rejection
-            : undefined;
-        currentValueTransferList.fee = (!vt.transaction_fee ? 0 : vt.transaction_fee) / 10 ** 8;
-        currentValueTransferList.zecPrice = !vt.zec_price ? 0 : vt.zec_price;
-        if (
-          vt.status === RPCValueTransfersStatusEnum.calculated ||
-          vt.status === RPCValueTransfersStatusEnum.transmitted ||
-          vt.status === RPCValueTransfersStatusEnum.mempool
-        ) {
-          currentValueTransferList.confirmations = 0;
-        } else if (vt.status === RPCValueTransfersStatusEnum.confirmed) {
-          currentValueTransferList.confirmations =
-            this.lastServerBlockHeight && this.lastServerBlockHeight >= this.lastWalletBlockHeight
-              ? this.lastServerBlockHeight - vt.blockheight + 1
-              : this.lastWalletBlockHeight - vt.blockheight + 1;
-        } else {
-          // impossible case... I guess.
-          currentValueTransferList.confirmations = 0;
-        }
-        currentValueTransferList.status = vt.status;
-        currentValueTransferList.address = !vt.recipient_address ? undefined : vt.recipient_address;
-        currentValueTransferList.amount = (!vt.value ? 0 : vt.value) / 10 ** 8;
-        currentValueTransferList.memos = !vt.memos || vt.memos.length === 0 ? undefined : vt.memos;
-        currentValueTransferList.poolType = !vt.pool_received ? undefined : vt.pool_received;
+          currentValueTransferList.txid = vt.txid;
+          currentValueTransferList.time = vt.datetime;
+          currentValueTransferList.kind =
+            vt.kind === RPCValueTransfersKindEnum.memoToSelf
+              ? ValueTransferKindEnum.MemoToSelf
+              : vt.kind === RPCValueTransfersKindEnum.basic
+              ? ValueTransferKindEnum.SendToSelf
+              : vt.kind === RPCValueTransfersKindEnum.received
+              ? ValueTransferKindEnum.Received
+              : vt.kind === RPCValueTransfersKindEnum.sent
+              ? ValueTransferKindEnum.Sent
+              : vt.kind === RPCValueTransfersKindEnum.shield
+              ? ValueTransferKindEnum.Shield
+              : vt.kind === RPCValueTransfersKindEnum.rejection
+              ? ValueTransferKindEnum.Rejection
+              : undefined;
+          currentValueTransferList.fee = (!vt.transaction_fee ? 0 : vt.transaction_fee) / 10 ** 8;
+          currentValueTransferList.zecPrice = !vt.zec_price ? 0 : vt.zec_price;
+          if (
+            vt.status === RPCValueTransfersStatusEnum.calculated ||
+            vt.status === RPCValueTransfersStatusEnum.transmitted ||
+            vt.status === RPCValueTransfersStatusEnum.mempool
+          ) {
+            currentValueTransferList.confirmations = 0;
+          } else if (vt.status === RPCValueTransfersStatusEnum.confirmed) {
+            currentValueTransferList.confirmations =
+              this.lastServerBlockHeight && this.lastServerBlockHeight >= this.lastWalletBlockHeight
+                ? this.lastServerBlockHeight - vt.blockheight + 1
+                : this.lastWalletBlockHeight - vt.blockheight + 1;
+          } else {
+            // impossible case... I guess.
+            currentValueTransferList.confirmations = 0;
+          }
+          currentValueTransferList.status = vt.status;
+          currentValueTransferList.address = !vt.recipient_address ? undefined : vt.recipient_address;
+          currentValueTransferList.amount = (!vt.value ? 0 : vt.value) / 10 ** 8;
+          currentValueTransferList.memos = !vt.memos || vt.memos.length === 0 ? undefined : vt.memos;
+          currentValueTransferList.poolType = !vt.pool_received ? undefined : vt.pool_received;
 
-        if (vt.txid.startsWith('xxxxxxxxx')) {
-          console.log('valuetransfer zingolib: ', vt);
-          console.log('valuetransfer zingo', currentValueTransferList);
-          console.log('--------------------------------------------------');
-        }
-        //if (vt.status === RPCValueTransfersStatusEnum.calculated) {
-        //  console.log('CALCULATED ))))))))))))))))))))))))))))))))))');
-        //  console.log(vt);
-        //}
-        //if (vt.status === RPCValueTransfersStatusEnum.transmitted) {
-        //  console.log('TRANSMITTED ))))))))))))))))))))))))))))))))))');
-        //  console.log(vt);
-        //}
+          if (vt.txid.startsWith('xxxxxxxxx')) {
+            console.log('valuetransfer zingolib: ', vt);
+            console.log('valuetransfer zingo', currentValueTransferList);
+            console.log('--------------------------------------------------');
+          }
+          //if (vt.status === RPCValueTransfersStatusEnum.calculated) {
+          //  console.log('CALCULATED ))))))))))))))))))))))))))))))))))');
+          //  console.log(vt);
+          //}
+          //if (vt.status === RPCValueTransfersStatusEnum.transmitted) {
+          //  console.log('TRANSMITTED ))))))))))))))))))))))))))))))))))');
+          //  console.log(vt);
+          //}
 
-        //console.log(currentValueTransferList);
-        vtList.push(currentValueTransferList);
-      });
+          //console.log(currentValueTransferList);
+          vtList.push(currentValueTransferList);
+        });
 
       //console.log(vtlist);
 
@@ -1341,65 +1344,67 @@ export default class RPC {
 
       // oscar idea and I think it is the correct way to build the history of
       // value transfers.
-      messagesJSON.value_transfers.forEach((m: RPCValueTransferType) => {
-        const currentMessageList: ValueTransferType = {} as ValueTransferType;
+      messagesJSON &&
+        messagesJSON.value_transfers &&
+        messagesJSON.value_transfers.forEach((m: RPCValueTransferType) => {
+          const currentMessageList: ValueTransferType = {} as ValueTransferType;
 
-        currentMessageList.txid = m.txid;
-        currentMessageList.time = m.datetime;
-        currentMessageList.kind =
-          m.kind === RPCValueTransfersKindEnum.memoToSelf
-            ? ValueTransferKindEnum.MemoToSelf
-            : m.kind === RPCValueTransfersKindEnum.basic
-            ? ValueTransferKindEnum.SendToSelf
-            : m.kind === RPCValueTransfersKindEnum.received
-            ? ValueTransferKindEnum.Received
-            : m.kind === RPCValueTransfersKindEnum.sent
-            ? ValueTransferKindEnum.Sent
-            : m.kind === RPCValueTransfersKindEnum.shield
-            ? ValueTransferKindEnum.Shield
-            : m.kind === RPCValueTransfersKindEnum.rejection
-            ? ValueTransferKindEnum.Rejection
-            : undefined;
-        currentMessageList.fee = (!m.transaction_fee ? 0 : m.transaction_fee) / 10 ** 8;
-        currentMessageList.zecPrice = !m.zec_price ? 0 : m.zec_price;
-        if (
-          m.status === RPCValueTransfersStatusEnum.calculated ||
-          m.status === RPCValueTransfersStatusEnum.transmitted ||
-          m.status === RPCValueTransfersStatusEnum.mempool
-        ) {
-          currentMessageList.confirmations = 0;
-        } else if (m.status === RPCValueTransfersStatusEnum.confirmed) {
-          currentMessageList.confirmations =
-            this.lastServerBlockHeight && this.lastServerBlockHeight >= this.lastWalletBlockHeight
-              ? this.lastServerBlockHeight - m.blockheight + 1
-              : this.lastWalletBlockHeight - m.blockheight + 1;
-        } else {
-          // impossible case... I guess.
-          currentMessageList.confirmations = 0;
-        }
-        currentMessageList.status = m.status;
-        currentMessageList.address = !m.recipient_address ? undefined : m.recipient_address;
-        currentMessageList.amount = (!m.value ? 0 : m.value) / 10 ** 8;
-        currentMessageList.memos = !m.memos || m.memos.length === 0 ? undefined : m.memos;
-        currentMessageList.poolType = !m.pool_received ? undefined : m.pool_received;
+          currentMessageList.txid = m.txid;
+          currentMessageList.time = m.datetime;
+          currentMessageList.kind =
+            m.kind === RPCValueTransfersKindEnum.memoToSelf
+              ? ValueTransferKindEnum.MemoToSelf
+              : m.kind === RPCValueTransfersKindEnum.basic
+              ? ValueTransferKindEnum.SendToSelf
+              : m.kind === RPCValueTransfersKindEnum.received
+              ? ValueTransferKindEnum.Received
+              : m.kind === RPCValueTransfersKindEnum.sent
+              ? ValueTransferKindEnum.Sent
+              : m.kind === RPCValueTransfersKindEnum.shield
+              ? ValueTransferKindEnum.Shield
+              : m.kind === RPCValueTransfersKindEnum.rejection
+              ? ValueTransferKindEnum.Rejection
+              : undefined;
+          currentMessageList.fee = (!m.transaction_fee ? 0 : m.transaction_fee) / 10 ** 8;
+          currentMessageList.zecPrice = !m.zec_price ? 0 : m.zec_price;
+          if (
+            m.status === RPCValueTransfersStatusEnum.calculated ||
+            m.status === RPCValueTransfersStatusEnum.transmitted ||
+            m.status === RPCValueTransfersStatusEnum.mempool
+          ) {
+            currentMessageList.confirmations = 0;
+          } else if (m.status === RPCValueTransfersStatusEnum.confirmed) {
+            currentMessageList.confirmations =
+              this.lastServerBlockHeight && this.lastServerBlockHeight >= this.lastWalletBlockHeight
+                ? this.lastServerBlockHeight - m.blockheight + 1
+                : this.lastWalletBlockHeight - m.blockheight + 1;
+          } else {
+            // impossible case... I guess.
+            currentMessageList.confirmations = 0;
+          }
+          currentMessageList.status = m.status;
+          currentMessageList.address = !m.recipient_address ? undefined : m.recipient_address;
+          currentMessageList.amount = (!m.value ? 0 : m.value) / 10 ** 8;
+          currentMessageList.memos = !m.memos || m.memos.length === 0 ? undefined : m.memos;
+          currentMessageList.poolType = !m.pool_received ? undefined : m.pool_received;
 
-        if (m.txid.startsWith('xxxxxxxxx')) {
-          console.log('valuetransfer messages zingolib: ', m);
-          console.log('valuetransfer messages zingo', currentMessageList);
-          console.log('--------------------------------------------------');
-        }
-        //if (m.status === RPCValueTransfersStatusEnum.calculated) {
-        //  console.log('CALCULATED ))))))))))))))))))))))))))))))))))');
-        //  console.log(m);
-        //}
-        //if (m.status === RPCValueTransfersStatusEnum.transmitted) {
-        //  console.log('TRANSMITTED ))))))))))))))))))))))))))))))))))');
-        //  console.log(m);
-        //}
+          if (m.txid.startsWith('xxxxxxxxx')) {
+            console.log('valuetransfer messages zingolib: ', m);
+            console.log('valuetransfer messages zingo', currentMessageList);
+            console.log('--------------------------------------------------');
+          }
+          //if (m.status === RPCValueTransfersStatusEnum.calculated) {
+          //  console.log('CALCULATED ))))))))))))))))))))))))))))))))))');
+          //  console.log(m);
+          //}
+          //if (m.status === RPCValueTransfersStatusEnum.transmitted) {
+          //  console.log('TRANSMITTED ))))))))))))))))))))))))))))))))))');
+          //  console.log(m);
+          //}
 
-        //console.log(currentValueTransferList);
-        mList.push(currentMessageList);
-      });
+          //console.log(currentValueTransferList);
+          mList.push(currentMessageList);
+        });
 
       //console.log(mlist);
 

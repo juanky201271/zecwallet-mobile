@@ -142,9 +142,10 @@ const parseZcashURI = async (
 
   // Convert to plain array
   const ans: ZcashURITargetClass[] = new Array(targets.size);
-  targets.forEach((tgt, idx) => {
-    ans[idx] = tgt;
-  });
+  targets &&
+    targets.forEach((tgt, idx) => {
+      ans[idx] = tgt;
+    });
 
   // Make sure no elements were skipped
   //const testAns: ZcashURITarget[] = ans;
