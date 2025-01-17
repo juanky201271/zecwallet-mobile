@@ -1540,10 +1540,6 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
     }
   };
 
-  setUOrchardAddress = (uOrchardAddress: string) => {
-    this.setState({ uOrchardAddress });
-  };
-
   syncingStatusMoreInfoOnClick = async () => {
     await this.fetchWallet();
     this.setState({ syncReportModalVisible: true });
