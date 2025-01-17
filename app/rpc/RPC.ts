@@ -1151,7 +1151,8 @@ export default class RPC {
         return;
       }
       const orchardAddressesJSON: RPCAddressType[] = await JSON.parse(orchardAddressesStr);
-      const uOrchardAddress: string = orchardAddressesJSON[0].address;
+      const uOrchardAddress: string =
+        orchardAddressesJSON && orchardAddressesJSON.length > 0 ? orchardAddressesJSON[0].address : '';
 
       let allAddresses: AddressClass[] = [];
 
