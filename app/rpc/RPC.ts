@@ -34,6 +34,7 @@ import { RPCValueTransfersKindEnum } from './enums/RPCValueTransfersKindEnum';
 import { RPCValueTransferType } from './types/RPCValueTransferType';
 import { ValueTransferKindEnum } from '../AppState/enums/ValueTransferKindEnum';
 import { RPCValueTransfersStatusEnum } from './enums/RPCValueTransfersStatusEnum';
+import { CommandAddressesEnum } from '../AppState/enums/CommandAddressesEnum';
 
 export default class RPC {
   fnSetInfo: (info: InfoType) => void;
@@ -1127,7 +1128,7 @@ export default class RPC {
   // This method will get the total balances
   async fetchAddresses() {
     try {
-      const addressesStr: string = await RPCModule.execute(CommandEnum.addresses, '');
+      const addressesStr: string = await RPCModule.execute(CommandEnum.addresses, CommandAddressesEnum.full);
       if (addressesStr) {
         if (addressesStr.toLowerCase().startsWith(GlobalConst.error)) {
           console.log(`Error addresses ${addressesStr}`);
@@ -1139,6 +1140,19 @@ export default class RPC {
       }
       const addressesJSON: RPCAddressType[] = await JSON.parse(addressesStr);
 
+      const orchardAddressesStr: string = await RPCModule.execute(CommandEnum.addresses, CommandAddressesEnum.orchard);
+      if (addressesStr) {
+        if (addressesStr.toLowerCase().startsWith(GlobalConst.error)) {
+          console.log(`Error addresses ${addressesStr}`);
+          return;
+        }
+      } else {
+        console.log('Internal Error addresses');
+        return;
+      }
+      const orchardAddressesJSON: RPCAddressType[] = await JSON.parse(orchardAddressesStr);
+      const uOrchardAddress: string = orchardAddressesJSON[0].address;
+
       let allAddresses: AddressClass[] = [];
 
       addressesJSON.forEach((u: RPCAddressType) => {
@@ -1148,18 +1162,22 @@ export default class RPC {
           (u.receivers.sapling ? ReceiverEnum.z : '') +
           (u.receivers.transparent ? ReceiverEnum.t : '');
         if (u.address) {
-          const abu = new AddressClass(u.address, u.address, AddressKindEnum.u, receivers);
+          const abu = new AddressClass(uOrchardAddress, u.address, AddressKindEnum.u, receivers);
           allAddresses.push(abu);
         }
         if (u.address && u.receivers.sapling) {
-          const abz = new AddressClass(u.address, u.receivers.sapling, AddressKindEnum.z, receivers);
+          const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, receivers);
           allAddresses.push(abz);
         }
         if (u.address && u.receivers.transparent) {
-          const abt = new AddressClass(u.address, u.receivers.transparent, AddressKindEnum.t, receivers);
+          const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, receivers);
           allAddresses.push(abt);
         }
       });
+
+      // adding the UA only orchard receiver
+      const abo = new AddressClass(uOrchardAddress, uOrchardAddress, AddressKindEnum.u, 'o');
+      allAddresses.push(abo);
 
       this.fnSetAllAddresses(allAddresses);
     } catch (error) {

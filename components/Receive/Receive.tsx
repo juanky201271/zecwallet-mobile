@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useState, ReactNode, useEffect } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 import { TabView, TabBar, SceneRendererProps, Route, NavigationState, TabBarItem } from 'react-native-tab-view';
 import { useTheme } from '@react-navigation/native';
 
@@ -16,34 +16,35 @@ import 'moment/locale/pt';
 import 'moment/locale/ru';
 
 import { AddressClass, AddressKindEnum, ModeEnum } from '../../app/AppState';
+import FadeText from '../Components/FadeText';
+import { ShieldedEnum } from '../../app/AppState/enums/ShieldedEnum';
 
 type ReceiveProps = {
-  setUaOrchardAddress: (uaOrchardAddress: string) => void;
   toggleMenuDrawer: () => void;
   syncingStatusMoreInfoOnClick: () => void;
   setUfvkViewModalVisible?: (v: boolean) => void;
+  alone: boolean;
 };
 
 const Receive: React.FunctionComponent<ReceiveProps> = ({
-  setUaOrchardAddress,
   toggleMenuDrawer,
   syncingStatusMoreInfoOnClick,
   setUfvkViewModalVisible,
+  alone,
 }) => {
   const context = useContext(ContextAppLoaded);
-  const { translate, addresses, uaOrchardAddress, mode, addLastSnackbar, language } = context;
+  const { translate, addresses, uOrchardAddress, mode, addLastSnackbar, language } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
   const [index, setIndex] = useState<number>(0);
   const [routes, setRoutes] = useState<{ key: string; title: string }[]>([]);
 
-  const [uindex, setUIndex] = useState<number>(0);
-  const [zindex, setZIndex] = useState<number>(0);
-  const [tindex, setTIndex] = useState<number>(0);
-  const [uaddrs, setUaddrs] = useState<AddressClass[]>([]);
-  const [zaddrs, setZaddrs] = useState<AddressClass[]>([]);
-  const [taddrs, setTaddrs] = useState<AddressClass[]>([]);
+  const [uFullAddr, setUFulladdr] = useState<AddressClass>({} as AddressClass);
+  const [uOrchardAddr, setUOrchardAddr] = useState<AddressClass>({} as AddressClass);
+  const [zAddr, setZAddr] = useState<AddressClass>({} as AddressClass);
+  const [tAddr, setTAddr] = useState<AddressClass>({} as AddressClass);
+  const [shielded, setShielded] = useState<ShieldedEnum>(ShieldedEnum.orchard);
 
   const dimensions = {
     width: Dimensions.get('screen').width,
@@ -51,86 +52,22 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
   };
 
   useEffect(() => {
-    if (addresses && addresses.length > 0 && uaOrchardAddress) {
-      const uadd = addresses.filter(a => a.addressKind === AddressKindEnum.u) || [];
-      const zadd =
-        addresses.filter(a => a.uaOrchardAddress === uaOrchardAddress && a.addressKind === AddressKindEnum.z) || [];
-      const tadd =
-        addresses.filter(a => a.uaOrchardAddress === uaOrchardAddress && a.addressKind === AddressKindEnum.t) || [];
-      setUaddrs(uadd);
-      setZaddrs(zadd);
-      setTaddrs(tadd);
-
-      const uaOrchardAddressIndex = uadd.findIndex(a => a.address === uaOrchardAddress);
-      setUIndex(uaOrchardAddressIndex);
-    } else if (addresses && addresses.length > 0) {
-      const uadd = addresses.filter(a => a.addressKind === AddressKindEnum.u) || [];
-      setUaddrs(uadd);
-
-      setUIndex(0);
+    if (addresses && addresses.length > 0) {
+      const uFullAdd = addresses.filter(a => a.addressKind === AddressKindEnum.u && a.receivers.length === 3) || [];
+      const uOrchardAdd = addresses.filter(a => a.addressKind === AddressKindEnum.u && a.receivers.length === 1) || [];
+      const zAdd = addresses.filter(a => a.addressKind === AddressKindEnum.z) || [];
+      const tAdd = addresses.filter(a => a.addressKind === AddressKindEnum.t) || [];
+      setUFulladdr(uFullAdd[0]);
+      setUOrchardAddr(uOrchardAdd[0]);
+      setZAddr(zAdd[0]);
+      setTAddr(tAdd[0]);
     }
-  }, [addresses, uaOrchardAddress]);
-
-  const prev = (type: AddressKindEnum) => {
-    if (type === AddressKindEnum.u) {
-      if (uaddrs.length === 0) {
-        return;
-      }
-      let newIndex = uindex - 1;
-      if (newIndex < 0) {
-        newIndex = uaddrs.length - 1;
-      }
-      setUIndex(newIndex);
-      setUaOrchardAddress(uaddrs[newIndex].address);
-    } else if (type === AddressKindEnum.z) {
-      if (zaddrs.length === 0) {
-        return;
-      }
-      let newIndex = zindex - 1;
-      if (newIndex < 0) {
-        newIndex = zaddrs.length - 1;
-      }
-      setZIndex(newIndex);
-    } else if (type === AddressKindEnum.t) {
-      if (taddrs.length === 0) {
-        return;
-      }
-      let newIndex = tindex - 1;
-      if (newIndex < 0) {
-        newIndex = taddrs.length - 1;
-      }
-      setTIndex(newIndex);
-    }
-  };
-
-  const next = (type: AddressKindEnum) => {
-    if (type === AddressKindEnum.u) {
-      if (uaddrs.length === 0) {
-        return;
-      }
-      const newIndex = (uindex + 1) % uaddrs.length;
-      setUIndex(newIndex);
-      setUaOrchardAddress(uaddrs[newIndex].address);
-    } else if (type === AddressKindEnum.z) {
-      if (zaddrs.length === 0) {
-        return;
-      }
-      const newIndex = (zindex + 1) % zaddrs.length;
-      setZIndex(newIndex);
-    } else if (type === AddressKindEnum.t) {
-      if (taddrs.length === 0) {
-        return;
-      }
-      const newIndex = (tindex + 1) % taddrs.length;
-      setTIndex(newIndex);
-    }
-  };
+  }, [addresses]);
 
   useEffect(() => {
-    const basicModeRoutes = [{ key: 'uaddr', title: translate('receive.u-title') as string }];
+    const basicModeRoutes = [{ key: 'uorchardaddr', title: translate('receive.u-title') as string }];
     const advancedModeRoutes = [
-      { key: 'uaddr', title: translate('receive.u-title') as string },
-      { key: 'zaddr', title: translate('receive.z-title') as string },
+      { key: 'uorchardaddr', title: translate('receive.u-title') as string },
       { key: 'taddr', title: translate('receive.t-title') as string },
     ];
     setRoutes(mode === ModeEnum.basic ? basicModeRoutes : advancedModeRoutes);
@@ -142,73 +79,125 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
     },
   ) => ReactNode = ({ route }) => {
     switch (route.key) {
-      case 'uaddr': {
-        let uaddr = translate('receive.noaddress') as string;
-        if (uaddrs.length > 0) {
-          uaddr = uaddrs[uindex].address;
+      case 'uorchardaddr': {
+        let uOrchard = translate('receive.noaddress') as string;
+        if (uOrchardAddr) {
+          uOrchard = uOrchardAddr.address;
+        }
+        let sapling = translate('receive.noaddress') as string;
+        if (zAddr) {
+          sapling = zAddr.address;
+        }
+        let uFull = translate('receive.noaddress') as string;
+        if (uFullAddr) {
+          uFull = uFullAddr.address;
         }
 
         return (
-          !!addresses &&
-          !!uaOrchardAddress && (
-            <SingleAddress
-              address={uaddr}
-              index={uindex}
-              total={uaddrs.length}
-              prev={() => {
-                prev(AddressKindEnum.u);
-              }}
-              next={() => {
-                next(AddressKindEnum.u);
-              }}
-            />
-          )
-        );
-      }
-      case 'zaddr': {
-        let zaddr = translate('receive.noaddress') as string;
-        if (zaddrs.length > 0) {
-          zaddr = zaddrs[zindex].address;
-        }
-
-        return (
-          !!addresses &&
-          !!uaOrchardAddress && (
-            <SingleAddress
-              address={zaddr}
-              index={zindex}
-              total={zaddrs.length}
-              prev={() => {
-                prev(AddressKindEnum.z);
-              }}
-              next={() => {
-                next(AddressKindEnum.z);
-              }}
-            />
-          )
+          <>
+            {mode === ModeEnum.advanced && (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 'auto',
+                  marginTop: 10,
+                  marginHorizontal: 5,
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShielded(ShieldedEnum.orchard);
+                  }}>
+                  <View
+                    style={{
+                      backgroundColor: shielded === ShieldedEnum.orchard ? colors.primary : colors.sideMenuBackground,
+                      borderRadius: 15,
+                      borderColor: shielded === ShieldedEnum.orchard ? colors.primary : colors.zingo,
+                      borderWidth: 1,
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      marginHorizontal: 5,
+                    }}>
+                    <FadeText
+                      style={{
+                        color: shielded === ShieldedEnum.orchard ? colors.sideMenuBackground : colors.zingo,
+                        fontWeight: 'bold',
+                      }}>
+                      {translate('receive.shielded-orchard') as string}
+                    </FadeText>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShielded(ShieldedEnum.full);
+                  }}>
+                  <View
+                    style={{
+                      backgroundColor: shielded === ShieldedEnum.full ? colors.primary : colors.sideMenuBackground,
+                      borderRadius: 15,
+                      borderColor: shielded === ShieldedEnum.full ? colors.primary : colors.zingo,
+                      borderWidth: 1,
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      marginHorizontal: 5,
+                    }}>
+                    <FadeText
+                      style={{
+                        color: shielded === ShieldedEnum.full ? colors.sideMenuBackground : colors.zingo,
+                        fontWeight: 'bold',
+                      }}>
+                      {translate('receive.shielded-full') as string}
+                    </FadeText>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShielded(ShieldedEnum.sapling);
+                  }}>
+                  <View
+                    style={{
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
+                      marginHorizontal: 15,
+                    }}>
+                    <FadeText
+                      style={{
+                        color: shielded === ShieldedEnum.sapling ? colors.primary : colors.zingo,
+                        opacity: shielded === ShieldedEnum.sapling ? 1 : undefined,
+                        fontWeight: 'bold',
+                      }}>
+                      {translate('receive.shielded-sapling') as string}
+                    </FadeText>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+            {!!addresses && !!uOrchardAddress && (
+              <>
+                {shielded === ShieldedEnum.orchard && (
+                  <SingleAddress address={uOrchard} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+                {shielded === ShieldedEnum.full && (
+                  <SingleAddress address={uFull} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+                {shielded === ShieldedEnum.sapling && (
+                  <SingleAddress address={sapling} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+              </>
+            )}
+          </>
         );
       }
       case 'taddr': {
         let taddr = translate('receive.noaddress') as string;
-        if (taddrs.length > 0) {
-          taddr = taddrs[tindex].address;
+        if (tAddr) {
+          taddr = tAddr.address;
         }
 
         return (
           !!addresses &&
-          !!uaOrchardAddress && (
-            <SingleAddress
-              address={taddr}
-              index={tindex}
-              total={taddrs.length}
-              prev={() => {
-                prev(AddressKindEnum.t);
-              }}
-              next={() => {
-                next(AddressKindEnum.t);
-              }}
-            />
-          )
+          !!uOrchardAddress && <SingleAddress address={taddr} index={0} total={1} prev={() => {}} next={() => {}} />
         );
       }
     }
@@ -220,7 +209,7 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
       color: string;
     },
   ) => ReactNode = ({ route, focused, color }) => {
-    const w = (dimensions.width - 50) / (mode === ModeEnum.basic ? 1 : 3);
+    const w = (dimensions.width - 50) / (mode === ModeEnum.basic ? 1 : 2);
     //const w = route.key === 'uaddr' ? '40%' : '30%';
     return (
       <View
@@ -270,7 +259,13 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
         <Header
           toggleMenuDrawer={toggleMenuDrawer}
           syncingStatusMoreInfoOnClick={syncingStatusMoreInfoOnClick}
-          title={translate('receive.title') as string}
+          title={
+            alone
+              ? (translate('receive.title-basic-alone') as string)
+              : mode === ModeEnum.basic
+              ? (translate('receive.title-basic') as string)
+              : (translate('receive.title-advanced') as string)
+          }
           noBalance={true}
           noPrivacy={true}
           setUfvkViewModalVisible={setUfvkViewModalVisible}

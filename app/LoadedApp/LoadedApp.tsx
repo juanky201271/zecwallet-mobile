@@ -393,7 +393,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
         zecPrice: 0,
         date: 0,
       } as ZecPriceType,
-      uaOrchardAddress: '',
+      uOrchardAddress: '',
       sendPageState: new SendPageStateClass(new ToAddrClass(Utils.getNextToAddrID())),
       receivePageState: {} as ReceivePageStateClass,
       background: props.background,
@@ -917,11 +917,11 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       this.setState({ addresses });
     }
     if (addresses.length > 0) {
-      if (this.state.uaOrchardAddress !== addresses[0].uaOrchardAddress) {
-        this.setState({ uaOrchardAddress: addresses[0].uaOrchardAddress });
+      if (this.state.uOrchardAddress !== addresses[0].uOrchardAddress) {
+        this.setState({ uOrchardAddress: addresses[0].uOrchardAddress });
       }
     } else {
-      this.setState({ uaOrchardAddress: '' });
+      this.setState({ uOrchardAddress: '' });
     }
   };
 
@@ -998,10 +998,10 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
   sendTransaction = async (setSendProgress: (arg0: SendProgressClass) => void): Promise<String> => {
     try {
       // Construct a sendJson from the sendPage state
-      const { sendPageState, uaOrchardAddress, addresses, server, donation } = this.state;
+      const { sendPageState, uOrchardAddress, addresses, server, donation } = this.state;
       const sendJson = await Utils.getSendManyJSON(
         sendPageState,
-        uaOrchardAddress,
+        uOrchardAddress,
         addresses ? addresses : ([] as AddressClass[]),
         server,
         donation,
@@ -1540,8 +1540,8 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
     }
   };
 
-  setUaOrchardAddress = (uaOrchardAddress: string) => {
-    this.setState({ uaOrchardAddress });
+  setUOrchardAddress = (uOrchardAddress: string) => {
+    this.setState({ uOrchardAddress });
   };
 
   syncingStatusMoreInfoOnClick = async () => {
@@ -1651,7 +1651,7 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
       sendProgress: this.state.sendProgress,
       info: this.state.info,
       zecPrice: this.state.zecPrice,
-      uaOrchardAddress: this.state.uaOrchardAddress,
+      uOrchardAddress: this.state.uOrchardAddress,
       sendPageState: this.state.sendPageState,
       receivePageState: this.state.receivePageState,
       background: this.state.background,
@@ -2066,10 +2066,10 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
               <Tab.Screen name={translate('loadedapp.receive-menu') as string}>
                 {() => (
                   <Receive
-                    setUaOrchardAddress={this.setUaOrchardAddress}
                     toggleMenuDrawer={this.toggleMenuDrawer}
                     syncingStatusMoreInfoOnClick={this.syncingStatusMoreInfoOnClick}
                     setUfvkViewModalVisible={this.setUfvkViewModalVisible}
+                    alone={false}
                   />
                 )}
               </Tab.Screen>
@@ -2106,10 +2106,10 @@ export class LoadedAppClass extends Component<LoadedAppClassProps, LoadedAppClas
                   <Tab.Screen name={translate('loadedapp.history-menu') as string}>
                     {() => (
                       <Receive
-                        setUaOrchardAddress={this.setUaOrchardAddress}
                         toggleMenuDrawer={this.toggleMenuDrawer}
                         syncingStatusMoreInfoOnClick={this.syncingStatusMoreInfoOnClick}
                         setUfvkViewModalVisible={this.setUfvkViewModalVisible}
+                        alone={true}
                       />
                     )}
                   </Tab.Screen>

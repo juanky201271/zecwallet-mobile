@@ -60,7 +60,7 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
     translate,
     currency,
     zecPrice,
-    uaOrchardAddress,
+    uOrchardAddress,
     privacy,
     totalBalance,
     addLastSnackbar,
@@ -75,7 +75,7 @@ const Confirm: React.FunctionComponent<ConfirmProps> = ({
   const [sendingTotal, setSendingTotal] = useState<number>(0);
 
   const memoTotal: string = `${sendPageState.toaddr.memo || ''}${
-    sendPageState.toaddr.includeUAMemo ? GlobalConst.replyTo + uaOrchardAddress : ''
+    sendPageState.toaddr.includeUAMemo ? GlobalConst.replyTo + uOrchardAddress : ''
   }`;
 
   /**

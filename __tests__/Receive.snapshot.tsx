@@ -55,7 +55,7 @@ describe('Component Receive - test', () => {
   //snapshot test
   test('Receive - snapshot', () => {
     const state = defaultAppContextLoaded;
-    state.uaOrchardAddress = mockAddresses[0].uaOrchardAddress;
+    state.uOrchardAddress = mockAddresses[0].uOrchardAddress;
     state.addresses = mockAddresses;
     state.translate = mockTranslate;
     state.info = mockInfo;
@@ -63,11 +63,7 @@ describe('Component Receive - test', () => {
     const onFunction = jest.fn();
     const receive = render(
       <ContextAppLoadedProvider value={state}>
-        <Receive
-          setUaOrchardAddress={onFunction}
-          toggleMenuDrawer={onFunction}
-          syncingStatusMoreInfoOnClick={onFunction}
-        />
+        <Receive toggleMenuDrawer={onFunction} syncingStatusMoreInfoOnClick={onFunction} alone={false} />
       </ContextAppLoadedProvider>,
     );
     expect(receive.toJSON()).toMatchSnapshot();

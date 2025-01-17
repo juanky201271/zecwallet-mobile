@@ -65,7 +65,7 @@ export default interface AppContextLoaded {
   wallet: WalletType;
 
   // active UA in the wallet
-  uaOrchardAddress: string;
+  uOrchardAddress: string;
 
   // zec price in USD from internet
   zecPrice: ZecPriceType;
