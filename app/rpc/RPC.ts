@@ -1156,8 +1156,8 @@ export default class RPC {
 
       let allAddresses: AddressClass[] = [];
 
-      addressesJSON &&
-        addressesJSON.forEach((u: RPCAddressType) => {
+      (addressesJSON || orchardAddressesJSON) &&
+        [...addressesJSON, ...orchardAddressesJSON].forEach((u: RPCAddressType) => {
           // If this has any pending txns, show that in the UI
           const receivers: string =
             (u.receivers.orchard_exists ? ReceiverEnum.o : '') +
@@ -1168,18 +1168,14 @@ export default class RPC {
             allAddresses.push(abu);
           }
           if (u.address && u.receivers.sapling) {
-            const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, receivers);
+            const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, 'z');
             allAddresses.push(abz);
           }
           if (u.address && u.receivers.transparent) {
-            const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, receivers);
+            const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, 't');
             allAddresses.push(abt);
           }
         });
-
-      // adding the UA only orchard receiver
-      const abo = new AddressClass(uOrchardAddress, uOrchardAddress, AddressKindEnum.u, 'o');
-      allAddresses.push(abo);
 
       this.fnSetAllAddresses(allAddresses);
     } catch (error) {

@@ -306,28 +306,36 @@ export default class Utils {
     return [...jsonFlat, ...donationTransaction];
   }
 
-  static async isValidAddress(address: string, serverChainName: string): Promise<boolean> {
+  static async isValidAddress(
+    address: string,
+    serverChainName: string,
+  ): Promise<{ isValid: boolean; onlyOrchardUA: string }> {
     const result: string = await RPCModule.execute(CommandEnum.parseAddress, address);
     //console.log(result);
+    let isValid: boolean = false;
+    let onlyOrchardUA: string = '';
+
     if (result) {
       if (result.toLowerCase().startsWith(GlobalConst.error)) {
-        return false;
+        return { isValid, onlyOrchardUA };
       }
     } else {
-      return false;
+      return { isValid, onlyOrchardUA };
     }
     let resultJSON = {} as RPCParseAddressType;
     try {
       resultJSON = await JSON.parse(result);
     } catch (e) {
-      return false;
+      return { isValid, onlyOrchardUA };
     }
 
-    //console.log('parse-address', address, resultJSON, resultJSON.status === RPCParseStatusEnum.successParse);
+    isValid =
+      resultJSON.status === RPCParseAddressStatusEnum.successAddressParse && resultJSON.chain_name === serverChainName;
+    if (isValid) {
+      onlyOrchardUA = resultJSON.only_orchard_ua ? resultJSON.only_orchard_ua : '';
+    }
 
-    return (
-      resultJSON.status === RPCParseAddressStatusEnum.successAddressParse && resultJSON.chain_name === serverChainName
-    );
+    return { isValid, onlyOrchardUA };
   }
 
   static async isValidOrchardOrSaplingAddress(address: string, serverChainName: string): Promise<boolean> {
@@ -364,7 +372,7 @@ export default class Utils {
     // only for orchard or sapling
     if (vt.address) {
       // the performance in the list is really bad if here I asked properly
-      // to zingolib (address_parse command) about the type of the address.
+      // to zingolib (parse_address command) about the type of the address.
       return !vt.address.startsWith('t');
     } else {
       const memoTotal = vt.memos && vt.memos.length > 0 ? vt.memos.join('\n') : '';

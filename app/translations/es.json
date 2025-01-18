@@ -566,7 +566,8 @@
     "not-confirmed": "Transacción no confirmada todavía",
     "calculated": "Calculada",
     "transmitted": "Transmitida",
-    "mempool": "En Mempool"
+    "mempool": "En Mempool",
+    "confirmed": "Confirmada"
   },
   "report": {
     "title": "Informe de Sincronización",

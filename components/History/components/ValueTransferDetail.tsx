@@ -131,7 +131,12 @@ const ValueTransferDetail: React.FunctionComponent<ValueTransferDetailProps> = (
   }, [totalLength]);
 
   const contactFound: (add: string) => boolean = (add: string) => {
-    const contact: AddressBookFileClass[] = addressBook.filter((ab: AddressBookFileClass) => ab.address === add);
+    if (!add) {
+      return false;
+    }
+    const contact: AddressBookFileClass[] = addressBook.filter(
+      (ab: AddressBookFileClass) => ab.address === add || ab.uOrchardAddress === add,
+    );
     return contact.length >= 1;
   };
 

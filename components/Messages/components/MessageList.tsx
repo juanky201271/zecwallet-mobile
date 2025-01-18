@@ -19,7 +19,13 @@ import { useTheme } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons';
 
-import { ButtonTypeEnum, GlobalConst, SendPageStateClass, ValueTransferType } from '../../../app/AppState';
+import {
+  AddressBookFileClass,
+  ButtonTypeEnum,
+  GlobalConst,
+  SendPageStateClass,
+  ValueTransferType,
+} from '../../../app/AppState';
 import { ThemeType } from '../../../app/types';
 import FadeText from '../../Components/FadeText';
 import Button from '../../Components/Button';
@@ -57,7 +63,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   openModal,
 }) => {
   const context = useContext(ContextAppLoaded);
-  const { translate, messages, language, addLastSnackbar } = context;
+  const { translate, messages, language, addLastSnackbar, addressBook } = context;
   const { colors } = useTheme() as unknown as ThemeType;
   moment.locale(language);
 
@@ -74,6 +80,7 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
   const [scrollViewHeight, setScrollViewHeight] = useState<number>(0);
   const [contentScrollViewHeight, setContentScrollViewHeight] = useState<number>(0);
   const [scrollable, setScrollable] = useState<boolean>(false);
+  const [uOrchardAddress, setUOrchardAddress] = useState<string>('');
   const scrollViewRef = useRef<ScrollView>(null);
 
   var lastMonth = '';
@@ -89,9 +96,16 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
         let memoArray = memoTotal.split(GlobalConst.replyTo);
         memoAddress = memoArray.pop();
       }
-      return addr === address || memoAddress === address;
+      // checking address & uOrchardAddress (if any value) as addresses
+      // from the same contact in the Address Book.
+      return (
+        addr === address ||
+        memoAddress === address ||
+        (uOrchardAddress && addr === uOrchardAddress) ||
+        (uOrchardAddress && memoAddress === uOrchardAddress)
+      );
     },
-    [address],
+    [address, uOrchardAddress],
   );
 
   const fetchMessagesFiltered = useMemo(() => {
@@ -108,6 +122,10 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
 
   useEffect(() => {
     if (messages !== null) {
+      const contact = addressBook.filter((ab: AddressBookFileClass) => ab.address === address);
+      if (contact.length === 1 && contact[0].uOrchardAddress) {
+        setUOrchardAddress(contact[0].uOrchardAddress);
+      }
       const vtf = fetchMessagesFiltered;
       setLoadMoreButton(numVt < vtf.length);
       setMessagesFiltered(vtf);

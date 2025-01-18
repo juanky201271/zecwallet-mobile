@@ -566,7 +566,8 @@
     "not-confirmed": "Transaction not yet confirmed",
     "calculated": "Calculated",
     "transmitted": "Transmitted",
-    "mempool": "In Mempool"
+    "mempool": "In Mempool",
+    "confirmed": "Confirmed"
   },
   "report": {
     "title": "Sync / Rescan Report",

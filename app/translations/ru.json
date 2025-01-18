@@ -566,7 +566,8 @@
     "not-confirmed": "Транзакция еще не подтверждена",
     "calculated": "Рассчитано",
     "transmitted": "Передано",
-    "mempool": "B Mempool"
+    "mempool": "B Mempool",
+    "confirmed": "Подтвержденный"
   },
   "report": {
     "title": "Отчёт о синхронизации",

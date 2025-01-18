@@ -153,7 +153,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
     }
   };
 
-  const doAction = async (a: AddressBookActionEnum, label: string, address: string) => {
+  const doAction = async (a: AddressBookActionEnum, label: string, address: string, uOrchardAddress: string) => {
     if (!label || !address) {
       return;
     }
@@ -161,7 +161,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
     if (a === AddressBookActionEnum.Delete) {
       ab = await AddressBookFileImpl.removeAddressBookItem(label, address);
     } else {
-      ab = await AddressBookFileImpl.writeAddressBookItem(label, address);
+      ab = await AddressBookFileImpl.writeAddressBookItem(label, address, uOrchardAddress);
     }
     setAddressBook(ab);
     cancel();
@@ -179,7 +179,7 @@ const AddressBook: React.FunctionComponent<AddressBookProps> = ({ closeModal, se
     setIsAtTop(isTop);
   };
 
-  //console.log('render Address Book - 4', currentItem, action);
+  console.log('render Address Book - 4', currentItem, action, addressBook);
 
   return (
     <SafeAreaView

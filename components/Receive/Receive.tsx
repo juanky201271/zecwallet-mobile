@@ -95,6 +95,19 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
 
         return (
           <>
+            {!!addresses && !!uOrchardAddress && (
+              <>
+                {shielded === ShieldedEnum.orchard && (
+                  <SingleAddress address={uOrchard} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+                {shielded === ShieldedEnum.full && (
+                  <SingleAddress address={uFull} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+                {shielded === ShieldedEnum.sapling && (
+                  <SingleAddress address={sapling} index={0} total={1} prev={() => {}} next={() => {}} />
+                )}
+              </>
+            )}
             {mode === ModeEnum.advanced && (
               <View
                 style={{
@@ -102,7 +115,6 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: 'auto',
-                  marginTop: 10,
                   marginHorizontal: 5,
                 }}>
                 <TouchableOpacity
@@ -151,40 +163,30 @@ const Receive: React.FunctionComponent<ReceiveProps> = ({
                     </FadeText>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    setShielded(ShieldedEnum.sapling);
-                  }}>
-                  <View
-                    style={{
-                      paddingHorizontal: 10,
-                      paddingVertical: 5,
-                      marginHorizontal: 15,
+                {false && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setShielded(ShieldedEnum.sapling);
                     }}>
-                    <FadeText
+                    <View
                       style={{
-                        color: shielded === ShieldedEnum.sapling ? colors.primary : colors.zingo,
-                        opacity: shielded === ShieldedEnum.sapling ? 1 : undefined,
-                        fontWeight: 'bold',
+                        paddingHorizontal: 10,
+                        paddingVertical: 5,
+                        marginHorizontal: 15,
                       }}>
-                      {translate('receive.shielded-sapling') as string}
-                    </FadeText>
-                  </View>
-                </TouchableOpacity>
+                      <FadeText
+                        style={{
+                          color: shielded === ShieldedEnum.sapling ? colors.primary : colors.zingo,
+                          opacity: shielded === ShieldedEnum.sapling ? 1 : undefined,
+                          textDecorationLine: 'underline',
+                          fontWeight: 'bold',
+                        }}>
+                        {translate('receive.shielded-sapling') as string}
+                      </FadeText>
+                    </View>
+                  </TouchableOpacity>
+                )}
               </View>
-            )}
-            {!!addresses && !!uOrchardAddress && (
-              <>
-                {shielded === ShieldedEnum.orchard && (
-                  <SingleAddress address={uOrchard} index={0} total={1} prev={() => {}} next={() => {}} />
-                )}
-                {shielded === ShieldedEnum.full && (
-                  <SingleAddress address={uFull} index={0} total={1} prev={() => {}} next={() => {}} />
-                )}
-                {shielded === ShieldedEnum.sapling && (
-                  <SingleAddress address={sapling} index={0} total={1} prev={() => {}} next={() => {}} />
-                )}
-              </>
             )}
           </>
         );

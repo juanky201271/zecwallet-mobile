@@ -555,7 +555,10 @@ const Send: React.FunctionComponent<SendProps> = ({
   }, [server.chainName, sendPageState.toaddr.to]);
 
   useEffect(() => {
-    const parseAddress = async (address: string, serverChainName: string): Promise<boolean> => {
+    const parseAddress = async (
+      address: string,
+      serverChainName: string,
+    ): Promise<{ isValid: boolean; onlyOrchardUA: string }> => {
       return await Utils.isValidAddress(address, serverChainName);
     };
 
@@ -563,7 +566,7 @@ const Send: React.FunctionComponent<SendProps> = ({
 
     if (to.to) {
       parseAddress(to.to, server.chainName).then(r => {
-        setValidAddress(r ? 1 : -1);
+        setValidAddress(r.isValid ? 1 : -1);
       });
     } else {
       setValidAddress(0);

@@ -273,10 +273,35 @@ export default function LoadedApp(props: LoadedAppProps) {
       }
 
       // adding `Zenny Tips` address always.
-      const ab = await AddressBookFileImpl.writeAddressBookItem(
+      let ab = await AddressBookFileImpl.writeAddressBookItem(
         translate('zenny-tips-ab') as string,
         await Utils.getZenniesDonationAddress(server.chainName),
+        '',
       );
+
+      // reply-to change, from full UA to only orchard UA.
+      // we need to calculate the only orchard UA for all the
+      // contacts with a full UA stored in the Address Book.
+      // We need to identify the old transaction memos (with full UA)
+      // and we need to idenfify the new transaction memos (with only orchard UA)
+
+      // if some contact don't have the new field: `uOrchardAddress` then
+      // the App have to create and calculate it if needed.
+      const toUpdate = ab.filter((a: AddressBookFileClass) => !a.hasOwnProperty('uOrchardAddress'));
+      console.log('Address Book -> TO UPDATE', toUpdate);
+      if (toUpdate.length > 0) {
+        for (let i = 0; i < toUpdate.length; i++) {
+          const a = toUpdate[i];
+          const validAddress: { isValid: boolean; onlyOrchardUA: string } = await Utils.isValidAddress(
+            a.address,
+            server.chainName,
+          );
+          if (validAddress.isValid) {
+            //ab = await AddressBookFileImpl.removeAddressBookItem(a.label, a.address);
+            ab = await AddressBookFileImpl.writeAddressBookItem(a.label, a.address, validAddress.onlyOrchardUA);
+          }
+        }
+      }
       setAddressBook(ab);
 
       setLoading(false);
