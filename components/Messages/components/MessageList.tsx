@@ -122,9 +122,18 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
 
   useEffect(() => {
     if (messages !== null) {
-      const contact = addressBook.filter((ab: AddressBookFileClass) => ab.address === address);
-      if (contact.length === 1 && contact[0].uOrchardAddress) {
-        setUOrchardAddress(contact[0].uOrchardAddress);
+      // edge case: the user can have the full UA from a contact (and the only orchard UA calculated)
+      // but the user can have the same only orchard UA as another contact as well.
+      // until the user solved this situation, the App can select the messages
+      // separately in one UA (only orchard), and all the messages in the another UA (full)
+      let contact = addressBook.filter((ab: AddressBookFileClass) => ab.address === address);
+      if (contact.length === 1) {
+        setUOrchardAddress(contact[0].uOrchardAddress ? contact[0].uOrchardAddress : '');
+      } else {
+        contact = addressBook.filter((ab: AddressBookFileClass) => ab.uOrchardAddress === address);
+        if (contact.length === 1) {
+          setUOrchardAddress(contact[0].address);
+        }
       }
       const vtf = fetchMessagesFiltered;
       setLoadMoreButton(numVt < vtf.length);
@@ -210,9 +219,9 @@ const MessageList: React.FunctionComponent<MessageListProps> = ({
     }
   };
 
-  //if (address) {
-  //  console.log('render Messages - 4', messagesSliced);
-  //}
+  if (address) {
+    console.log('render Messages - 4', address, uOrchardAddress);
+  }
 
   return (
     <View
