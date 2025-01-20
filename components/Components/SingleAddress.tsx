@@ -211,6 +211,7 @@ const SingleAddress: React.FunctionComponent<SingleAddressProps> = ({ address, i
               flexDirection: 'row',
               justifyContent: 'center',
               marginTop: 50,
+              marginBottom: 30,
             }}>
             <RegText>{address}</RegText>
           </View>

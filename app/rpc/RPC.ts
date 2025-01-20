@@ -1168,11 +1168,11 @@ export default class RPC {
             allAddresses.push(abu);
           }
           if (u.address && u.receivers.sapling) {
-            const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, 'z');
+            const abz = new AddressClass(uOrchardAddress, u.receivers.sapling, AddressKindEnum.z, ReceiverEnum.z);
             allAddresses.push(abz);
           }
           if (u.address && u.receivers.transparent) {
-            const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, 't');
+            const abt = new AddressClass(uOrchardAddress, u.receivers.transparent, AddressKindEnum.t, ReceiverEnum.t);
             allAddresses.push(abt);
           }
         });

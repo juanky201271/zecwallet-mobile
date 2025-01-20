@@ -1,5 +1,6 @@
 export enum ShieldedEnum {
-  full = 'full',
-  orchard = 'orchard',
+  uFull = 'uFull',
+  uOrchardSapling = 'uOrchardSapling',
+  uOrchard = 'uOrchard',
   sapling = 'sapling',
 }

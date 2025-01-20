@@ -502,6 +502,7 @@
     "next": "Next",
     "shielded-orchard": "Orchard",
     "shielded-sapling": "Sapling",
+    "shielded-orchard-sapling": "Orchard+Sapling",
     "shielded-full": "Full"
   },
   "history": {
